@@ -1,0 +1,1232 @@
+\subsection{algorithms package}
+This package provides classes to implement detector algorithms
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+	\umlsimpleinterface[x=-5]{AlgorithmInterface}
+	\umlemptyclass[type=abstract]{AbstractAlgorithm}
+	
+	\begin{umlpackage}{bottrack}
+	\umlemptyclass[x=-3, y=-3.5]{BotTrackAlgorithm}
+	\end{umlpackage}
+	\begin{umlpackage}{disclosure}
+	\umlemptyclass[x=3, y=-3.5]{DisclosureAlgorithm}
+	\end{umlpackage}
+	
+	\umlemptyclass[y=-6]{Algorithm}
+	
+	\umlunicompo[geometry=-|]{Algorithm}{BotTrackAlgorithm}
+	\umlunicompo[geometry=-|]{Algorithm}{DisclosureAlgorithm}
+	\umlimpl[geometry=-|-, arm1=-5, anchor1=-160]{Algorithm}{AlgorithmInterface}
+	
+	\umlimpl{AbstractAlgorithm}{AlgorithmInterface}
+	\umlinherit{BotTrackAlgorithm}{AbstractAlgorithm}
+	\umlinherit[geometry=|-, anchor1=40]{DisclosureAlgorithm}{AbstractAlgorithm}
+	
+	\end{tikzpicture}
+	\caption{Package diagram: algorithms}
+\end{figure}
+
+\hypertarget{algorithms::AlgorithmInterface}{}
+\subsubsection[AlgorithmInterface]{algorithms::AlgorithmInterface}
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+\umlclass{algorithms::AlgorithmInterface} {}{\umlvirt{+stratified\_k\_fold(folds : uint, best : bool) : (ndarray, ndarray, ndarray)}}
+\end{tikzpicture}
+\caption{Class diagram - algorithms::AlgorithmInterface}
+\end{figure}\begin{description}
+\item[Description] \hfill \\
+ This is the interface for each detection algorithm
+\item[Children classes] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item \hyperlink{algorithms::Algorithm}{algorithms::Algorithm}
+\item \hyperlink{algorithms::AbstractAlgorithm}{algorithms::AbstractAlgorithm}
+\end{itemize}
+
+\item[Methods] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item stratified\_k\_fold(folds : uint, best : bool) : (ndarray, ndarray, ndarray) $\rightarrow$ This method computes a stratified k-fold cross validation of the samples\begin{itemize}
+\item folds $\rightarrow$ How many k-folds to perform
+\item best $\rightarrow$ If use the best classifier for the given samples
+\end{itemize}
+
+\end{itemize}
+
+\end{description}
+\hypertarget{algorithms::Algorithm}{}
+\subsubsection[Algorithm]{algorithms::Algorithm}
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+\umlclass{algorithms::Algorithm} {}{+stratified\_k\_fold(folds : uint, best : bool) : (ndarray, ndarray, ndarray)\\--algorithms\_map() : dict\\+\_\_init\_\_(algorithm : str, **kwargs : kwargs)}
+\end{tikzpicture}
+\caption{Class diagram - algorithms::Algorithm}
+\end{figure}\begin{description}
+\item[Description] \hfill \\
+ This class binds to many detector algorithms depending on parameters
+\item[Parent classes] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item \hyperlink{algorithms::AlgorithmInterface}{algorithms::AlgorithmInterface}
+\end{itemize}
+
+\item[Methods] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item stratified\_k\_fold(folds : uint, best : bool) : (ndarray, ndarray, ndarray) $\rightarrow$ This method computes a stratified k-fold cross validation of the samples\begin{itemize}
+\item folds $\rightarrow$ How many k-folds to perform
+\item best $\rightarrow$ If use the best classifier for the given samples
+\end{itemize}
+
+\item algorithms\_map() : dict $\rightarrow$ This method provides a map to bind a string to an algorithm
+\item \_\_init\_\_(algorithm : str, **kwargs : kwargs) $\rightarrow$ This method is the constructor of the class\begin{itemize}
+\item algorithm $\rightarrow$ Which algorithm to build
+\item **kwargs $\rightarrow$ Other keyword arguments
+\end{itemize}
+
+\end{itemize}
+
+\end{description}
+\hypertarget{algorithms::AbstractAlgorithm}{}
+\subsubsection[AbstractAlgorithm]{algorithms::AbstractAlgorithm}
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+\umlclass{algorithms::AbstractAlgorithm} {}{--matrices() : (ndarray, ndarray, ndarray)\\+stratified\_k\_fold() : (ndarray, ndarray, ndarray)\\\umlvirt{\#build\_classifier() : classifier}\\\umlvirt{\#build\_best\_classifier(x : ndarray, y : ndarray) : classifier}\\\#pre\_folds(clf : classifier, x : ndarray, y : ndarray) : void\\\#pre\_fit(clf : classifier, x : ndarray, y : ndarray, train : ndarray, test : ndarray) : void\\\umlvirt{\#fit(clf : classifier, x : ndarray, y : ndarray, test : ndarray, train : ndarray) : void}\\\#post\_fit(clf : classifier, x : ndarray, y : ndarray, test : ndarray, train : ndarray) : void\\\#pre\_predict(clf : classifier, x : ndarray, y : ndarray, test : ndarray, train : ndarray) : void\\\umlvirt{\#predict(clf : classifier, x : ndarray, y : ndarray, test : ndarray, train : ndarray) : ndarray}\\\#post\_predict(clf : classifier, x : ndarray, y : ndarray, test : ndarray, train : ndarray) : void\\\#post\_folds(clf : classifier, x : ndarray, y : ndarray, y\_labels : ndarray,\\ y\_predictions : ndarray, y\_tests : ndarray) : void\\+\_\_init\_\_(features : dict)}
+\end{tikzpicture}
+\caption{Class diagram - algorithms::AbstractAlgorithm}
+\end{figure}\begin{description}
+\item[Description] \hfill \\
+ This class is an abstract base class for each detection algorithm
+\item[Parent classes] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item \hyperlink{algorithms::AlgorithmInterface}{algorithms::AlgorithmInterface}
+\end{itemize}
+
+\item[Children classes] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item \hyperlink{algorithms::bottrack::BotTrackAlgorithm}{algorithms::bottrack::BotTrackAlgorithm}
+\item \hyperlink{algorithms::disclosure::DisclosureAlgorithm}{algorithms::disclosure::DisclosureAlgorithm}
+\end{itemize}
+
+\item[Methods] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item matrices() : (ndarray, ndarray, ndarray) $\rightarrow$ This method gets sample features matrix, labels vector and named labels vector
+\item stratified\_k\_fold() : (ndarray, ndarray, ndarray) $\rightarrow$ This method computes a stratified k-fold cross validation of the samples
+\item build\_classifier() : classifier $\rightarrow$ This method builds a classifier
+\item build\_best\_classifier(x : ndarray, y : ndarray) : classifier $\rightarrow$ This method builds the best classifier based on features\begin{itemize}
+\item x $\rightarrow$ Features matrix
+\item y $\rightarrow$ Labels matrix
+\end{itemize}
+
+\item pre\_folds(clf : classifier, x : ndarray, y : ndarray) : void $\rightarrow$ This method executes operations before the k-fold computation\begin{itemize}
+\item clf $\rightarrow$ The classifier to use
+\item x $\rightarrow$ Features matrix
+\item y $\rightarrow$ Labels matrix
+\end{itemize}
+
+\item pre\_fit(clf : classifier, x : ndarray, y : ndarray, train : ndarray, test : ndarray) : void $\rightarrow$ This method executes operations before the fit computation\begin{itemize}
+\item clf $\rightarrow$ The classifier to use
+\item x $\rightarrow$ Features matrix
+\item y $\rightarrow$ Labels matrix
+\item train $\rightarrow$ Train matrix
+\item test $\rightarrow$ Test matrix
+\end{itemize}
+
+\item fit(clf : classifier, x : ndarray, y : ndarray, test : ndarray, train : ndarray) : void $\rightarrow$ This method provides to fit the classifier\begin{itemize}
+\item clf $\rightarrow$ The classifier to use
+\item x $\rightarrow$ Features matrix
+\item y $\rightarrow$ Labels matrix
+\item test $\rightarrow$ Test matrix
+\item train $\rightarrow$ Train matrix
+\end{itemize}
+
+\item post\_fit(clf : classifier, x : ndarray, y : ndarray, test : ndarray, train : ndarray) : void $\rightarrow$ This method executes operations after the fit computation\begin{itemize}
+\item clf $\rightarrow$ The classifier to use
+\item x $\rightarrow$ Features matrix
+\item y $\rightarrow$ Labels matrix
+\item test $\rightarrow$ Test matrix
+\item train $\rightarrow$ Train matrix
+\end{itemize}
+
+\item pre\_predict(clf : classifier, x : ndarray, y : ndarray, test : ndarray, train : ndarray) : void $\rightarrow$ This method executes operations before the prediction computation\begin{itemize}
+\item clf $\rightarrow$ The classifier to use
+\item x $\rightarrow$ Features matrix
+\item y $\rightarrow$ Labels matrix
+\item test $\rightarrow$ Test matrix
+\item train $\rightarrow$ Train matrix
+\end{itemize}
+
+\item predict(clf : classifier, x : ndarray, y : ndarray, test : ndarray, train : ndarray) : ndarray $\rightarrow$ This method performs predictions\begin{itemize}
+\item clf $\rightarrow$ The classifier to use
+\item x $\rightarrow$ Features matrix
+\item y $\rightarrow$ Labels matrix
+\item test $\rightarrow$ Test matrix
+\item train $\rightarrow$ Train matrix
+\end{itemize}
+
+\item post\_predict(clf : classifier, x : ndarray, y : ndarray, test : ndarray, train : ndarray) : void $\rightarrow$ This method executes operations after the prediction computation\begin{itemize}
+\item clf $\rightarrow$ The classifier to use
+\item x $\rightarrow$ Features matrix
+\item y $\rightarrow$ Labels matrix
+\item test $\rightarrow$ Test matrix
+\item train $\rightarrow$ Train matrix
+\end{itemize}
+
+\item post\_folds(clf : classifier, x : ndarray, y : ndarray, y\_labels : ndarray, y\_predictions : ndarray, y\_tests : ndarray) : void $\rightarrow$ This method executes operations after the k-fold computation\begin{itemize}
+\item clf $\rightarrow$ The classifier to use
+\item x $\rightarrow$ Features matrix
+\item y $\rightarrow$ Labels matrix
+\item y\_labels $\rightarrow$ Many labels vectors
+\item y\_predictions $\rightarrow$ Many prediction labels vectors
+\item y\_tests $\rightarrow$ Many test labels vectors
+\end{itemize}
+
+\item \_\_init\_\_(features : dict) $\rightarrow$ This method is the constructor of the class\begin{itemize}
+\item features $\rightarrow$ Dictionary with samples as keys and another dictionary as values which has features as keys and values
+\end{itemize}
+
+\end{itemize}
+
+\end{description}
+\subsubsection{algorithms::disclosure}
+This package provides classes to implement Disclosure detector algorithm
+
+\hypertarget{algorithms::disclosure::DisclosureAlgorithm}{}
+\paragraph[DisclosureAlgorithm]{algorithms::disclosure::DisclosureAlgorithm}
+ \hfill\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+\umlclass{algorithms::disclosure::DisclosureAlgorithm} {}{\#build\_classifier() : classifier\\\#build\_best\_classifier(x : ndarray, y : ndarray) : classifier\\\#fit(clf : classifier, x : ndarray, y : ndarray, test : ndarray, train : ndarray) : void\\\#predict(clf : classifier, x : ndarray, y : ndarray, test : ndarray, train : ndarray) : ndarray\\+\_\_init\_\_(trees : uint)}
+\end{tikzpicture}
+\caption{Class diagram - algorithms::disclosure::DisclosureAlgorithm}
+\end{figure}\begin{description}
+\item[Description] \hfill \\
+ This class implements Disclosure detection algorithm
+\item[Parent classes] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item \hyperlink{algorithms::AbstractAlgorithm}{algorithms::AbstractAlgorithm}
+\end{itemize}
+
+\item[Methods] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item build\_classifier() : classifier $\rightarrow$ This method builds a classifier
+\item build\_best\_classifier(x : ndarray, y : ndarray) : classifier $\rightarrow$ This method builds the best classifier based on features\begin{itemize}
+\item x $\rightarrow$ Features matrix
+\item y $\rightarrow$ Labels matrix
+\end{itemize}
+
+\item fit(clf : classifier, x : ndarray, y : ndarray, test : ndarray, train : ndarray) : void $\rightarrow$ This method provides to fit the classifier\begin{itemize}
+\item clf $\rightarrow$ The classifier to use
+\item x $\rightarrow$ Features matrix
+\item y $\rightarrow$ Labels matrix
+\item test $\rightarrow$ Test matrix
+\item train $\rightarrow$ Train matrix
+\end{itemize}
+
+\item predict(clf : classifier, x : ndarray, y : ndarray, test : ndarray, train : ndarray) : ndarray $\rightarrow$ This method performs predictions\begin{itemize}
+\item clf $\rightarrow$ The classifier to use
+\item x $\rightarrow$ Features matrix
+\item y $\rightarrow$ Labels matrix
+\item test $\rightarrow$ Test matrix
+\item train $\rightarrow$ Train matrix
+\end{itemize}
+
+\item \_\_init\_\_(trees : uint) $\rightarrow$ This function is the constructor method\begin{itemize}
+\item trees $\rightarrow$ Number of trees in the Random Forest classifier
+\end{itemize}
+
+\end{itemize}
+
+\end{description}
+\subsubsection{algorithms::bottrack}
+This package provides classes to implement BotTrack detector algorithm
+
+\hypertarget{algorithms::bottrack::BotTrackAlgorithm}{}
+\paragraph[BotTrackAlgorithm]{algorithms::bottrack::BotTrackAlgorithm}
+ \hfill\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+\umlclass{algorithms::bottrack::BotTrackAlgorithm} {}{\#build\_classifier() : classifier\\\#build\_best\_classifier(x : ndarray, y : ndarray) : classifier\\\#fit(clf : classifier, x : ndarray, y : ndarray, test : ndarray, train : ndarray) : void\\\#predict(clf : classifier, x : ndarray, y : ndarray, test : ndarray,\\ train : ndarray) : ndarray\\\#pre\_fit(clf : classifier, x : ndarray, y : ndarray) : void\\\#pre\_predict(clf : classifier, x : ndarray, y : ndarray, test : ndarray,\\ train : ndarray) : void\\+\_\_init\_\_(features : dict, min\_pts : uint, eps : float)}
+\end{tikzpicture}
+\caption{Class diagram - algorithms::bottrack::BotTrackAlgorithm}
+\end{figure}\begin{description}
+\item[Description] \hfill \\
+ This class implements BotTrack detection algorithm
+\item[Parent classes] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item \hyperlink{algorithms::AbstractAlgorithm}{algorithms::AbstractAlgorithm}
+\end{itemize}
+
+\item[Methods] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item build\_classifier() : classifier $\rightarrow$ This method builds a classifier
+\item build\_best\_classifier(x : ndarray, y : ndarray) : classifier $\rightarrow$ This method builds the best classifier based on features\begin{itemize}
+\item x $\rightarrow$ Features matrix
+\item y $\rightarrow$ Labels matrix
+\end{itemize}
+
+\item fit(clf : classifier, x : ndarray, y : ndarray, test : ndarray, train : ndarray) : void $\rightarrow$ This method provides to fit the classifier\begin{itemize}
+\item clf $\rightarrow$ The classifier to use
+\item x $\rightarrow$ Features matrix
+\item y $\rightarrow$ Labels matrix
+\item test $\rightarrow$ Test matrix
+\item train $\rightarrow$ Train matrix
+\end{itemize}
+
+\item predict(clf : classifier, x : ndarray, y : ndarray, test : ndarray, train : ndarray) : ndarray $\rightarrow$ This method performs predictions\begin{itemize}
+\item clf $\rightarrow$ The classifier to use
+\item x $\rightarrow$ Features matrix
+\item y $\rightarrow$ Labels matrix
+\item test $\rightarrow$ Test matrix
+\item train $\rightarrow$ Train matrix
+\end{itemize}
+
+\item pre\_fit(clf : classifier, x : ndarray, y : ndarray) : void $\rightarrow$ This method executes operations before the k-fold computation\begin{itemize}
+\item clf $\rightarrow$ The classifier to use
+\item x $\rightarrow$ Features matrix
+\item y $\rightarrow$ Labels matrix
+\end{itemize}
+
+\item pre\_predict(clf : classifier, x : ndarray, y : ndarray, test : ndarray, train : ndarray) : void $\rightarrow$ This method executes operations before the prediction computation\begin{itemize}
+\item clf $\rightarrow$ The classifier to use
+\item x $\rightarrow$ Features matrix
+\item y $\rightarrow$ Labels matrix
+\item test $\rightarrow$ Test matrix
+\item train $\rightarrow$ Train matrix
+\end{itemize}
+
+\item \_\_init\_\_(features : dict, min\_pts : uint, eps : float) $\rightarrow$ This function is the constructor method\begin{itemize}
+\item features $\rightarrow$ Dictionary with samples as keys and another dictionary as values which has features as keys and values
+\item min\_pts $\rightarrow$ Minimum point such a cluster is not considered as noise in DBSCAN
+\item eps $\rightarrow$ Maximum euclidean distance from a point to be considered neighbor in DBSCAN
+\end{itemize}
+
+\end{itemize}
+
+\end{description}
+\subsection{datasets package}
+This package provides classes to handle with datasets
+
+\begin{figure}
+	\centering
+	\begin{tikzpicture}
+	
+	\umlsimpleinterface[x=-5.5, y=16.25]{DatasetBuilderInterface}
+	\umlemptyclass[y=16.25, type=abstract]{AbstractDatasetBuilder}
+	
+	\umlsimpleinterface[x=-3.5, y=2.5]{UnlabeledDatasetInterface}
+	\umlsimpleinterface[x=-3.5, y=5]{LabeledDatasetInterface}
+	\umlsimpleinterface[x=-3.5, y=7.5]{IpLabeledDatasetInterface}
+	
+	\umlemptyclass[x=3.5, type=abstract]{AbstractDataset}
+	\umlemptyclass[x=3.5, y=2.5]{UnlabeledDataset}
+	\umlemptyclass[x=3.5, y=5]{LabeledDataset}
+	\umlemptyclass[x=3.5, y=7.5, type=abstract]{IpLabeledDataset}
+	
+	\umlemptyclass[y=-2.5]{DatasetBuilder}
+	
+	\begin{umlpackage}[x=-3.5, y=10.25]{bottrack}
+	\umlemptyclass[y=2.5]{BotTrackDatasetBuilder}
+	\umlemptyclass{BotTrackDataset}
+	\end{umlpackage}
+	\begin{umlpackage}[x=3.5, y=10.25]{disclosure}
+	\umlemptyclass[y=2.5]{DisclosureDatasetBuilder}
+	\umlemptyclass{DisclosureDataset}
+	\end{umlpackage}
+	
+	
+	\umlunicompo[geometry=-|-, arm1=-7]{DatasetBuilder}{BotTrackDatasetBuilder}
+	\umlunicompo[geometry=-|-, arm1=7]{DatasetBuilder}{DisclosureDatasetBuilder}
+	\umlimpl[geometry=-|-, arm1=-5.5, anchor1=-160]{DatasetBuilder}{DatasetBuilderInterface}
+	
+	\umlimpl{UnlabeledDataset}{UnlabeledDatasetInterface}
+	\umlimpl{LabeledDataset}{LabeledDatasetInterface}
+	\umlimpl{IpLabeledDataset}{IpLabeledDatasetInterface}
+	
+	\umlinherit{UnlabeledDataset}{AbstractDataset}
+	\umlinherit{LabeledDataset}{UnlabeledDataset}
+	\umlinherit{IpLabeledDataset}{LabeledDataset}
+	\umlinherit{BotTrackDataset}{IpLabeledDataset}
+	\umlinherit{DisclosureDataset}{IpLabeledDataset}
+	
+	\umlinherit{LabeledDatasetInterface}{UnlabeledDatasetInterface}
+	\umlinherit{IpLabeledDatasetInterface}{LabeledDatasetInterface}
+	
+	\umlimpl{AbstractDatasetBuilder}{DatasetBuilderInterface}
+	\umlinherit{BotTrackDatasetBuilder}{AbstractDatasetBuilder}
+	\umlinherit[geometry=|-]{DisclosureDatasetBuilder}{AbstractDatasetBuilder}
+	
+	\umldep{BotTrackDatasetBuilder}{BotTrackDataset}
+	\umldep{DisclosureDatasetBuilder}{DisclosureDataset}
+	
+	\umldep[geometry=-|-, anchor1=10, arm1=5]{AbstractDatasetBuilder}{AbstractDataset}
+	\end{tikzpicture}
+	\caption{Package diagram: datasets}
+\end{figure}
+
+\hypertarget{datasets::AbstractDataset}{}
+\subsubsection[AbstractDataset]{datasets::AbstractDataset}
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+\umlclass{datasets::AbstractDataset} {}{}
+\end{tikzpicture}
+\caption{Class diagram - datasets::AbstractDataset}
+\end{figure}\begin{description}
+\item[Description] \hfill \\
+ This class is the abstract base class for each dataset
+\item[Children classes] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item \hyperlink{datasets::UnlabeledDataset}{datasets::UnlabeledDataset}
+\end{itemize}
+
+\end{description}
+\hypertarget{datasets::UnlabeledDatasetInterface}{}
+\subsubsection[UnlabeledDatasetInterface]{datasets::UnlabeledDatasetInterface}
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+\umlclass{datasets::UnlabeledDatasetInterface} {}{\umlvirt{+netflow() : ndarray}}
+\end{tikzpicture}
+\caption{Class diagram - datasets::UnlabeledDatasetInterface}
+\end{figure}\begin{description}
+\item[Description] \hfill \\
+ This is the interface for each unlabeled dataset
+\item[Children classes] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item \hyperlink{datasets::LabeledDatasetInterface}{datasets::LabeledDatasetInterface}
+\item \hyperlink{datasets::UnlabeledDataset}{datasets::UnlabeledDataset}
+\end{itemize}
+
+\item[Methods] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item netflow() : ndarray $\rightarrow$ This method gets the netflow matrix
+\end{itemize}
+
+\end{description}
+\hypertarget{datasets::LabeledDatasetInterface}{}
+\subsubsection[LabeledDatasetInterface]{datasets::LabeledDatasetInterface}
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+\umlclass{datasets::LabeledDatasetInterface} {}{\umlvirt{+labels() : ndarray}}
+\end{tikzpicture}
+\caption{Class diagram - datasets::LabeledDatasetInterface}
+\end{figure}\begin{description}
+\item[Description] \hfill \\
+ This is the interface for each labeled dataset
+\item[Parent classes] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item \hyperlink{datasets::UnlabeledDatasetInterface}{datasets::UnlabeledDatasetInterface}
+\end{itemize}
+
+\item[Children classes] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item \hyperlink{datasets::IpLabeledDatasetInterface}{datasets::IpLabeledDatasetInterface}
+\item \hyperlink{datasets::LabeledDataset}{datasets::LabeledDataset}
+\end{itemize}
+
+\item[Methods] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item labels() : ndarray $\rightarrow$ This method gets the labels matrix
+\end{itemize}
+
+\end{description}
+\hypertarget{datasets::IpLabeledDatasetInterface}{}
+\subsubsection[IpLabeledDatasetInterface]{datasets::IpLabeledDatasetInterface}
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+\umlclass{datasets::IpLabeledDatasetInterface} {}{\umlvirt{+labeled\_ips() : dict}}
+\end{tikzpicture}
+\caption{Class diagram - datasets::IpLabeledDatasetInterface}
+\end{figure}\begin{description}
+\item[Description] \hfill \\
+ This is the interface for each IP-labeled dataset
+\item[Parent classes] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item \hyperlink{datasets::LabeledDatasetInterface}{datasets::LabeledDatasetInterface}
+\end{itemize}
+
+\item[Children classes] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item \hyperlink{datasets::IpLabeledDataset}{datasets::IpLabeledDataset}
+\end{itemize}
+
+\item[Methods] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item labeled\_ips() : dict $\rightarrow$ This method gets labels for each samples
+\end{itemize}
+
+\end{description}
+\hypertarget{datasets::UnlabeledDataset}{}
+\subsubsection[UnlabeledDataset]{datasets::UnlabeledDataset}
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+\umlclass{datasets::UnlabeledDataset} {--netflow : ndarray}{+\_\_init\_\_(netflow : ndarray)\\+netflow() : ndarray}
+\end{tikzpicture}
+\caption{Class diagram - datasets::UnlabeledDataset}
+\end{figure}\begin{description}
+\item[Description] \hfill \\
+ This class represents an unlabeled dataset
+\item[Parent classes] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item \hyperlink{datasets::AbstractDataset}{datasets::AbstractDataset}
+\item \hyperlink{datasets::UnlabeledDatasetInterface}{datasets::UnlabeledDatasetInterface}
+\end{itemize}
+
+\item[Children classes] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item \hyperlink{datasets::LabeledDataset}{datasets::LabeledDataset}
+\end{itemize}
+
+\item[Attributes] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item netflow : ndarray (Netflow matrix)
+\end{itemize}
+
+\item[Methods] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item \_\_init\_\_(netflow : ndarray) $\rightarrow$ This method is the constructor of the class\begin{itemize}
+\item netflow $\rightarrow$ Netflow matrix
+\end{itemize}
+
+\item netflow() : ndarray $\rightarrow$ This method gets the netflow matrix
+\end{itemize}
+
+\end{description}
+\hypertarget{datasets::LabeledDataset}{}
+\subsubsection[LabeledDataset]{datasets::LabeledDataset}
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+\umlclass{datasets::LabeledDataset} {--labels : ndarray}{+\_\_init\_\_(netflow : ndarray, labels : ndarray)\\+labels() : ndarray}
+\end{tikzpicture}
+\caption{Class diagram - datasets::LabeledDataset}
+\end{figure}\begin{description}
+\item[Description] \hfill \\
+ This class represents a labeled dataset
+\item[Parent classes] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item \hyperlink{datasets::LabeledDatasetInterface}{datasets::LabeledDatasetInterface}
+\item \hyperlink{datasets::UnlabeledDataset}{datasets::UnlabeledDataset}
+\end{itemize}
+
+\item[Children classes] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item \hyperlink{datasets::IpLabeledDataset}{datasets::IpLabeledDataset}
+\end{itemize}
+
+\item[Attributes] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item labels : ndarray (Labels matrix)
+\end{itemize}
+
+\item[Methods] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item \_\_init\_\_(netflow : ndarray, labels : ndarray) $\rightarrow$ This method is the constructor of the class\begin{itemize}
+\item netflow $\rightarrow$ Netflow matrix
+\item labels $\rightarrow$ Labels matrix
+\end{itemize}
+
+\item labels() : ndarray $\rightarrow$ This method gets the labels matrix
+\end{itemize}
+
+\end{description}
+\hypertarget{datasets::IpLabeledDataset}{}
+\subsubsection[IpLabeledDataset]{datasets::IpLabeledDataset}
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+\umlclass{datasets::IpLabeledDataset} {--labeled\_ip : dict}{+\_\_init\_\_(netflow : ndarray, labels : ndarray, **kwargs : kwargs)\\\umlvirt{\#extract\_ips(netflow : ndarray, labels : ndarray, **kwargs : kwargs) : set}\\\#associate\_labels(ips : iterable) : dict\\+labeled\_ips() : dict}
+\end{tikzpicture}
+\caption{Class diagram - datasets::IpLabeledDataset}
+\end{figure}\begin{description}
+\item[Description] \hfill \\
+ This class is an abstract base class for each IP-labeled dataset
+\item[Parent classes] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item \hyperlink{datasets::IpLabeledDatasetInterface}{datasets::IpLabeledDatasetInterface}
+\item \hyperlink{datasets::LabeledDataset}{datasets::LabeledDataset}
+\end{itemize}
+
+\item[Children classes] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item \hyperlink{datasets::disclosure::DisclosureDataset}{datasets::disclosure::DisclosureDataset}
+\item \hyperlink{datasets::bottrack::BotTrackDataset}{datasets::bottrack::BotTrackDataset}
+\end{itemize}
+
+\item[Attributes] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item labeled\_ip : dict (Labels for each samples)
+\end{itemize}
+
+\item[Methods] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item \_\_init\_\_(netflow : ndarray, labels : ndarray, **kwargs : kwargs) $\rightarrow$ This method is the constructor of the class\begin{itemize}
+\item netflow $\rightarrow$ Netflow matrix
+\item labels $\rightarrow$ Labels matrix
+\item **kwargs $\rightarrow$ Other keyword arguments
+\end{itemize}
+
+\item extract\_ips(netflow : ndarray, labels : ndarray, **kwargs : kwargs) : set $\rightarrow$ This method extracts IPs\begin{itemize}
+\item netflow $\rightarrow$ Netflow matrix
+\item labels $\rightarrow$ Labels matrix
+\item **kwargs $\rightarrow$ Other keyword arguments
+\end{itemize}
+
+\item associate\_labels(ips : iterable) : dict $\rightarrow$ This method associates labels to each IP\begin{itemize}
+\item ips $\rightarrow$ IPs
+\end{itemize}
+
+\item labeled\_ips() : dict $\rightarrow$ This method gets labels for each samples
+\end{itemize}
+
+\end{description}
+\hypertarget{datasets::DatasetBuilderInterface}{}
+\subsubsection[DatasetBuilderInterface]{datasets::DatasetBuilderInterface}
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+\umlclass{datasets::DatasetBuilderInterface} {}{\umlvirt{+build(filename : str, columns : iterable, **kwargs : kwargs) : AbstractDataset}}
+\end{tikzpicture}
+\caption{Class diagram - datasets::DatasetBuilderInterface}
+\end{figure}\begin{description}
+\item[Description] \hfill \\
+ This is the interface for each dataset builder
+\item[Children classes] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item \hyperlink{datasets::AbstractDatasetBuilder}{datasets::AbstractDatasetBuilder}
+\item \hyperlink{datasets::DatasetBuilder}{datasets::DatasetBuilder}
+\end{itemize}
+
+\item[Methods] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item build(filename : str, columns : iterable, **kwargs : kwargs) : AbstractDataset $\rightarrow$ This method build the dataset\begin{itemize}
+\item filename $\rightarrow$ File to load netflow from
+\item columns $\rightarrow$ Columns of the netflow
+\item **kwargs $\rightarrow$ Other keyword arguments
+\end{itemize}
+
+\end{itemize}
+
+\end{description}
+\hypertarget{datasets::AbstractDatasetBuilder}{}
+\subsubsection[AbstractDatasetBuilder]{datasets::AbstractDatasetBuilder}
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+\umlclass{datasets::AbstractDatasetBuilder} {}{\#pre\_build(columns : iterable, **kwargs : kwargs) : (list, kwargs)\\\#load(filename : str, columns : iterable) : ndarray\\\umlvirt{\#build(netflow : ndarray, columns : iterable, **kwargs : kwargs) : AbstractDataset}\\\umlvirt{+columns()}}
+\end{tikzpicture}
+\caption{Class diagram - datasets::AbstractDatasetBuilder}
+\end{figure}\begin{description}
+\item[Description] \hfill \\
+ This class is an abstract base class for each dataset builder
+\item[Parent classes] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item \hyperlink{datasets::DatasetBuilderInterface}{datasets::DatasetBuilderInterface}
+\end{itemize}
+
+\item[Children classes] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item \hyperlink{datasets::disclosure::DisclosureDatasetBuilder}{datasets::disclosure::DisclosureDatasetBuilder}
+\item \hyperlink{datasets::bottrack::BotTrackDatasetBuilder}{datasets::bottrack::BotTrackDatasetBuilder}
+\end{itemize}
+
+\item[Methods] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item pre\_build(columns : iterable, **kwargs : kwargs) : (list, kwargs) $\rightarrow$ This method performs operations before build method call\begin{itemize}
+\item columns $\rightarrow$ Columns of the netflow
+\item **kwargs $\rightarrow$ Other keyword arguments
+\end{itemize}
+
+\item load(filename : str, columns : iterable) : ndarray $\rightarrow$ This method loads the netflow from file\begin{itemize}
+\item filename $\rightarrow$ File to load netflow from
+\item columns $\rightarrow$ Columns of the netflow
+\end{itemize}
+
+\item build(netflow : ndarray, columns : iterable, **kwargs : kwargs) : AbstractDataset $\rightarrow$ This method build the dataset and it is accessed from build public method\begin{itemize}
+\item netflow $\rightarrow$ Netflow matrix
+\item columns $\rightarrow$ Columns of the netflow
+\item **kwargs $\rightarrow$ Other keyword arguments
+\end{itemize}
+
+\item columns() $\rightarrow$ This method gets the columns to extract from the netflow
+\end{itemize}
+
+\end{description}
+\hypertarget{datasets::DatasetBuilder}{}
+\subsubsection[DatasetBuilder]{datasets::DatasetBuilder}
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+\umlclass{datasets::DatasetBuilder} {}{+build(filename : str, **kwargs : kwargs) : AbstractDataset\\--dataset\_builders\_map() : dict\\+\_\_init\_\_(extractor : str)}
+\end{tikzpicture}
+\caption{Class diagram - datasets::DatasetBuilder}
+\end{figure}\begin{description}
+\item[Description] \hfill \\
+ This class binds to many dataset builders depending on parameters
+\item[Parent classes] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item \hyperlink{datasets::DatasetBuilderInterface}{datasets::DatasetBuilderInterface}
+\end{itemize}
+
+\item[Methods] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item build(filename : str, **kwargs : kwargs) : AbstractDataset $\rightarrow$ This method build the dataset\begin{itemize}
+\item filename $\rightarrow$ File to load netflow from
+\item **kwargs $\rightarrow$ Other keyword arguments
+\end{itemize}
+
+\item dataset\_builders\_map() : dict $\rightarrow$ This method provides a map to bind a string to a dataset builder
+\item \_\_init\_\_(extractor : str) $\rightarrow$ This method is the constructor of the class\begin{itemize}
+\item extractor $\rightarrow$ Which dataset builder to build
+\end{itemize}
+
+\end{itemize}
+
+\end{description}
+\subsubsection{datasets::disclosure}
+This package provides classes to handle with Disclosure datasets
+
+\hypertarget{datasets::disclosure::DisclosureDataset}{}
+\paragraph[DisclosureDataset]{datasets::disclosure::DisclosureDataset}
+ \hfill\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+\umlclass{datasets::disclosure::DisclosureDataset} {}{\#extract\_ips(netflow : ndarray, labels : ndarray, sigma : float) : set}
+\end{tikzpicture}
+\caption{Class diagram - datasets::disclosure::DisclosureDataset}
+\end{figure}\begin{description}
+\item[Description] \hfill \\
+ This class represents a Disclosure dataset
+\item[Parent classes] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item \hyperlink{datasets::IpLabeledDataset}{datasets::IpLabeledDataset}
+\end{itemize}
+
+\item[Methods] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item extract\_ips(netflow : ndarray, labels : ndarray, sigma : float) : set $\rightarrow$ This method extracts server IPs which are nodes with number of incoming connections around a certain standard deviation from the maximum\begin{itemize}
+\item netflow $\rightarrow$ Netflow matrix
+\item labels $\rightarrow$ Labels matrix
+\item sigma $\rightarrow$ Standard deviation
+\end{itemize}
+
+\end{itemize}
+
+\end{description}
+\hypertarget{datasets::disclosure::DisclosureDatasetBuilder}{}
+\paragraph[DisclosureDatasetBuilder]{datasets::disclosure::DisclosureDatasetBuilder}
+ \hfill\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+\umlclass{datasets::disclosure::DisclosureDatasetBuilder} {}{\umlvirt{\#build(netflow : ndarray, columns : iterable, **kwargs : kwargs) : DisclosureDataset}\\\umlvirt{+columns()}}
+\end{tikzpicture}
+\caption{Class diagram - datasets::disclosure::DisclosureDatasetBuilder}
+\end{figure}\begin{description}
+\item[Description] \hfill \\
+ This class provides a builder for Disclosure datasets
+\item[Parent classes] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item \hyperlink{datasets::AbstractDatasetBuilder}{datasets::AbstractDatasetBuilder}
+\end{itemize}
+
+\item[Methods] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item build(netflow : ndarray, columns : iterable, **kwargs : kwargs) : DisclosureDataset $\rightarrow$ This method build the dataset and it is accessed from build public method\begin{itemize}
+\item netflow $\rightarrow$ Netflow matrix
+\item columns $\rightarrow$ Columns of the netflow
+\item **kwargs $\rightarrow$ Other keyword arguments
+\end{itemize}
+
+\item columns() $\rightarrow$ This method gets the columns to extract from the netflow
+\end{itemize}
+
+\end{description}
+\subsubsection{datasets::bottrack}
+This package provides classes to handle with BotTrack datasets
+
+\hypertarget{datasets::bottrack::BotTrackDataset}{}
+\paragraph[BotTrackDataset]{datasets::bottrack::BotTrackDataset}
+ \hfill\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+\umlclass{datasets::bottrack::BotTrackDataset} {}{+extract\_ips(labels : ndarray, netflow : ndarray, **kwargs : kwargs) : set}
+\end{tikzpicture}
+\caption{Class diagram - datasets::bottrack::BotTrackDataset}
+\end{figure}\begin{description}
+\item[Description] \hfill \\
+ This class represents a BotTrack dataset
+\item[Parent classes] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item \hyperlink{datasets::IpLabeledDataset}{datasets::IpLabeledDataset}
+\end{itemize}
+
+\item[Methods] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item extract\_ips(labels : ndarray, netflow : ndarray, **kwargs : kwargs) : set $\rightarrow$ This method extracts every unique IP\begin{itemize}
+\item labels $\rightarrow$ Labels matrix
+\item netflow $\rightarrow$ Netflow matrix
+\item **kwargs $\rightarrow$ Other keyword arguments
+\end{itemize}
+
+\end{itemize}
+
+\end{description}
+\hypertarget{datasets::bottrack::BotTrackDatasetBuilder}{}
+\paragraph[BotTrackDatasetBuilder]{datasets::bottrack::BotTrackDatasetBuilder}
+ \hfill\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+\umlclass{datasets::bottrack::BotTrackDatasetBuilder} {}{\umlvirt{+columns()}\\\umlvirt{\#build(columns : iterable, netflow : ndarray, **kwargs : kwargs) : BotTrackDataset}}
+\end{tikzpicture}
+\caption{Class diagram - datasets::bottrack::BotTrackDatasetBuilder}
+\end{figure}\begin{description}
+\item[Description] \hfill \\
+ This class provides a builder for BotTrack datasets
+\item[Parent classes] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item \hyperlink{datasets::AbstractDatasetBuilder}{datasets::AbstractDatasetBuilder}
+\end{itemize}
+
+\item[Methods] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item columns() $\rightarrow$ This method gets the columns to extract from the netflow
+\item build(columns : iterable, netflow : ndarray, **kwargs : kwargs) : BotTrackDataset $\rightarrow$ This method build the dataset and it is accessed from build public method\begin{itemize}
+\item columns $\rightarrow$ Columns of the netflow
+\item netflow $\rightarrow$ Netflow matrix
+\item **kwargs $\rightarrow$ Other keyword arguments
+\end{itemize}
+
+\end{itemize}
+
+\end{description}
+\subsection{extractors package}
+This package provides classes to implement features extractors
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+	\umlsimpleinterface{ExtractorInterface}
+	
+	\begin{umlpackage}{bottrack}
+	\umlemptyclass[x=-3, y=-3.5]{BotTrackExtractor}
+	\end{umlpackage}
+	\begin{umlpackage}{disclosure}
+	\umlemptyclass[x=3, y=-3.5]{DisclosureExtractor}
+	\end{umlpackage}
+	
+	\umlemptyclass[y=-6]{Extractor}
+	
+	\umlunicompo[geometry=-|]{Extractor}{BotTrackExtractor}
+	\umlunicompo[geometry=-|]{Extractor}{DisclosureExtractor}
+	\umlimpl{Extractor}{ExtractorInterface}
+	\umlimpl{BotTrackExtractor}{ExtractorInterface}
+	\umlimpl[geometry=|-, anchor1=60]{DisclosureExtractor}{ExtractorInterface}
+	\end{tikzpicture}
+	\caption{Package diagram: extractors}
+\end{figure}
+
+\hypertarget{extractors::ExtractorInterface}{}
+\subsubsection[ExtractorInterface]{extractors::ExtractorInterface}
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+\umlclass{extractors::ExtractorInterface} {}{\umlvirt{+extract(dataset : AbstractDataset, **kwargs : kwargs) : dict}}
+\end{tikzpicture}
+\caption{Class diagram - extractors::ExtractorInterface}
+\end{figure}\begin{description}
+\item[Description] \hfill \\
+ This is the interface for each extractor
+\item[Children classes] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item \hyperlink{extractors::Extractor}{extractors::Extractor}
+\item \hyperlink{extractors::disclosure::DisclosureExtractor}{extractors::disclosure::DisclosureExtractor}
+\item \hyperlink{extractors::bottrack::BotTrackExtractor}{extractors::bottrack::BotTrackExtractor}
+\end{itemize}
+
+\item[Methods] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item extract(dataset : AbstractDataset, **kwargs : kwargs) : dict $\rightarrow$ This method provides to extract features from the dataset\begin{itemize}
+\item dataset $\rightarrow$ Dataset which extract features from
+\item **kwargs $\rightarrow$ Other keyword arguments
+\end{itemize}
+
+\end{itemize}
+
+\end{description}
+\hypertarget{extractors::Extractor}{}
+\subsubsection[Extractor]{extractors::Extractor}
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+\umlclass{extractors::Extractor} {}{+\_\_init\_\_(extractor : str)\\--extractors\_map() : dict\\+extract(dataset : AbstractDataset, **kwargs : kwargs) : dict}
+\end{tikzpicture}
+\caption{Class diagram - extractors::Extractor}
+\end{figure}\begin{description}
+\item[Description] \hfill \\
+ This class binds to many features extractors depending on parameters
+\item[Parent classes] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item \hyperlink{extractors::ExtractorInterface}{extractors::ExtractorInterface}
+\end{itemize}
+
+\item[Methods] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item \_\_init\_\_(extractor : str) $\rightarrow$ This method is the constructor of the class\begin{itemize}
+\item extractor $\rightarrow$ Which extractor to build
+\end{itemize}
+
+\item extractors\_map() : dict $\rightarrow$ This method provides a map to bind a string to an extractor
+\item extract(dataset : AbstractDataset, **kwargs : kwargs) : dict $\rightarrow$ This method provides to extract features from the dataset\begin{itemize}
+\item dataset $\rightarrow$ Dataset which extract features from
+\item **kwargs $\rightarrow$ Other keyword arguments
+\end{itemize}
+
+\end{itemize}
+
+\end{description}
+\subsubsection{extractors::disclosure}
+This package provides classes to implement Disclosure features extractor algorithm
+
+\hypertarget{extractors::disclosure::DisclosureExtractor}{}
+\paragraph[DisclosureExtractor]{extractors::disclosure::DisclosureExtractor}
+ \hfill\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+\umlclass{extractors::disclosure::DisclosureExtractor} {}{+extract(dataset : DisclosureDataset, autocorrelation : uint, unmatched : uint) : dict\\\umlstatic{--extract\_flows(dataset : DisclosureDataset) : dict}\\\umlstatic{--extract\_statistical\_features(q : Queue, flows\_by\_server : dict) : dict}\\\umlstatic{--extract\_autocorrelation\_features(q : Queue, flows\_by\_server : dict,} \\\umlstatic{ dataset : DisclosureDataset, autocorrelation : uint) : dict}\\\umlstatic{--extract\_unique\_flow\_sizes\_features(q : Queue, flows\_by\_server : dict) : dict}\\\umlstatic{--extract\_kurtosis\_and\_entropy(flow\_sizes : ndarray) : dict}\\\umlstatic{--regular\_access\_patterns\_features(q : Queue, flows\_by\_server : dict) : dict}\\\umlstatic{--unmatched\_flow\_density\_features(q : Queue, flows\_by\_server : dict,} \\\umlstatic{dataset : DisclosureDataset, unmatched : uint) : dict}}
+\end{tikzpicture}
+\caption{Class diagram - extractors::disclosure::DisclosureExtractor}
+\end{figure}\begin{description}
+\item[Description] \hfill \\
+ This class is a features extractor for Disclosure algorithm
+\item[Parent classes] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item \hyperlink{extractors::ExtractorInterface}{extractors::ExtractorInterface}
+\end{itemize}
+
+\item[Methods] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item extract(dataset : DisclosureDataset, autocorrelation : uint, unmatched : uint) : dict $\rightarrow$ This method provides to extract features from the dataset\begin{itemize}
+\item dataset $\rightarrow$ Dataset which extract features from
+\item autocorrelation $\rightarrow$ Number of time series for computing autocorrelation features
+\item unmatched $\rightarrow$ Number of time series for computing unmatched flow features
+\end{itemize}
+
+\item extract\_flows(dataset : DisclosureDataset) : dict $\rightarrow$ This method provide to create of an easy to iterate data structure from the dataset\begin{itemize}
+\item dataset $\rightarrow$ Dataset which extract features from
+\end{itemize}
+
+\item extract\_statistical\_features(q : Queue, flows\_by\_server : dict) : dict $\rightarrow$ This method extracts statistical features\begin{itemize}
+\item q $\rightarrow$ Queue where put result in
+\item flows\_by\_server $\rightarrow$ Easy to iterate data structure with flows
+\end{itemize}
+
+\item extract\_autocorrelation\_features(q : Queue, flows\_by\_server : dict, dataset : DisclosureDataset, autocorrelation : uint) : dict $\rightarrow$ This method extracts autocorrelation features\begin{itemize}
+\item q $\rightarrow$ Queue where put result in
+\item flows\_by\_server $\rightarrow$ Easy to iterate data structure with flows
+\item dataset $\rightarrow$ Dataset which extract features from
+\item autocorrelation $\rightarrow$ Number of time series for computing autocorrelation features
+\end{itemize}
+
+\item extract\_unique\_flow\_sizes\_features(q : Queue, flows\_by\_server : dict) : dict $\rightarrow$ This method extracts unique flow sizes features\begin{itemize}
+\item q $\rightarrow$ Queue where put result in
+\item flows\_by\_server $\rightarrow$ Easy to iterate data structure with flows
+\end{itemize}
+
+\item extract\_kurtosis\_and\_entropy(flow\_sizes : ndarray) : dict $\rightarrow$ This method extracts kurtosis of given flow sizes and entropy on unique flow size\begin{itemize}
+\item flow\_sizes $\rightarrow$ Vector of flow sizes
+\end{itemize}
+
+\item regular\_access\_patterns\_features(q : Queue, flows\_by\_server : dict) : dict $\rightarrow$ This method extracts regular access patterns features\begin{itemize}
+\item q $\rightarrow$ Queue where put result in
+\item flows\_by\_server $\rightarrow$ Easy to iterate data structure with flows
+\end{itemize}
+
+\item unmatched\_flow\_density\_features(q : Queue, flows\_by\_server : dict, dataset : DisclosureDataset, unmatched : uint) : dict $\rightarrow$ This method extracts unmatched flow density features\begin{itemize}
+\item q $\rightarrow$ Queue where put result in
+\item flows\_by\_server $\rightarrow$ Easy to iterate data structure with flows
+\item dataset $\rightarrow$ Dataset which extract features from
+\item unmatched $\rightarrow$ Number of time series for computing unmatched flow features
+\end{itemize}
+
+\end{itemize}
+
+\end{description}
+\subsubsection{extractors::bottrack}
+This package provides classes to implement BotTrack features extractor algorithm
+
+\hypertarget{extractors::bottrack::BotTrackExtractor}{}
+\paragraph[BotTrackExtractor]{extractors::bottrack::BotTrackExtractor}
+ \hfill\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+\umlclass{extractors::bottrack::BotTrackExtractor} {}{+extract(dataset : BotTrackDataset, hits\_max\_iter : uint) : dict}
+\end{tikzpicture}
+\caption{Class diagram - extractors::bottrack::BotTrackExtractor}
+\end{figure}\begin{description}
+\item[Description] \hfill \\
+ This class is a features extractor for BotTrack algorithm
+\item[Parent classes] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item \hyperlink{extractors::ExtractorInterface}{extractors::ExtractorInterface}
+\end{itemize}
+
+\item[Methods] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item extract(dataset : BotTrackDataset, hits\_max\_iter : uint) : dict $\rightarrow$ This method provides to extract features from the dataset\begin{itemize}
+\item dataset $\rightarrow$ Dataset which extract features from
+\item hits\_max\_iter $\rightarrow$ Maximum number of iterations of HITS function
+\end{itemize}
+
+\end{itemize}
+
+\end{description}
+\subsection{main package}
+This package contains the main program
+
+\hypertarget{main::App}{}
+\subsubsection[App]{main::App}
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+\umlclass{main::App} {--app\_dir : str}{+main() : void\\\umlstatic{--parse() : object}\\+\_\_init\_\_(app\_dir : str)}
+\end{tikzpicture}
+\caption{Class diagram - main::App}
+\end{figure}\begin{description}
+\item[Description] \hfill \\
+ This class is the main class of the application
+\item[Attributes] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item app\_dir : str (The location of the application)
+\end{itemize}
+
+\item[Methods] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item main() : void $\rightarrow$ This method is the main method of the application
+\item parse() : object $\rightarrow$ This method provide to parse the command line input
+\item \_\_init\_\_(app\_dir : str) $\rightarrow$ This method is the constructor of the class\begin{itemize}
+\item app\_dir $\rightarrow$ The location of the application
+\end{itemize}
+
+\end{itemize}
+
+\end{description}
+\subsection{metrics package}
+This package provides classes to compute evaluation metrics
+
+\hypertarget{metrics::Metrics}{}
+\subsubsection[Metrics]{metrics::Metrics}
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+\umlclass{metrics::Metrics} {}{\umlstatic{+accuracy(y\_tests : ndarray, y\_predictions : ndarray) : tuple}\\\umlstatic{+precision(y\_tests : ndarray, y\_predictions : ndarray) : tuple}\\\umlstatic{+recall(y\_tests : ndarray, y\_predictions : ndarray) : tuple}\\\umlstatic{+roc\_auc(y\_tests : ndarray, y\_predictions : ndarray) : tuple}}
+\end{tikzpicture}
+\caption{Class diagram - metrics::Metrics}
+\end{figure}\begin{description}
+\item[Description] \hfill \\
+ This class contains build-in methods to compute evaluation metrics
+\item[Methods] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item accuracy(y\_tests : ndarray, y\_predictions : ndarray) : tuple $\rightarrow$ This method performs accuracy score metric\begin{itemize}
+\item y\_tests $\rightarrow$ Many test labels vectors
+\item y\_predictions $\rightarrow$ Many prediction labels vectors
+\end{itemize}
+
+\item precision(y\_tests : ndarray, y\_predictions : ndarray) : tuple $\rightarrow$ This method performs precision score metric\begin{itemize}
+\item y\_tests $\rightarrow$ Many test labels vectors
+\item y\_predictions $\rightarrow$ Many prediction labels vectors
+\end{itemize}
+
+\item recall(y\_tests : ndarray, y\_predictions : ndarray) : tuple $\rightarrow$ This method performs recall score metric\begin{itemize}
+\item y\_tests $\rightarrow$ Many test labels vectors
+\item y\_predictions $\rightarrow$ Many prediction labels vectors
+\end{itemize}
+
+\item roc\_auc(y\_tests : ndarray, y\_predictions : ndarray) : tuple $\rightarrow$ This method performs ROC AUC score metric\begin{itemize}
+\item y\_tests $\rightarrow$ Many test labels vectors
+\item y\_predictions $\rightarrow$ Many prediction labels vectors
+\end{itemize}
+
+\end{itemize}
+
+\end{description}
+\subsection{outputs package}
+This package provides classes to handle with outputs
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+	\begin{umlpackage}[x=-2]{plot}
+	\umlemptyclass{Plot}
+	\end{umlpackage}
+	\begin{umlpackage}[x=2]{save}
+	\umlemptyclass{Save}
+	\end{umlpackage}
+	\end{tikzpicture}
+	\caption{Package diagram: outputs}
+\end{figure}
+
+\subsubsection{outputs::save}
+This package provides classes to save outputs into files
+
+\hypertarget{outputs::save::Save}{}
+\paragraph[Save]{outputs::save::Save}
+ \hfill\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+\umlclass{outputs::save::Save} {}{\umlstatic{+metrics(filename : str, y\_tests : ndarray, y\_predictions : ndarray, y\_labels : ndarray,} \\\umlstatic{which : iterable, bots : iterable, sort\_keys : bool, indent : uint) : void}\\\umlstatic{+features(filename : str, features : dict, which : iterable, bots : iterable, sort\_keys : bool,} \\\umlstatic{indent : uint) : void}\\\umlstatic{+predictions(filename\_tests : str, filename\_predictions : str, filename\_labels : str,} \\\umlstatic{y\_tests : ndarray, y\_predictions : ndarray, y\_labels : ndarray, bots : iterable,} \\\umlstatic{indent : uint) : void}}
+\end{tikzpicture}
+\caption{Class diagram - outputs::save::Save}
+\end{figure}\begin{description}
+\item[Description] \hfill \\
+ This class contains build-in methods to save outputs into files
+\item[Methods] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item metrics(filename : str, y\_tests : ndarray, y\_predictions : ndarray, y\_labels : ndarray, which : iterable, bots : iterable, sort\_keys : bool, indent : uint) : void $\rightarrow$ This method save evaluation metrics into a JSON file\begin{itemize}
+\item filename $\rightarrow$ File where save data into
+\item y\_tests $\rightarrow$ Tests labels
+\item y\_predictions $\rightarrow$ Predictions labels
+\item y\_labels $\rightarrow$ Labels of samples
+\item which $\rightarrow$ Which metrics save into the file
+\item bots $\rightarrow$ Which botnets save into the file
+\item sort\_keys $\rightarrow$ If JSON should have sorted keys
+\item indent $\rightarrow$ Indent of the JSON file
+\end{itemize}
+
+\item features(filename : str, features : dict, which : iterable, bots : iterable, sort\_keys : bool, indent : uint) : void $\rightarrow$ This method save extracted features into a JSON file\begin{itemize}
+\item filename $\rightarrow$ File where save data into
+\item features $\rightarrow$ Dictionary with samples as keys and another dictionary as values which has features as keys and values
+\item which $\rightarrow$ Which features save into the file
+\item bots $\rightarrow$ Which samples save into the file
+\item sort\_keys $\rightarrow$ If JSON should have sorted keys
+\item indent $\rightarrow$ Indent of the JSON file
+\end{itemize}
+
+\item predictions(filename\_tests : str, filename\_predictions : str, filename\_labels : str, y\_tests : ndarray, y\_predictions : ndarray, y\_labels : ndarray, bots : iterable, indent : uint) : void $\rightarrow$ This method save predictions into a JSON file\begin{itemize}
+\item filename\_tests $\rightarrow$ File where save tests labels into
+\item filename\_predictions $\rightarrow$ File where save predictions labels into
+\item filename\_labels $\rightarrow$ File where save labels of samples into
+\item y\_tests $\rightarrow$ Many test labels vectors
+\item y\_predictions $\rightarrow$ Many prediction labels vectors
+\item y\_labels $\rightarrow$ Many labels vectors
+\item bots $\rightarrow$ Which botnets save into the file
+\item indent $\rightarrow$ Indent of the JSON file
+\end{itemize}
+
+\end{itemize}
+
+\end{description}
+\subsubsection{outputs::plot}
+This package provides classes to save plots into files
+
+\hypertarget{outputs::plot::Plot}{}
+\paragraph[Plot]{outputs::plot::Plot}
+ \hfill\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+\umlclass{outputs::plot::Plot} {}{\umlstatic{--get\_colours\_map(n : uint) : function}\\\umlstatic{+metrics\_bars(filename : str, y\_tests : ndarray, y\_predictions : ndarray,} \\\umlstatic{y\_labels : ndarray, which : iterable, bots : iterable, bar\_width : float, xlabels : str,} \\\umlstatic{ylabel : str, xlabel : str, color : str) : void}\\\umlstatic{+total\_metrics\_bar(filename : str, y\_tests : ndarray, y\_predictions : ndarray,} \\\umlstatic{y\_labels : ndarray, which : iterable, bar\_width : float, xlabels : str, ylabel : str,} \\\umlstatic{xlabel : str, color : str) : void}}
+\end{tikzpicture}
+\caption{Class diagram - outputs::plot::Plot}
+\end{figure}\begin{description}
+\item[Description] \hfill \\
+ This class contains build-in methods to save plots into files
+\item[Methods] \hfill \\
+ \vspace{-1cm}
+\begin{itemize}
+\item get\_colours\_map(n : uint) : function $\rightarrow$ This method gets a function which generates colors in a range\begin{itemize}
+\item n $\rightarrow$ Range of colors to generate
+\end{itemize}
+
+\item metrics\_bars(filename : str, y\_tests : ndarray, y\_predictions : ndarray, y\_labels : ndarray, which : iterable, bots : iterable, bar\_width : float, xlabels : str, ylabel : str, xlabel : str, color : str) : void $\rightarrow$ This method plots a bar chart with metrics for each detected botnet\begin{itemize}
+\item filename $\rightarrow$ File where save data into
+\item y\_tests $\rightarrow$ Tests labels
+\item y\_predictions $\rightarrow$ Predictions labels
+\item y\_labels $\rightarrow$ Labels of samples
+\item which $\rightarrow$ Which are metrics to plot
+\item bots $\rightarrow$ Which are botnets to plot
+\item bar\_width $\rightarrow$ How wide plot the bars
+\item xlabels $\rightarrow$ Labels of the X axis ticks
+\item ylabel $\rightarrow$ Label of the Y axis
+\item xlabel $\rightarrow$ Label of the X axis
+\item color $\rightarrow$ Bars color
+\end{itemize}
+
+\item total\_metrics\_bar(filename : str, y\_tests : ndarray, y\_predictions : ndarray, y\_labels : ndarray, which : iterable, bar\_width : float, xlabels : str, ylabel : str, xlabel : str, color : str) : void $\rightarrow$ This method plots a bar chart with metrics of total detected botnets\begin{itemize}
+\item filename $\rightarrow$ File where save data into
+\item y\_tests $\rightarrow$ Tests labels
+\item y\_predictions $\rightarrow$ Predictions labels
+\item y\_labels $\rightarrow$ Labels of samples
+\item which $\rightarrow$ Which are metrics to plot
+\item bar\_width $\rightarrow$ How wide plot the bars
+\item xlabels $\rightarrow$ Labels of the X axis ticks
+\item ylabel $\rightarrow$ Label of the Y axis
+\item xlabel $\rightarrow$ Label of the X axis
+\item color $\rightarrow$ Bars color
+\end{itemize}
+
+\end{itemize}
+
+\end{description}

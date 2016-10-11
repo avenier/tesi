@@ -1,0 +1,474 @@
+\documentclass{beamer}
+%**************************************************************
+% Packages
+%**************************************************************
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage{makeidx}
+\makeindex
+\newenvironment{theindex}
+{\let\item\par
+	%definitions for subitem etc
+}{}
+\newcommand\indexspace{}
+
+\usepackage{multicol}
+\usepackage[english]{babel}
+\usepackage{graphicx}
+\usepackage[toc, acronym]{glossaries}
+\usepackage[nottoc]{tocbibind}
+\usepackage{transparent}
+\usepackage{hyperref}
+\usepackage{color}
+\usepackage{epstopdf}
+\usepackage{subcaption}
+\usepackage{wrapfig}
+\usepackage{tikz}
+\usepackage{tikz-uml}
+\usetikzlibrary{calc,trees,positioning,arrows,chains,shapes.geometric,decorations.pathreplacing,decorations.pathmorphing,shapes,matrix,shapes.symbols}
+\usepackage{setspace}
+\usepackage{appendixnumberbeamer}
+
+%**************************************************************
+% Setup
+%**************************************************************
+
+% Line spaceing
+\renewcommand{\baselinestretch}{1.5}
+
+% Links color
+\hypersetup {
+	colorlinks=true,
+	linkcolor=black,
+	urlcolor=blue,
+	citecolor=black
+}
+
+% Diagrams
+\tikzset{
+	>=stealth',
+	punktchain/.style={
+		rectangle, 
+		rounded corners, 
+		fill=yellow!20,
+		draw=black, very thick,
+		text width=10em, 
+		minimum height=3em, 
+		text centered, 
+		on chain},
+	line/.style={draw, thick, <-},
+	element/.style={
+		tape,
+		top color=white,
+		bottom color=blue!50!black!60!,
+		minimum width=8em,
+		draw=blue!40!black!90, very thick,
+		text width=10em, 
+		minimum height=3.5em, 
+		text centered, 
+		on chain},
+	every join/.style={->, thick,shorten >=1pt},
+	decoration={brace},
+	tuborg/.style={decorate},
+	tubnode/.style={midway, right=2pt},
+}
+
+\input{glossary.tex}
+\usetheme{Padova}
+
+\title{Botnet Finder Framework}
+\subtitle{a modular framework for botnet detectors evaluation and a practical application}
+\author{Nicola De Cao}
+\date{14 July 2016}
+
+\begin{document}
+
+	\maketitle
+
+	\begin{frame}{Outline}
+		\begin{multicols}{2}
+			%\tableofcontents
+			\begin{itemize}
+				\item Introduction
+				\begin{itemize}
+					\item Botnets
+					\item Detectors
+				\end{itemize}
+				\item The Framework
+				\begin{itemize}
+					\item Modules
+				\end{itemize}
+				\item ELISA evaluation
+				\begin{itemize}
+					\item Implemented detectors
+					\item Experiment
+					\item Results
+				\end{itemize}
+				\item Conclusion
+			\end{itemize}
+		\end{multicols}
+	\end{frame}
+
+	\section{Introduction}
+	
+	\subsection{Botnets}
+	
+	\begin{frame}{What is a Botnet?}
+		\begin{figure}
+			\includegraphics[width=10cm]{botnet.jpg}
+		\end{figure}
+	\end{frame}
+	
+	\begin{frame}{Botnets}
+		\begin{itemize}
+			\item A \textbf{network of infected machines} (bots) controlled by an attacker
+			\item \textbf{Command and Control (C\&C)} channel: servers and infrastructure to communicate with bots
+			\item In the past - \textbf{centralized} C\&C over {IRC} and {HTTP}
+			\item Today - \textbf{decentralized} P2P communication mechanisms
+		\end{itemize}
+	\end{frame}
+	
+	\subsection{Detectors}
+	
+	\begin{frame}{Botnet Detectors}
+		Search for C\&C communication in a network.\\
+		Two main approaches:
+		\begin{itemize}
+			\item \textbf{Active:} modify potential C\&C packets, observe reactions;
+			\item \textbf{Passive:} observe the network traffic to find:
+			\begin{itemize}
+				\item patterns (by correlations and behavior)
+				\item clusters of similar nodes
+			\end{itemize}
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}{\ }
+		\Huge \textbf{The framework}
+	\end{frame}
+	
+	\section{The framework}
+	
+	\begin{frame}{BFF (Botnet Finder Framework)}
+		\textbf{BFF (Botnet Finder Framework)}: a modular and extensible framework to develop and evaluate botnet detectors in \textbf{Python}. It provides tools to handle with:
+		\begin{itemize}
+			\item building datasets from NetFlow files
+			\item features extraction
+			\item classification algorithms (both supervised and unsupervised)
+			\item evaluation metrics (accuracy, precision, sensitivity, etc.)
+			\item plotting results
+		\end{itemize}
+	\end{frame}
+	
+	\subsection{Modules}
+
+	\begin{frame}{Modules 1/3}
+		    \begin{minipage}{.5\textwidth}
+				\begin{itemize}
+					\item Initially a \textbf{NetFlow} file is processed and transformed into an internal representation: a \textbf{Dataset}
+					\vspace{.5em}
+					\item then BFF use Datasets to extract \textbf{features} using the \textbf{extract} module
+				\end{itemize}
+		    \end{minipage}%
+			\begin{minipage}{.6\textwidth}
+				\begin{figure}
+					\centering
+					\begin{tikzpicture}
+					[start chain=going below]
+					\node[punktchain, join] (nf) {NetFlow};
+					\node[punktchain, join] (ds) {Dataset};
+					\node[punktchain, join] (feat) {Features};
+					
+					\draw[tuborg, decoration={brace}] let \p1=(nf.south), \p2=(ds.north) in ($(2.5, \y1)$) -- ($(2.5, \y2)$) node[tubnode] {build};
+					\draw[tuborg, decoration={brace}] let \p1=(ds.south), \p2=(feat.north) in ($(2.5, \y1)$) -- ($(2.5, \y2)$) node[tubnode] {extract};
+					\end{tikzpicture}
+				\end{figure}
+		  \end{minipage}
+	\end{frame}
+		
+	\begin{frame}{Modules 2/3}
+		    \begin{minipage}{.5\textwidth}			
+				\begin{itemize}
+					\item Once features are extracted, the \textbf{predict} module performs \textbf{predictions} over the target values
+					\vspace{.5em}
+					\item then BFF computes evaluation \textbf{metrics} with the \textbf{evaluate} module
+				\end{itemize}
+		    \end{minipage}%
+		    \begin{minipage}{.6\textwidth}
+				\begin{figure}
+					\centering
+					\begin{tikzpicture}
+					[start chain=going below]
+					\node[punktchain, join] (feat) {Features};
+					\node[punktchain, join] (pred) {Predictions};
+					\node[punktchain, join] (metr) {Metrics};
+					
+					\draw[tuborg, decoration={brace}] let \p1=(feat.south), \p2=(pred.north) in ($(2.5, \y1)$) -- ($(2.5, \y2)$) node[tubnode] {predict};
+					\draw[tuborg, decoration={brace}] let \p1=(pred.south), \p2=(metr.north) in ($(2.5, \y1)$) -- ($(2.5, \y2)$) node[tubnode] {evaluate};
+					\end{tikzpicture}
+				\end{figure}
+		    \end{minipage}
+	\end{frame}
+
+	\begin{frame}{Modules 3/3}
+		\begin{minipage}{.5\textwidth}
+	    	\begin{itemize}
+	    		\item Finally, the \textbf{plot} module generates \textbf{plots} from processed metrics
+	    	\end{itemize}
+		\end{minipage}%
+		\begin{minipage}{.6\textwidth}
+			\begin{figure}
+				\centering
+				\begin{tikzpicture}
+				[start chain=going below]
+				\node[punktchain, join] (metr) {Metrics};
+				\node[punktchain, join] (plot) {Plots};
+				
+				\draw[tuborg, decoration={brace}] let \p1=(metr.south), \p2=(plot.north) in ($(2.5, \y1)$) -- ($(2.5, \y2)$) node[tubnode] {plot};
+				\end{tikzpicture}
+			\end{figure}
+		\end{minipage}
+	\end{frame}
+	
+	\subsection{NetFlow}
+	
+	\begin{frame}{NetFlow 1/2}
+		\begin{longtable}[h]{c c c}
+			\hline
+			\textbf{Datetime} & \textbf{Duration} & \textbf{Protocol} \\ \hline \hline
+			2016-06-09 07:57:18.890838 & 0.000245 & SSL \\ \hline
+			2016-06-09 07:57:18.890876 & 0.000038 & TCP \\ \hline
+			2016-06-09 07:57:18.893086 & 0.000848 & HTTP \\ \hline
+			2016-06-09 07:57:18.893604 & 0.000039 & SSH \\ \hline
+			2016-06-09 07:57:18.930443 & 0.000001 & SSL \\ \hline
+			2016-06-09 07:57:18.930715 & 0.000272 & TCP \\ \hline
+		\end{longtable}
+	\end{frame}
+	
+	\begin{frame}{NetFlow 2/2}
+		\begin{longtable}[h]{r r r c}
+			\hline
+			\textbf{Source IP} & \textbf{Destination IP} & \textbf{Length} & \textbf{Label} \\ \hline \hline
+			216.58.208.99 & 210.202.121.130 & 1484 & Benign \\ \hline
+			210.202.121.130 & 216.58.208.99 & 54 & Botnet \\ \hline
+			167.114.216.47 & 210.202.121.159 & 847 & Benign \\ \hline
+			210.202.121.185 & 147.162.22.101 & 114 & Benign \\ \hline
+			216.58.208.99 & 210.202.121.130 & 1116 & Botnet \\ \hline
+			210.202.121.130 & 216.58.208.99 & 54 & Benign \\ \hline
+		\end{longtable}
+	\end{frame}
+	
+	\subsection{Extract module}
+	
+	\begin{frame}{Extract module}
+		The \textbf{extract} module builds matrices with \textbf{features} for each sample in the dataset. This will help us finding patterns into the data in order to learn a C\&C channel behavior.
+		
+		\begin{minipage}{.5\textwidth}
+			\begin{longtable}[h]{c c c c | c}
+				$x_1$ & $x_2$ & \dots & $x_n$ & $y$ \\ \hline \hline
+				1.31 & 5.8 & \dots & 0.054 & 0 \\ \hline
+				4.7 & 5.22 & \dots & 8.47 & 1 \\ \hline
+				18.5 & 16.2 & \dots & 0.114 & 0 \\ \hline
+				9.9 & 22.3 & \dots & 6.16 & 1 \\
+			\end{longtable}
+		\end{minipage}%
+		\begin{minipage}{.5\textwidth}
+			\begin{figure}
+				\includegraphics[width=\textwidth]{svm.jpg}
+			\end{figure}
+		\end{minipage}
+	\end{frame}
+	
+	\subsection{Predict module}
+	
+	\begin{frame}{Predict module}
+		The \textbf{predict} module trains a classifier and then performs predictions. It uses stratified k-fold to select train and test subsets properly from the original dataset.
+		\begin{longtable}[h]{c c c c}
+			\hline
+			\textbf{Test} & \textbf{Prediction} & \textbf{Label} & \textbf{Predicted Condition } \\ \hline \hline
+			0 & 0 & \textcolor{green}{Benign} & True negative \\ \hline
+			0 & 1 & \textcolor{green}{Benign} & False positive \\ \hline
+			1 & 1 & \textcolor{red}{Botnet} & True positive \\ \hline
+			1 & 0 & \textcolor{red}{Botnet} & False negative \\ \hline
+		\end{longtable}
+	\end{frame}
+	
+	\subsection{Evaluate module}
+	
+	\begin{frame}{Evaluate module}
+		The \textbf{evaluate} module computes the following metrics:
+		
+		\begin{itemize}
+			\item \textbf{Accuracy:} the proportion of true results among the total number of correct or incorrect classifications
+			\item \textbf{Precision:} the proportion of the samples that the classifier predicts positive and are actually positive, among all the samples that it classifies as positive
+			\item \textbf{Sensitivity:} the proportion of the samples that the classifier predicts positive and are actually positive, among all the samples that are positive
+		\end{itemize}
+
+	\end{frame}
+	
+	\subsection{Plot module}
+	
+	\begin{frame}{Plot module}
+		Plot module builds bar charts in order to provide a visual representation of the evaluation metrics.
+	
+		\begin{figure}
+			\includegraphics[width=\textwidth]{BotTrack_plot_metrics_bars2.eps}
+		\end{figure}
+	\end{frame}
+	
+	\begin{frame}{\ }
+		\Huge \textbf{ELISA evaluation}
+	\end{frame}
+
+	\section{ELISA evaluation}
+	
+	\begin{frame}{ELISA: Elusive Social Army}
+		\textbf{ELISA} [1] is a botnet that propagates its command and control messages using \textbf{Facebook}. It communicates with the botmaster appending an invisible string, made of unprintable characters, on users' messages.
+		
+		\begin{longtable}{c c l}
+			Latin Small letter A & U+0061 & $\rightarrow$ a \\
+			Left-To-Right Mark & U+200E & $\rightarrow$
+		\end{longtable}
+		{\setstretch{1}\footnotesize
+			[1] Alberto Compagno, Mauro Conti, Daniele Lain, Giulio Lovisotto, and Luigi Vincenzo Mancini. \textit{Boten ELISA: A novel approach for botnet C\&C in Online Social Networks.} In IEEE CNS 2015. \par
+		}
+	\end{frame}
+
+	\subsection{Detectors}
+
+	\begin{frame}{Detectors 1/2 - BotTrack}
+		\begin{minipage}{.6\textwidth}
+		\begin{itemize}
+			\item \textbf{Features:} each IP is a node, flows are edges, BotTrack[2] computes hub and authority scores with \textbf{HITS}
+			\item \textbf{Clustering:} uses \textbf{DBSCAN}
+			\item \textbf{Classifier:} considers an IP as malicious if it is in the same cluster of a known malicious IP/node
+		\end{itemize}
+		\end{minipage}%
+		\begin{minipage}{.45\textwidth}
+			\vspace{-1cm}
+			\begin{figure}
+				\includegraphics[width=\textwidth]{dbscan.png}
+			\end{figure}
+		\end{minipage}
+		
+		{\setstretch{1}\footnotesize \vspace{.25cm}
+			[2]	Jér\^ome François and Shaonan Wang and Radu State and Thomas Engel \emph{BotTrack: Tracking Botnets Using NetFlow and PageRank} \par
+		}
+	\end{frame}
+	
+
+
+	\begin{frame}{Detectors 2/2 - Disclosure}
+		Disclosure[3] tries to find non-human patterns:
+		\begin{itemize}
+			\item \textbf{Features:} \textbf{flow size}-based features like statistical, autocorrelation, and unique flow size measurements; \textbf{client access patterns}-based features like regular access patterns, and unmatched flow density
+			\item \textbf{Classifier:} Random Forests
+		\end{itemize}
+	
+		{\setstretch{1}\footnotesize \vspace{.5cm}
+			[3]	Leyla Bilge, Davide Balzarotti, William Robertson, Engin Kirda and Christopher Kruegel \emph{DISCLOSURE: Detecting Botnet Command and Control Servers Through Large-Scale NetFlow Analysis} \par
+		}
+	\end{frame}
+
+	\subsection{Experiment}
+
+	\begin{frame}{Experiment}
+		Our experiment consisted in recording network data to extract packet information from labTA. We:
+		\begin{itemize}
+			\item recorded traffic for \textbf{9 hours} consecutively, while more than \textbf{50} volunteers participated
+			\item used \textbf{4 machines} to generate \textbf{ELISA} malicious traffic
+			\item recorded about \textbf{38 million} flow records (2.8GB of data)
+			\item stored information into \textbf{NetFlow} format
+		\end{itemize}
+	\end{frame}
+	
+	\subsection{Results}
+	
+	\begin{frame}{Results}
+		We applied the two detection algorithms on the data we recorded. Both of them failed to detect ELISA:
+		\begin{itemize}
+			\item \textbf{BotTrack}'s total precision score and total sensitivity score were \textbf{0\%}. This means that there were no true positive samples (traffic classified as malicious)
+			\item \textbf{Disclosure} performed quite well. However, it only learned how Facebook traffic behaves. \textbf{92.42\%} of the analyzed traffic was benign, but Disclosure classified that traffic as malicious
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}{\ }
+		\Huge \textbf{Conclusion}
+	\end{frame}
+	
+	\section{Conclusion}
+	
+	\begin{frame}{Future work}
+		As future work, we plan to:
+		\begin{itemize}
+			\item improve \textbf{BFF} usability with more configurable options
+			\item improve \textbf{BFF} modularity, splitting it into more modules
+			\item implement other detectors
+			\item merge \textbf{BotTrack} and \textbf{Disclosure} algorithms to build a new and powerful detector
+			\item design and model a new detector capable of finding \textbf{ELISA} and similar stealthy botnets
+		\end{itemize}
+	\end{frame}
+
+	\begin{frame}{Questions?}
+		\begin{figure}
+			\includegraphics[height=0.7\textheight]{botnet-cool.png}
+		\end{figure}
+	\end{frame}
+	
+	\appendix
+	
+	\subtitle{a modular framework for botnet detectors evaluation and a practical application (backup slides)}
+	\maketitle
+	
+	\begin{frame}{Metrics 1/3 - Accuracy score}
+		Accuracy is the proportion of true results (both True Positives and True Negatives) among the total number of correct or incorrect classifications.
+		
+		$$accuracy=\frac{true\ positives + true\ negatives} {total\ number\ of\ correct\ or\ incorrect\ classifications}$$
+	\end{frame}
+	
+	\begin{frame}{Metrics 2/3 - Precision score}
+		Precision or \acrfull{ppv} is the proportion of the samples that the classifier predict positive and are actually positive among all the samples that it classifies as positive.
+		
+		$$precision=\frac{true\ positives}{true\ positives + false\ positives}$$
+	\end{frame}
+	
+	\begin{frame}{Metrics 3/3 - Sensitivity score}
+		Sensitivity or \acrfull{tpr}, also known as recall, is the proportion of the samples that the classifier predict positive and are actually positive among all the samples that are positive. 
+		
+		$$sensitivity  = \frac{true\ positives}{true\ positives + false\ negatives}$$
+	\end{frame}
+	
+	\begin{frame}{Hubs and Authorities (HITS) 1/2}	
+		At the begin, the rankings are $\forall p$, $auth(p)=1$ and $hub(p)=1$, then the algorithm performs a series of iterations   consisting of two basic steps: update of authority values and then hub values for each node. First $\forall p$, $auth(p)$ is updated as:
+		$$auth(p)=\sum_{i=1}^n hub(i)$$
+		
+		where $n$ is the total number of nodes connected to $p$ and $i$ is a node connected to $p$.
+	\end{frame}
+	
+	\begin{frame}{Hubs and Authorities (HITS) 2/2}
+		Then $\forall p$, $hub(p)$ is updated as:
+		$$hub(p)=\sum_{i=1}^n auth(i)$$
+		
+		where $n$ is the total number of nodes $p$ connects to and $i$ is a node which $p$ connects to. 
+		
+		The final scores of each node is determined after infinite repetitions of the process described above. Applying directly this algorithm it leads to diverging values, so we need to normalize the matrix after every iteration.
+	\end{frame}
+	
+	\begin{frame}{DBSCAN}
+		\begin{itemize}
+			\item All samples are point in a $n$ dimensional space
+			\item two points $a$ and $b$ are neighbor if $ \left\| a - b \right\| <= \epsilon$
+			\item if two points are neighbors it proceed considering them as part of the same cluster
+			\item it computes neighbors search again until there are not reachable samples within $\epsilon$ distance
+			\item if there are not at least $\mu$ samples for each cluster then they are considered as noise
+		\end{itemize}
+	\end{frame}
+
+	\begin{frame}{Random Forests Classifier}
+		\begin{figure}
+			\includegraphics[width=\textwidth]{dt.png}
+		\end{figure}
+	\end{frame}
+
+\end{document}

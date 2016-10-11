@@ -1,0 +1,147 @@
+\documentclass[12pt,a4paper,twoside,openright,english]{book}
+\input{style.tex}
+\input{glossary.tex}
+
+\title{\myTitle}
+\author{\myName}
+\date{\today}
+
+\begin{document}
+
+%**************************************************************
+% Cover
+%**************************************************************
+\frontmatter
+\begin{titlepage}
+	\begin{center}
+		\vbox to40pt{\vbox to\textheight{\vfill {\transparent{0.2}\includegraphics[width=10cm]{logo-unipd.png}} \vfill}}
+	\end{center}
+	\begin{minipage}{.20\textwidth}
+		\includegraphics[height=2cm]{logo-department.png}
+	\end{minipage}
+	\hspace{40pt}
+	\begin{minipage}{.80\textwidth}
+		\begin{center}
+			\begin{LARGE}
+				\textsc{\textbf{\myUni}}\\
+			\end{LARGE}
+			\line(1,0){220}\\
+			\begin{Large}
+				\textsc{\myDepartment}\\
+			\end{Large}
+		\end{center}
+	\end{minipage}
+	\begin{center}
+		\vfill
+		\large{\textsc{\myDegree}}\\			
+		\LARGE{\textsc{\textbf{\myTitle}}}\\
+		\large{\mySubTitle}\\
+		\vfill
+		\begin{minipage}{0.4\textwidth}
+			\begin{flushleft} \large
+				\emph{Autore}\\
+				\myName
+			\end{flushleft}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.4\textwidth}
+			\begin{flushright} \large
+				\emph{Relatore} \\
+				\myProf
+			\end{flushright}
+		\end{minipage}
+		\vfill
+		\line(1, 0){338} \\
+		\begin{normalsize}
+			\textsc{Anno Accademico \myAA}
+		\end{normalsize}
+	\end{center}
+\end{titlepage}
+
+%**************************************************************
+% Colophon
+%**************************************************************
+\thispagestyle{empty}
+\hfill
+\vfill
+\noindent \myName\ \textit{\myTitle,} \myDegree, Copyright \textcopyright\ \myTime.
+
+\cleardoublepage
+
+%**************************************************************
+% Abstract
+%**************************************************************
+\chapter*{Abstract}\label{abstract}
+
+%**************************************************************
+% Keywords
+%**************************************************************
+\chapter*{Keywords}\label{keywords}
+
+%**************************************************************
+% Table of contents, list of figures and list of tables
+%**************************************************************
+\tableofcontents
+\listoffigures
+\listoftables
+
+\mainmatter
+
+%**************************************************************
+% Introduzione
+%**************************************************************
+\chapter{Introduzione}\label{introduzione}
+
+%**************************************************************
+% Tecnologie e Strumenti
+%**************************************************************
+\chapter{Tecnologie e Strumenti}\label{tecnologie}
+
+%**************************************************************
+% Tecnologie e Strumenti
+%**************************************************************
+\chapter{Analisi}\label{analisi}
+
+%**************************************************************
+% Casi d'uso
+%**************************************************************
+\section{Casi d'uso}\label{usecase}
+
+%**************************************************************
+% Requisiti
+%**************************************************************
+\section{Requisiti}\label{requisiti}
+
+
+%**************************************************************
+% Progettazione
+%**************************************************************
+\chapter{Progettazione}\label{progettazione}
+
+\section{Design pattern}\label{design_pattern}
+\section{Progettazione architetturale}\label{progettazione_architetturale}
+\section{Progettazione di dettaglio}\label{progettazione_dettaglio}
+
+\chapter{Verifica e validazione}\label{verifica_validazione}
+
+\chapter{Conclusioni}\label{conclusioni}
+
+%**************************************************************
+% Glossary and bibliography
+%**************************************************************
+\printglossaries
+\bibliographystyle{unsrt}
+%\bibliography{thesis}
+
+
+%**************************************************************
+% Ringraziamenti
+%**************************************************************
+
+%\chapter*{Thanksgivings}
+%rr 
+
+%\noindent\textit{\myLocation, \myTime}
+%\hfill \myName
+
+\end{document}

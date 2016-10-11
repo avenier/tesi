@@ -1,0 +1,80 @@
+%**************************************************************
+% Packages
+%**************************************************************
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+%\usepackage[latin1]{inputenc}
+\usepackage[italian]{babel}
+\usepackage{graphicx}
+\usepackage[toc, acronym]{glossaries}
+\usepackage[nottoc]{tocbibind}
+\usepackage{transparent}
+\usepackage{hyperref}
+\usepackage{color}
+\usepackage{epstopdf}
+\usepackage{subcaption}
+\usepackage{wrapfig}
+\usepackage{tikz}
+\usepackage{tikz-uml}
+\usetikzlibrary{calc,trees,positioning,arrows,chains,shapes.geometric,decorations.pathreplacing,decorations.pathmorphing,shapes,matrix,shapes.symbols}
+
+%**************************************************************
+% Setup
+%**************************************************************
+
+% Line spaceing
+\renewcommand{\baselinestretch}{1.5}
+
+% Links color
+\hypersetup {
+	colorlinks=true,
+	linkcolor=black,
+	urlcolor=blue,
+	citecolor=black
+}
+
+% Macros
+\newcommand{\bff}{\acrshort{bff}}
+
+% Diagrams
+\tikzset{
+	>=stealth',
+	punktchain/.style={
+		rectangle, 
+		rounded corners, 
+		fill=yellow!20,
+		draw=black, very thick,
+		text width=10em, 
+		minimum height=3em, 
+		text centered, 
+		on chain},
+	line/.style={draw, thick, <-},
+	element/.style={
+		tape,
+		top color=white,
+		bottom color=blue!50!black!60!,
+		minimum width=8em,
+		draw=blue!40!black!90, very thick,
+		text width=10em, 
+		minimum height=3.5em, 
+		text centered, 
+		on chain},
+	every join/.style={->, thick,shorten >=1pt},
+	decoration={brace},
+	tuborg/.style={decorate},
+	tubnode/.style={midway, right=2pt},
+}
+
+%**************************************************************
+% Cover
+%**************************************************************
+\newcommand{\myName}{Andrea \textsc{Venier}}
+\newcommand{\myTitle}{Integrazione tra applicazioni web mediante microservizi RESTful}
+\newcommand{\mySubTitle}{Ampliamento delle funzionalità\\ di un’applicazione di Project Management}
+\newcommand{\myDegree}{Corso di Laurea in Informatica}
+\newcommand{\myUni}{Università di Padova}
+\newcommand{\myDepartment}{Dipartimento di Matematica}
+\newcommand{\myProf}{Gilberto \textsc{Filè}}
+\newcommand{\myLocation}{Padova}
+\newcommand{\myAA}{2015-2016}
+\newcommand{\myTime}{Dicembre 2016}
