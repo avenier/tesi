@@ -108,19 +108,43 @@ l'obbiettivo di facilitare e automatizzare il suddetto insieme di attività.
 % Tecnologie e Strumenti
 %**************************************************************
 \chapter{Tecnologie e Strumenti}\label{tecnologie}
-\section{Ambiente e linguaggi di programmazione}
+\section{Frameworks e linguaggi di programmazione}
 In questa sezione verranno descritti brevemente i linguaggi di programmazione usati nella scrittura di \textbf{ADProject} e di \textbf{ADCrm}.
 Non tutti i linguaggi che verranno presentati in seguito sono stati usati nell'ambito del progetto di stage (in quanto limitato alla realizzazione del servizio \large{ADCrm}), tuttavia la loro contestualizzazione all'interno dei vari moduli sviluppati dall'azienda aiuta a capire meglio il funzionamento degli stessi.
 
-\paragraph{.NET}
-\paragraph{VB.NET}
+\paragraph{.NET Framework}
+è un framework software sviluppato da Microsoft. Include una vasta classe di librerie chiamata \textit{Framework Class Library} (FLC) che permette l'interoperabilità tra i linguaggi di programmazione del framework. I programmi scritti per .NET vengono eseguiti in un ambiente software conosciuto come \textit{Common Language Runtime} (CLR), una \textit{virtual machine}  che fornisce servizi come la gestione delle eccezioni, gestione della memoria, sicurezza. FCL e CLR insieme costituisco il framework .NET.\\
+Il software di Project management \textbf{ADProject} e il modulo \textbf{ADCrm} sono sviluppati su questo framework.
+%TODO da incrementare questa parte o specificarla meglio
+
 \paragraph{ASP.NET}
+ è un framework server-side, sviluppato da Microsoft, per la creazione di applicazioni web che permette ai programmatori di costruire pagine web dinamiche, applicazioni e servizio web.
+ ASP.NET viene usato per lo sviluppo di tutte le pagine web dinamiche che fungono da interfacce grafiche per ADProject.
+
+\paragraph{Visual Basic .NET}
+è un linguaggio di programmazione orientato agli oggetti sviluppato sul framework .NET.\\
+Con questo linguaggio è stato sviluppato ADProject, e sono tuttora in sviluppo numerosi moduli di questo software. La motivazione principale che ha portato i developer assegnati al progetto a scegliere questo linguaggio è stata la loro famigliarità con lo stesso. 
+
 \paragraph{C\#}
+è un linguaggio di programmazione orientato agli oggetti sviluppato sul framework .NET.
+La sintassi del linguaggio prende spunto da C++ , da Java
+e da Visual Basic.
+Questo linguaggio sta alla base di tutto lo sviluppo del microservice ADCrm, scelta che si potrebbe pensare poco sensata in quanto ADCrm deve integrarsi con un applicazione web interamente scritta con Visual Basic .NET, tuttavia ci sono delle forti motivazioni che hanno fatto propendere il team di sviluppo per adottare questo linguaggio:
+\begin{itemize}
+	\item avendo scelto di adottare una struttura basata su microservices per lo sviluppo di ADCrm, ed essendo quindi un modulo fisicamente slegato da ADProject, è possibile scegliere un linguaggio di programmazione differente da VB.NET, pur rimanendo all'interno dei linguaggi offerti dal framework .NET;
+	\item i programmatori assegnati allo sviluppo del progetto hanno maggiore famigliarità con questo linguaggio;
+	\item Microsoft tendenzialmente offre maggiore supporto per C\#;
+	\item C\# ha una vastissima comunity di sviluppatori, persino superiore a quella di VB.NET;
+	\item è più facile reperire documentazione e teamplate rispetto a VB.NET;
+	\item è più facile trovare nuovi sviluppatori per C\#.	
+\end{itemize}
 
+\section{Ambiente di sviluppo}
+\paragraph{Visual Studio}
+ è un potente l'ambiente di sviluppo multipiattaforma fornito da Microsoft ed è stata la scelta naturale per lo sviluppo di ogni componente di ADProject ed ADCrm.
+Visual Studio supporta, oltre ai linguaggi e framework sopracitati: C, C++, F\#, Html e Javascript. 
+%TODO da specificare cosa vuol dire multipiattaforma
 
-%**************************************************************
-% Tecnologie e Strumenti
-%**************************************************************
 \chapter{Analisi}\label{analisi}
 
 %**************************************************************
