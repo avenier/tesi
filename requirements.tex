@@ -1,0 +1,62 @@
+\begin{longtable}{|r l|p{2.5cm}|p{10cm}|}
+	\hline
+	\multicolumn{2}{|c|}{\textbf{Codice}} & \textbf{Tipologia} & \textbf{Descrizione}\tabularnewline
+	\hline
+	& \hypertarget{R-3F1}{R-3F1} & Funzionale
+	
+	Obbligatorio & E' necessario avere un account con permessi amministrativi per Salesforce\tabularnewline
+	\hline
+	\begin{tikzpicture}
+
+	\end{tikzpicture} & \hypertarget{R-3F1.1}{R-3F1.1} & Funzionale
+	
+	Obbligatorio & E' necessario che Salesforce sia configurato per esporre le API necessarie a recuperare i dati desiderati\tabularnewline
+	\hline
+	& \hypertarget{R-3F2}{R-3F2} & Funzionale
+	
+	Obbligatorio & L'applicazione ADCrm deve poter interrogare Salesforce attraverso le API RESTful che vengono esposte
+	\tabularnewline
+	\hline
+	\begin{tikzpicture}
+
+	\end{tikzpicture} & \hypertarget{R-3F2.1}{R-3F2.1} & Funzionale
+	
+	Obbligatorio & L'applicazione ADCrm deve poter interrogare Salesforce per otterere tutti i dati relativi alle Famiglie di Prodotti, recuperando: il campo identificativo della famiglia di prodotti, una descrizione della stessa ed un eventuale id del Parent\tabularnewline
+	\hline
+	\begin{tikzpicture}
+
+	\end{tikzpicture} & \hypertarget{R-3F2.2}{R-3F2.2} & Funzionale
+	
+	Obbligatorio & L'applicazione ADCrm deve poter interrogare Salesforce per otterere tutti i dati relativi agli Account delle aziende clienti recuperando: il campo identificativo, il nome e tutti i dati informativi riguardanti l'azienda (email,telefono,sito web,città,...)\tabularnewline
+	\hline
+	\begin{tikzpicture}
+
+	\end{tikzpicture} & \hypertarget{R-3F2.3}{R-3F2.3} & Funzionale
+	
+	Obbligatorio & L'applicazione ADCrm deve poter interrogare Salesforce per otterere tutti i dati relativi ai contatti di un azienda recuperando: il campo identificativo, il nome, il cognome e tutti i dati informativi riguardanti il contatto (email, telefono, fax, ...)\tabularnewline
+	\hline
+	\begin{tikzpicture}
+
+	\end{tikzpicture} & \hypertarget{R-3F2.4}{R-3F2.4} & Funzionale
+	
+	Obbligatorio & L'applicazione ADCrm deve poter interrogare Salesforce per otterere tutti i dati relativi alle offerte commerciali legate ad un azienda recuperando: il campo identificativo, l'identificativo aziendale, il prezzo, lo sconto e se l'offerta ha ordini associati \tabularnewline
+	\hline
+	\begin{tikzpicture}
+
+	\end{tikzpicture} & \hypertarget{R-3F2.5}{R-3F2.5} & Funzionale
+	
+	Obbligatorio & L'applicazione ADCrm deve poter interrogare Salesforce per otterere tutti i dati relativi ai prodotti legati ad un offerta commerciale recuperando: il campo identificativo, il nome, la famiglia di prodotti a cui appartiene, l'identificativo dell'offerta, il prezzo, la quantità\tabularnewline
+	\hline
+	\begin{tikzpicture}
+
+	\end{tikzpicture} & \hypertarget{R-3F2.6}{R-3F2.6} & Funzionale
+	
+	Obbligatorio & L'applicazione ADCrm deve poter interrogare Salesforce per otterere tutti i dati relativi agli utenti dell'azienda che utilizzano il CRM recuperando: il campo identificativo, il nome, il cognome e la email\tabularnewline
+	\hline
+	& \hypertarget{R-3F3}{R-3F3} & Funzionale
+	
+	Obbligatorio & L'applicazione ADCrm deve esporre delle API REST per poter essere interrogata da ADProject con il fine di fornire i dati recuperati da Salesforce\tabularnewline
+	\hline
+	\caption{Tabella requisiti} 
+	\tabularnewline
+\end{longtable}
