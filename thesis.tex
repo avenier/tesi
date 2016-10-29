@@ -79,7 +79,7 @@
 \chapter*{Keywords}\label{keywords}
 \paragraph*{CRM}
 sta per \textit{Customer relationship management} e rappresenta un approccio per gestire le interazioni di un azienda con i suoi clienti, attuali e potenziali.\\
-Attraverso questa metodologia si punta a raccogliere e analizzare i dati relativi al cliente (email, sito aziendale, numeri telefonici, offerte precedenti) con il fine di incrementare le vendite grazie alla fidelizzazione dello stesso mediante offerte mirate.\\
+Attraverso questa metodologia si punta a raccogliere e analizzare i dati relativi ai cliente (email, sito aziendale, numeri telefonici ed in particolar modo lo storico delle offerte e degli ordini effettuati) con il fine di incrementare le vendite grazie alla fidelizzazione dello stesso mediante offerte e sconti mirati.\\
 Seguendo questi concetti sono nati, e si sono affermati, diversi software CRM e tra i maggiori esponenti possiamo trovare: \textbf{Salesforce} e \textbf{Microsoft Dynamics}.\\
 L'azienda \large{\myCompany{}}, basandosi sull'importanza e sulla diffusione dei suddetti software ha deciso di integrarli nella propria applicazione web di \textit{Project Management}.
  
@@ -113,36 +113,34 @@ In questa sezione verranno descritti brevemente i linguaggi di programmazione us
 Non tutti i linguaggi che verranno presentati in seguito sono stati usati nell'ambito del progetto di stage (in quanto limitato alla realizzazione del servizio \large{ADCrm}), tuttavia la loro contestualizzazione all'interno dei vari moduli sviluppati dall'azienda aiuta a capire meglio il funzionamento degli stessi.
 
 \paragraph{.NET Framework}
-è un framework software sviluppato da Microsoft. Include una vasta classe di librerie chiamata \textit{Framework Class Library} (FLC) che permette l'interoperabilità tra i linguaggi di programmazione del framework. I programmi scritti per .NET vengono eseguiti in un ambiente software conosciuto come \textit{Common Language Runtime} (CLR), una \textit{virtual machine}  che fornisce servizi come la gestione delle eccezioni, gestione della memoria, sicurezza. FCL e CLR insieme costituisco il framework .NET.\\
-Il software di Project management \textbf{ADProject} e il modulo \textbf{ADCrm} sono sviluppati su questo framework.
+è un \glo{framework} software sviluppato da Microsoft. Include una vasta classe di librerie chiamata \textit{Framework Class Library} (FLC) che permette l'interoperabilità tra i linguaggi di programmazione del \glo{framework}. I programmi scritti per .NET vengono eseguiti in un ambiente software conosciuto come \textit{Common Language Runtime} (CLR), una \textit{virtual machine}  che fornisce servizi come la gestione delle eccezioni e la gestione della memoria. FCL e CLR insieme costituisco .NET.\\
+Il software di project management \textbf{ADProject} e il modulo \textbf{ADCrm} sono sviluppati su questo \glo{framework}.
 %TODO da incrementare questa parte o specificarla meglio
 
 \paragraph{ASP.NET}
- è un framework server-side, sviluppato da Microsoft, per la creazione di applicazioni web che permette ai programmatori di costruire pagine web dinamiche, applicazioni e servizio web.
+ è un \glo{framework} server-side, sviluppato da Microsoft, per la creazione di applicazioni web, che permette ai programmatori di costruire pagine dinamiche, applicazioni e web services.
  ASP.NET viene usato per lo sviluppo di tutte le pagine web dinamiche che fungono da interfacce grafiche per ADProject.
 
 \paragraph{Visual Basic .NET}
-è un linguaggio di programmazione orientato agli oggetti sviluppato sul framework .NET.\\
-Con questo linguaggio è stato sviluppato ADProject, e sono tuttora in sviluppo numerosi moduli di questo software. La motivazione principale che ha portato i developer assegnati al progetto a scegliere questo linguaggio è stata la loro famigliarità con lo stesso. 
+è un linguaggio di programmazione orientato agli oggetti sviluppato su .NET.\\
+Con questo linguaggio è stato sviluppato ADProject, e sono tuttora in sviluppo numerosi moduli di questo software. La motivazione principale che ha portato i developers assegnati al progetto a scegliere questo linguaggio è stata la loro familiarità con lo stesso. 
 
 \paragraph{C\#}
-è un linguaggio di programmazione orientato agli oggetti sviluppato sul framework .NET.
+è un linguaggio di programmazione orientato agli oggetti sviluppato su .NET.
 La sintassi del linguaggio prende spunto da C++ , da Java
 e da Visual Basic.
-Questo linguaggio sta alla base di tutto lo sviluppo del microservice ADCrm, scelta che si potrebbe pensare poco sensata in quanto ADCrm deve integrarsi con un applicazione web interamente scritta con Visual Basic .NET, tuttavia ci sono delle forti motivazioni che hanno fatto propendere il team di sviluppo per adottare questo linguaggio:
+Questo linguaggio sta alla base di tutto lo sviluppo del microservice ADCrm, scelta che si potrebbe pensare poco sensata in quanto ADCrm deve integrarsi con un applicazione web interamente scritta con Visual Basic .NET, tuttavia ci sono delle forti motivazioni che hanno fatto propendere il team di sviluppo ad adottare questo linguaggio:
 \begin{itemize}
-	\item avendo scelto di adottare una struttura basata su microservices per lo sviluppo di ADCrm, ed essendo quindi un modulo fisicamente slegato da ADProject, è possibile scegliere un linguaggio di programmazione differente da VB.NET, pur rimanendo all'interno dei linguaggi offerti dal framework .NET;
-	\item i programmatori assegnati allo sviluppo del progetto hanno maggiore famigliarità con questo linguaggio;
-	\item Microsoft tendenzialmente offre maggiore supporto per C\#;
-	\item C\# ha una vastissima comunity di sviluppatori, persino superiore a quella di VB.NET;
-	\item è più facile reperire documentazione e teamplate rispetto a VB.NET;
-	\item è più facile trovare nuovi sviluppatori per C\#.	
+	\item avendo scelto di adottare una struttura basata su microservices per lo sviluppo di ADCrm, ed essendo quindi un modulo fisicamente slegato da ADProject, è possibile scegliere un linguaggio di programmazione differente da VB.NET, pur rimanendo all'interno dei linguaggi offerti dal \glo{framework};
+	\item i programmatori assegnati allo sviluppo del progetto hanno maggiore familiarità con questo linguaggio;
+	\item C\# ha una vastissima comunity e mediamente è più facile reperire documentazione e teamplate rispetto a VB.NET;
+	\item è più probabile trovare futuri developer C\#, nel caso si debba incrementare o manutenere ADCrm.	
 \end{itemize}
 
 \section{Ambiente di sviluppo}
 \paragraph{Visual Studio}
  è un potente l'ambiente di sviluppo multipiattaforma fornito da Microsoft ed è stata la scelta naturale per lo sviluppo di ogni componente di ADProject ed ADCrm.
-Visual Studio supporta, oltre ai linguaggi e framework sopracitati: C, C++, F\#, Html e Javascript. 
+Visual Studio supporta, oltre ai linguaggi e \glo{framework} sopracitati: C, C++, F\#, Html e Javascript. 
 %TODO da specificare cosa vuol dire multipiattaforma
 
 \chapter{Analisi}\label{analisi}
@@ -151,7 +149,6 @@ Visual Studio supporta, oltre ai linguaggi e framework sopracitati: C, C++, F\#,
 % Casi d'uso
 %**************************************************************
 \section{Casi d'uso}\label{usecase}
-%TODO mancano gli include
 
 \begin{small}
 \input{useCase.tex}
@@ -165,16 +162,63 @@ Visual Studio supporta, oltre ai linguaggi e framework sopracitati: C, C++, F\#,
 % Requisiti
 %**************************************************************
 \section{Requisiti}\label{requisiti}
+\begin{small}
 \input{requirements.tex}
-
+\end{small}
 %**************************************************************
 % Progettazione
 %**************************************************************
 \chapter{Progettazione}\label{progettazione}
+In questo capitolo viene dettagliatamente descritta l'applicazione, presentando: 
+\begin{enumerate}
+	\itemsep-1em 
+	\item I \glo{Design Pattern} utilizzati, contestualizzando il loro utilizzo;
+	\item La descrizione dell'architettura ad alto livello del sistema;
+	\item Le \glo{API} REST esposte per permettere al client di comunicare con l'applicazione;
+	\item Una descrizione più dettagliata delle classi che rappresentano il cuore dell'applicazione.
+\end{enumerate}
 
 \section{Design pattern}\label{design_pattern}
-\section{Progettazione architetturale}\label{progettazione_architetturale}
-\section{Progettazione di dettaglio}\label{progettazione_dettaglio}
+\subsection{Microservices}
+Lo stile architetturale a microservizi è un approccio per sviluppare una singola applicazione come un insieme di piccoli servizi autonomi che interagiscono tra di loro, ognuno dei quali gestisce i suoi processi e comunica attraverso meccanismi snelli, spesso \glo{API} HTTP.
+Questa architettura permette di velocizzare i tempi di sviluppo (essendo i servizi autonomi tra di loro essi possono raggiungere l'ambiente di produzione anche in momenti separati ed inoltre possono essere sviluppati da persone diverse), aumentare la resilienza del sistema (se uno dei servizi smette di funzionare essendo separato dagli altri, non pregiudica il funzionamento del sistema) ed è più facilmente scalabile rispetto ad un architettura monolitica.\\
+Si è deciso di sviluppare ADCrm seguendo quest'ottica, ottenendo in questo modo:
+\begin{itemize}
+	\item una netta separazione dei compiti delle varie componenti del sistema;
+	\item la possibilità di collegarsi a nuovi CRM senza dover modificare in alcun modo ADProject, in quanto esso comunica con il servizio attraverso un interfaccia comune;
+	\item un aumento  della resilienza e la scalabilità dell'applicazione.
+\end{itemize}
+
+
+\subsection{RESTful}
+REST o \textit{\textbf{Re}presentational \textbf{S}tate \textbf{T}ransfer} è un architettura software che permette di rendere interoperabili sistemi di computer attraverso internet. 
+Un servizio web REST permette ai sistemi richiedenti, di accedere e manipolare una rappresentazione testuale delle sue risorse web attraverso un insieme predefinito di operazioni \glo{stateless}.
+Utilizzare i metodi definiti per il protocollo HTTP (GET, POST, PUT, DELETE) è il modo più comune accedere alle risorse web del sistema che le espone.
+Questa architettura attraverso l'utilizzo del protocollo \glo{stateless} e di insiemi di operazioni standard, mira a garantire ottime performance, essere affidabile e scalabile senza dover necessitare di modificare tutto il sistema nel caso di modifiche a qualche sua componente.
+L'architettura REST viene utilizzata da \textbf{ADCrm\textbf{}} per recuperare ed esporre a sua volta le risorse presenti sul CRM.
+Concretamente sarà presente quindi un microservizio per ogni CRM che si vorrà collegare all'applicazione.
+
+\subsection{DTO \& DAO}
+Il DTO (\textit{Data Transfer Object}) e DAO (\textit{Data Access Object}) sono due design pattern architetturali spesso usati in congiunzione.\\
+La loro funzione principale è quella di disaccoppiare il \textit{data layer} (la parte in cui risiedono i dati) dalla parte di \textit{business logic} (ciò che rappresenta la logica applicativa) dell'applicazione, aumentando cosi la separazione tra le varie componenti e quindi la loro modularità e manutenibilità.\\
+Le classi di oggetti DTO al loro interno avranno solamente campi dati accedibili attraverso metodi \textit{getter} e \textit{setter}, mentre gli oggetti DAO implementeranno i metodi, utilizzati dalla \textit{business logic}, per accedere ai dati dell'applicazione utilizzando quindi i sopracitati \textit{Data Transfer Object}.
+
+\subsection{Factory Method}
+Questo design pattern creazionale, nell'ambito della programmazione orientata agli oggetti, permette di affrontare il problema della creazione di oggetti senza specificarne a priori l'esatta classe di appartenenza.
+Il pattern fornisce un interfaccia per la creazione di un oggetto, ma lascia alle classi che la implementano la decisione di quale oggetto istanziare.\\
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{images/abstract_factory_structure}
+	\caption{Schema UML per il Factory design pattern}
+	\label{fig:abstractfactorystructure}
+\end{figure}
+
+In questo modo l'applicazione ADCrm non solo non ha bisogno di sapere a priori se deve costruire oggetti per \textit{Salesforce} o altri CRM, ma ha anche la possibilità di aver collegarsi a più applicazioni CRM contemporaneamente.
+
+
+\input{architecturalDesign.tex}
+
 
 \chapter{Verifica e validazione}\label{verifica_validazione}
 
