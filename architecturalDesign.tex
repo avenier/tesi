@@ -61,17 +61,78 @@ Inoltre si noti che è necessario da parte di chi effettua chiamate verso questo
 	\end{small}
 	
 \section{Progettazione di dettaglio}
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{images/modulesDiagram}
 	\caption{Diagramma dei moduli di ADCrm}
+	\label{fig:generalUMLDiagram}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{images/general2}
+	\caption{Diagramma UML di ADCrm}
 	\label{fig:modulesdiagram}
 \end{figure}
 
+
+
 \subsection{Athesys.ADCrm.API}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{images/modules/API}
+	\caption{}
+	\label{fig:api}
+\end{figure}
+
+Questo \glo{package} è utilizzato per esporre le API REST all'applicazione web ADProject. In esso vengono definite le \glo{route} che è possibile chiamare e ad ognuna di esse viene associato un metodo di un particolare controller. 
+
 \subsection{Athesys.ADCrm.API.AppStart}
+Questo \glo{package} contiene la classe che si occupano di definire le \glo{route} che verranno rese disponibili dall'applicazione.
+
 \subsection{Athesys.ADCrm.API.Controllers}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{images/modules/Controllers}
+	\caption{}
+	\label{fig:controllers}
+\end{figure}
+
+
+Questo \glo{package} contiene tutte le classi controller contenenti i metodi necessari a rispondere alle richieste http effettuate alle \glo{route}.
+
 \subsection{Athesys.ADCrm.Common}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{images/modules/common}
+	\caption{}
+	\label{fig:common}
+\end{figure}
+
+Questo \glo{package} contiene tutte le interfaccie e i DTO che dovranno essere implementate diversamente per ogni CRM che si vuole collegare all'applicazione. 
+%TODO: da modificare la descrizione
+
 \subsection{Athesys.ADCrm.API.Data}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{images/modules/Data}
+	\caption{}
+	\label{fig:data}
+\end{figure}
+
+
+Questo \glo{package} contiene tutti i vari DTO definiti per ogni entità di dati che si vuole restituire alle chiamate effettuate da ADProject. 
+
 \subsection{Athesys.ADCrm.Model}
+Questo package contiene tutte le classi concrete in comune tra i CRM che si vogliono collegare all'applicazione 
+
 \subsection{Athesys.ADCrm.Salesforce}
+Questo \glo{package} contiene tutte le classi che implementano le interfacce definite in Athesys.ADCrm.Common e restituiscono ai controller di Athesys.ADCrm.API i vari oggetti DTO di tipo Athesys.ADCrm.Common.Data al fine di incapsularli nella risposta HTTP.
+
+\subsection{Athesys.ADCrm.Dynamics}
+Questo \glo{package} contiene tutte le classi che implementano le interfacce definite in Athesys.ADCrm.Common e restituiscono ai controller di Athesys.ADCrm.API i vari oggetti DTO di tipo Athesys.ADCrm.Common.Data al fine di incapsularli nella risposta HTTP.
