@@ -90,7 +90,7 @@ Inoltre si noti che è necessario da parte di chi effettua chiamate verso questo
 Questo \glo{package} è utilizzato per esporre le API REST all'applicazione web ADProject. In esso vengono definite le \glo{route} che è possibile chiamare e ad ognuna di esse viene associato un metodo di un particolare controller. 
 
 \subsection{Athesys.ADCrm.API.AppStart}
-Questo \glo{package} contiene la classe che si occupano di definire le \glo{route} che verranno rese disponibili dall'applicazione.
+Questo \glo{package} contiene la classe che si occupa di definire le \glo{route} che verranno esposte dall'applicazione.
 
 \subsection{Athesys.ADCrm.API.Controllers}
 
@@ -131,7 +131,7 @@ I dati recuperati vengono incapsulati in una risposta http e ritornati ad ADProj
 		\begin{lstlisting}
 		Public async Task<HttpResponseMessage> GetById(organizationId : string, accountId : string)
 		\end{lstlisting}
-		Metodo invocato quando viene inviata una richiesta http GET alla route "api/organization/{organizationId}/accounts/{accountId}", ritornado una risposta http contenente l'Account avente id = {accountId}.\\
+		Metodo invocato quando viene inviata una richiesta http GET alla route "api/organization/{organizationId}/accounts/{accountId}", ritornando una risposta http contenente l'Account avente id = {accountId}.\\
 		\textbf{\small Argomenti:}
 		\begin{enumerate}[leftmargin=*]
 			\itemsep0em 
@@ -139,14 +139,80 @@ I dati recuperati vengono incapsulati in una risposta http e ritornati ad ADProj
 				\begin{lstlisting}
 				organizationId : string 
 				\end{lstlisting}
-				Rapprensenta l'identificativo univoco legato all'utenza aziendale con cui accedere al servizio CRM
+				Rappresenta l'identificativo univoco legato all'utenza aziendale con cui accedere al servizio CRM
 			\item 
 				\begin{lstlisting}
 				accountId : string
 				\end{lstlisting}
-				Rapprensenta l'identificativo univoco legato ad un Account del CRM, attraverso il quale si andrà a richiedere i dati voluti
+				Rappresenta l'identificativo univoco legato ad un Account del CRM, attraverso il quale si andrà a richiedere i dati voluti
 		\end{enumerate}
 \end{itemize}
+
+\subsubsection{ProposalsController (class)}
+
+\paragraph{Descrizione:}
+Classe che serve per gestire le chiamate http richiedenti dati relativi all'entità Proposal. Utilizzando la classe Athesys.ADCrm.Model::Crm (che implementa il design pattern Factory) vengono creati oggetti sui quali si possono invocare metodi per interrogare le API di uno specifico CRM. I dati recuperati vengono incapsulati in una risposta http e ritornati ad ADProject.
+
+\paragraph{Metodi:}\hfill
+\begin{itemize}
+	\itemsep0em 
+	\item 
+	\begin{lstlisting}
+	Public async Task<HttpResponseMessage> Get(organizationId : string)
+	\end{lstlisting}
+	Metodo invocato quando viene inviata una richiesta http GET alla route "api/organization/{organizationId}/proposals", ritornando una risposta http contenente tutte le offerte commerciali censite nel CRM.\\
+	\textbf{\small Argomenti:}
+	\begin{enumerate}[leftmargin=*]
+		\itemsep0em 
+		\item \begin{lstlisting}
+		organizationId : string 
+		\end{lstlisting}
+		Rappresenta l'identificativo univoco legato all'utenza aziendale con cui accedere al servizio CRM.
+	\end{enumerate}
+	
+	\item 
+	\begin{lstlisting}
+	Public async Task<HttpResponseMessage> GetById(organizationId : string,  proposalId : string)
+	\end{lstlisting}
+	Metodo invocato quando viene inviata una richiesta http GET alla route "api/organization/{organizationId}/proposals/{proposalId}", ritornando una risposta http contenente l'offerta commerciale avente id = {proposalId}.\\
+	\textbf{\small Argomenti:}
+	\begin{enumerate}[leftmargin=*]
+		\itemsep0em 
+		\item 
+		\begin{lstlisting}
+		organizationId : string 
+		\end{lstlisting}
+		Rapprensenta l'identificativo univoco legato all'utenza aziendale con cui accedere al servizio CRM;
+		\item 
+		\begin{lstlisting}
+		proposalId : string
+		\end{lstlisting}
+		Rappresenta l'identificativo univoco legato ad un offerta commerciale del CRM, attraverso il quale si andrà a richiedere i dati voluti.
+	\end{enumerate}
+
+	\item 
+	\begin{lstlisting}
+	Public async Task<HttpResponseMessage> GetByAccountId(organizationId : string,  accountId : string)
+	\end{lstlisting}
+	Metodo invocato quando viene inviata una richiesta http GET alla route "api/organization/{organizationId}/accounts/{accountId}/proposals", ritornando una risposta http contenente la lista delle proposte legate all'account avente id = {proposalId}.\\
+	\textbf{\small Argomenti:}
+	\begin{enumerate}[leftmargin=*]
+		\itemsep0em 
+		\item 
+		\begin{lstlisting}
+		organizationId : string 
+		\end{lstlisting}
+		Rapprensenta l'identificativo univoco legato all'utenza aziendale con cui accedere al servizio CRM;
+		\item 
+		\begin{lstlisting}
+		accountId : string
+		\end{lstlisting}
+		Rappresenta l'identificativo univoco legato all'account di un azienda cliente CRM, attraverso il quale si andrà a richiedere i dati voluti.
+	\end{enumerate}
+\end{itemize}
+
+
+
 \vfill
 
 
@@ -160,8 +226,53 @@ I dati recuperati vengono incapsulati in una risposta http e ritornati ad ADProj
 	\label{fig:common}
 \end{figure}
 
-Questo \glo{package} contiene tutte le interfaccie e i DTO che dovranno essere implementate diversamente per ogni CRM che si vuole collegare all'applicazione. 
+Questo \glo{package} contiene il \glo{package} Data(avente le classi DTO) e tutte le interfacce che dovranno essere implementate diversamente per ogni CRM che si vuole collegare all'applicazione. 
 %TODO: da modificare la descrizione
+
+\subsubsection{IProposal (interface)}
+
+\paragraph{Descrizione:}
+Interfaccia che dovrà essere implementata dalle classi concrete Athesys.ADCrm.Salesforce::Proposal e\\ Athesys.ADCrm.Dynamics::Proposal, essa definisce i metodi utilizzati per interrogare i rispettivi CRM attraverso le API REST esposte, restituendo la risposta HTTP incapsulata all'interno di un DTO di tipo ResponseContainerData.
+
+\paragraph{Metodi:}\hfill
+\begin{itemize}
+	\itemsep0em 
+	\item 
+	\begin{lstlisting}
+	Task<ResponseContainerData<ProposalData>> GetAll()
+	\end{lstlisting}
+	Metodo da implementare per interrogare il CRM ritornando la lista di tutte le offerte commerciali censite nello stesso. Il metodo restituisce il DTO ResponseContainerData istanziato al tipo ProposalData essendo una classe \glo{generic}.\\
+	
+	\item 
+	\begin{lstlisting}
+	Task<ResponseContainerData<ProposalData>> GetById(proposalId : string)
+	\end{lstlisting}
+	Metodo da implementare per interrogare il CRM ritornando l'offerta commerciale avente id = {proposalId}. Il metodo restituisce il DTO ResponseContainerData istanziato al tipo ProposalData essendo una classe \glo{generic}.\\
+	\textbf{\small Argomenti:}
+	\begin{enumerate}[leftmargin=*]
+		\itemsep0em 
+		\item 
+		\begin{lstlisting}
+		proposalId : string
+		\end{lstlisting}
+		Rappresenta l'identificativo univoco legato ad un offerta commerciale del CRM, attraverso il quale si andrà a richiedere i dati voluti.
+	\end{enumerate}
+	
+	\item 
+	\begin{lstlisting}
+	Task<ResponseContainerData<ProposalData>> GetByAccountId(accountId : string)
+	\end{lstlisting}
+	Metodo da implementare per interrogare il CRM ritornando la lista di tutte le offerte commerciali legate all'account avente id = {accountId}. Il metodo restituisce il DTO ResponseContainerData istanziato al tipo ProposalData essendo una classe \glo{generic}.\\
+	\textbf{\small Argomenti:}
+	\begin{enumerate}[leftmargin=*]
+		\itemsep0em
+		\item 
+		\begin{lstlisting}
+		accountId : string
+		\end{lstlisting}
+		Rappresenta l'identificativo univoco legato all'account di un azienda cliente CRM, attraverso il quale si andrà a richiedere i dati voluti.
+	\end{enumerate}
+\end{itemize}
 
 \subsection{Athesys.ADCrm.API.Data}
 
