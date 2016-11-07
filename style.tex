@@ -18,6 +18,40 @@
 \usepackage{tikz}
 %\usepackage{tikz-uml}
 %\usepackage{fancyhdr}
+\definecolor{bluekeywords}{rgb}{0,0,1}
+\definecolor{greencomments}{rgb}{0,0.5,0}
+\definecolor{redstrings}{rgb}{0.64,0.08,0.08}
+\definecolor{xmlcomments}{rgb}{0.5,0.5,0.5}
+\definecolor{types}{rgb}{0.17,0.57,0.68}
+
+\usepackage{listings,lstautogobble}
+\usepackage{enumitem}
+
+\lstset{language=[Sharp]C,
+	%captionpos=b,
+	%numbers=left, %Nummerierung
+	%numberstyle=\tiny, % kleine Zeilennummern
+	%frame=lines, % Oberhalb und unterhalb des Listings ist eine Linie
+	aboveskip=3mm,
+	belowskip=3mm,
+	showspaces=false,
+	showtabs=false,
+	breaklines=true,
+	showstringspaces=false,
+	breakatwhitespace=true,
+	escapeinside={(*@}{@*)},
+	commentstyle=\color{greencomments},
+	morekeywords={partial, var, value, get, set, Public, HttpResponseMessage, async},
+	keywordstyle=\color{bluekeywords},
+	stringstyle=\color{redstrings},
+	basicstyle={\small\ttfamily},
+	columns=flexible,	
+	breaklines=true,
+	tabsize=4,
+	autogobble=true
+}
+
+
 
 
 %\pagestyle{fancy}

@@ -104,6 +104,53 @@ Questo \glo{package} contiene la classe che si occupano di definire le \glo{rout
 
 Questo \glo{package} contiene tutte le classi controller contenenti i metodi necessari a rispondere alle richieste http effettuate alle \glo{route}.
 
+\subsubsection{AccountsController (class)}
+
+\paragraph{Descrizione:}
+Classe che serve per gestire le chiamate http richiedenti dati relativi all'entità Account. Utilizzando la classe Athesys.ADCrm.Model::Crm (che implementa il design pattern Factory) vengono creati oggetti sui quali si possono invocare metodi per interrogare le API di uno specifico CRM.
+I dati recuperati vengono incapsulati in una risposta http e ritornati ad ADProject.
+
+\paragraph{Metodi:}\hfill
+\begin{itemize}
+	\itemsep0em 
+	\item 
+		\begin{lstlisting}
+		Public async Task<HttpResponseMessage> Get(organizationId : string)
+		\end{lstlisting}
+		Metodo invocato quando viene inviata una richiesta http GET alla route "api/organization/{organizationId}/accounts", ritornado una risposta http contenente la lista di tutti gli Account censiti nel CRM.\\
+		\textbf{\small Argomenti:}
+		\begin{enumerate}[leftmargin=*]
+			\itemsep0em 
+			\item \begin{lstlisting}
+			organizationId : string 
+			\end{lstlisting}
+			Rapprensenta l'identificativo univoco legato all'utenza aziendale con cui accedere al servizio CRM
+		\end{enumerate}
+		
+	\item 
+		\begin{lstlisting}
+		Public async Task<HttpResponseMessage> GetById(organizationId : string, accountId : string)
+		\end{lstlisting}
+		Metodo invocato quando viene inviata una richiesta http GET alla route "api/organization/{organizationId}/accounts/{accountId}", ritornado una risposta http contenente l'Account avente id = {accountId}.\\
+		\textbf{\small Argomenti:}
+		\begin{enumerate}[leftmargin=*]
+			\itemsep0em 
+			\item 
+				\begin{lstlisting}
+				organizationId : string 
+				\end{lstlisting}
+				Rapprensenta l'identificativo univoco legato all'utenza aziendale con cui accedere al servizio CRM
+			\item 
+				\begin{lstlisting}
+				accountId : string
+				\end{lstlisting}
+				Rapprensenta l'identificativo univoco legato ad un Account del CRM, attraverso il quale si andrà a richiedere i dati voluti
+		\end{enumerate}
+\end{itemize}
+\vfill
+
+
+
 \subsection{Athesys.ADCrm.Common}
 
 \begin{figure}[H]
