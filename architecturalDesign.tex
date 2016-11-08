@@ -27,19 +27,19 @@ La figura \ref{fig:architetturasistema} illustra l'architettura ad alto livello 
 	\label{fig:architetturasistema}
 \end{figure}
 
-\section{API REST}
+\section{API REST}\label{apiRest}
 Di seguito si trova la definizione delle API REST esposte dal servizio ADCrm.\\
 I metodi HTTP con cui chiamare tutti i successivi URL sono metodi \textbf{GET} ed i dati ricevuti nelle risposte sono forniti in formato \glo{JSON}.
 
 	\begin{small}
 		\begin{longtable}{ | l | p{8cm} | }
 			\hline \textbf{URL} & \textbf{Descrizione Risposta}\\
-			\hline api/organization/\{organizationId\}/ & Risponde con i dati riguardante l'organizzazione avente id = \{organizationId\}\\
+			\hline api/organization/\{organizationId\}/ & Risponde con i dati riguardante l'organizzazione avente \textit{id = organizationId}\\
 			\hline
 		\end{longtable}		
 	\end{small}
 Questo primo \glo{endpoint} necessita di ulteriori spiegazioni in quanto l'url specificato sopra è da anteporre a di tutti quelli che seguiranno (eg. "\textbf{api/organization/\{organizationId\}/accounts}" nel caso dell'url "/accounts").\\
-Inoltre si noti che è necessario da parte di chi effettua chiamate verso questo url (e quindi anche verso tutti gli altri) conoscere il campo \{organizationId\} per poter ottenere una risposta. Questa restrizione è stata posta per far si che il sistema sia più sicuro, rendendo disponibili dei dati riguardanti l'azienda fruitrice del servizio solo se si conosce il corretto identificativo.
+Inoltre si noti che è necessario da parte di chi effettua chiamate verso questo url (e quindi anche verso tutti gli altri) conoscere il campo \textit{organizationId} per poter ottenere una risposta. Questa restrizione è stata posta per far si che il sistema sia più sicuro, rendendo disponibili dei dati riguardanti l'azienda fruitrice del servizio solo se si conosce il corretto identificativo.
 %TODO: decidere se sistemare la parte qua sopra
 	\begin{small}
 		\begin{longtable}{ | l | p{8cm} | }
@@ -47,6 +47,7 @@ Inoltre si noti che è necessario da parte di chi effettua chiamate verso questo
 			\hline /accounts & Risponde con la lista contenente i dati di tutti gli account\\
 			\hline /accounts/\{\textit{accountId}\} & Risponde con i dati dell'account avente \textit{id = accountId}\\    
 			\hline /accounts/\{\textit{accountId}\}/contacts & Risponde con la lista contenente i dati di tutti gli i contatti legati all'account avente \textit{id = accountId}\\
+			\hline /accounts/\{\textit{accountId}\}/proposals & Risponde con la lista contenente i dati di tutte le offerte commerciali legate all'account avente \textit{id = accountId}\\
 			\hline /contacts/\{\textit{contactId}\} & Risponde con i dati del contatto avente \textit{id = contactId}\\
 			\hline /proposals & Risponde con la lista contenente i dati di tutte le proposte commerciali\\
 			\hline /proposals/\{\textit{proposalId}\} & Risponde con i dati della proposta commerciale avente \textit{id = proposalId}\\    
@@ -218,14 +219,14 @@ Classe che serve per gestire le chiamate http richiedenti dati relativi all'enti
 
 
 \subsection{Athesys.ADCrm.Common}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=\linewidth]{images/modules/common}
-	\caption{}
-	\label{fig:common}
-\end{figure}
-
+\begin{sidewaysfigure}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=\linewidth]{images/modules/common}
+		\caption{}
+		\label{fig:common}
+	\end{figure}
+\end{sidewaysfigure}
 Questo \glo{package} contiene il \glo{package} Data(avente le classi DTO) e tutte le interfacce che dovranno essere implementate diversamente per ogni CRM che si vuole collegare all'applicazione. 
 %TODO: da modificare la descrizione
 
@@ -275,7 +276,8 @@ Interfaccia che dovrà essere implementata dalle classi concrete Athesys.ADCrm.S
 \end{itemize}
 
 \subsection{Athesys.ADCrm.API.Data}
-
+Questo \glo{package} contiene tutti i vari DTO definiti per ogni entità di dati che si vuole restituire alle chiamate effettuate da ADProject ed inoltre quelle necessarie per gestire le risposte le risposte provenienti dai CRM. 
+Segue in questa sezione una breve descrizione delle classi principali, sorvolando sui metodi delle stesse in quanto sono tutti \glo{accessors} \glo{getter} e \glo{setter}.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{images/modules/Data}
@@ -283,14 +285,121 @@ Interfaccia che dovrà essere implementata dalle classi concrete Athesys.ADCrm.S
 	\label{fig:data}
 \end{figure}
 
+\subsubsection{ProposalData (class)}
+\paragraph{Descrizione:}
+Classe che rappresenta un oggetto DTO per modellare l'entità \textit{Proposal}.
+In essa sono presenti i metodi \glo{getter} e \glo{setter} e tutti i campi dati (privati) contenenti gli elementi che caratterizzano un offerta commerciale, quali: l'identificativo univoco della stessa, il cliente a cui è stata proposta, il costo totale, un eventuale sconto e molti altri dati.
+Gli oggetti di questa classe, contenente i dati provenienti dal CRM, verranno incapsulati all'interno della risposta HTTP restituita ad ADProject.
 
-Questo \glo{package} contiene tutti i vari DTO definiti per ogni entità di dati che si vuole restituire alle chiamate effettuate da ADProject. 
+\subsubsection{CrmResponseData (class)}
+\paragraph{Descrizione:}
+Classe che rappresenta un oggetto DTO per modellare le risposte HTTP provenienti dal CRM.
+Questa classe ha solamente due campi dati (ed i relativi \glo{accessors}):
+\begin{itemize}
+	\item 	
+	\begin{lstlisting}
+	Private HttpStatusCode Status
+	\end{lstlisting}
+	In questo campo dati viene salvato il codice di stato HTTP della risposta mandata dal CRM;
+	\item
+	\begin{lstlisting}
+	Private string Content
+	\end{lstlisting}
+	In questo campo dati viene salvato il \glo{Json} della risposta mandata dal CRM.
+\end{itemize}
+
+\subsubsection{ResponseContainerData (class)}
+\paragraph{Descrizione:}
+Classe che rappresenta un oggetto DTO per modellare le risposte HTTP da inviare a ADProject.
+Questa classe ha tre campi dati (ed i relativi \glo{accessors}):
+\begin{itemize}
+	\item 	
+	\begin{lstlisting}
+	private List<T> Payload
+	\end{lstlisting}
+	In questo campo dati è una lista di \glo{generics} che viene istanziata al tipo di uno degli oggetti DTO di questo \glo{package} (AccountData,ProposalData,ProductData,ContactData,UserData,ProductCategoryData o OrganizationData);
+	
+	\item 	
+	\begin{lstlisting}
+	private HttpStatusCode Status
+	\end{lstlisting}
+	In questo campo dati viene salvato il codice di stato HTTP che dovrà assumere la risposta da inviare ad ADProject;
+	
+	\item
+	\begin{lstlisting}
+	private string Description
+	\end{lstlisting}
+	In questo campo dati, in caso di errore, viene aggiunta una breve descrizione testuale dello stesso.
+\end{itemize}
+
+
+
 
 \subsection{Athesys.ADCrm.Model}
-Questo package contiene tutte le classi concrete in comune tra i CRM che si vogliono collegare all'applicazione 
+Questo \glo{package} contiene tutte le classi concrete in comune tra i CRM che si vogliono collegare all'applicazione.
+La classe principale del \glo{package} è Athesys.ADCrm.Model::Crm.
+\subsubsection{Crm (class)}
+\paragraph{Descrizione:}
+Questa classe implementa il design pattern Factory ed è usata dai controllers per produrre oggetti concreti di un particolare CRM (su cui invocare i metodi per recuperare i dati dallo stesso) senza conoscere a priori il tipo di CRM richiesto (Dynamics o SalesForce).
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{images/factoryInADCrm}
+	\caption{Diagramma semplificato del pattern Factory per ADCrm}
+	\label{fig:factoryInADCrm}
+\end{figure}
+Di seguito vengono riportati alcuni metodi significativi della classe per esemplificarne il funzionamento generale.
+
+
+\paragraph{Metodi:}\hfill
+\begin{itemize}
+	\itemsep0em 
+	\item 
+	\begin{lstlisting}
+	  public static async Task<OrganizationData> BuildOrganization(string organizationId)	
+	\end{lstlisting}
+	Metodo che costruisce un oggetto di tipo OrganizationData, appartenente ad un particolare CRM, in base alla tipologia del parametro passato.
+	Tutti i campi dati dell'oggetto ritornato vengono impostati dal database dell'applicazione che contiene i parametri di connessione ai vari CRM.
+	\\
+	\textbf{\small Argomenti:}
+	\begin{enumerate}[leftmargin=*]
+		\itemsep0em 
+		\item 
+		\begin{lstlisting}
+		organizationId : string
+		\end{lstlisting}
+		Rappresenta la tipologia di CRM a cui ci si deve collegare. Questo dati si ottiene grazie alle route definite nella sezione \ref{apiRest} (eg. api/organization/\{\textbf{organizationId}\}/accounts).
+	\end{enumerate}
+	
+	\item 
+	\begin{lstlisting}
+     public static IProposal BuildProposal(OrganizationData org)
+	\end{lstlisting}
+	Metodo che, in base alla tipologia di organizzazione passata per parametro, costruisce un oggetto Proposal per un particolare tipo di CRM\\
+	\textbf{\small Argomenti:}
+	\begin{enumerate}[leftmargin=*]
+		\itemsep0em
+		\item 
+		\begin{lstlisting}
+		org : OrganizationData
+		\end{lstlisting}
+		Rappresenta la tipologia di CRM da cui si vogliono recuperare le proposte commerciali.
+	\end{enumerate}
+\end{itemize}
+ 
 \subsection{Athesys.ADCrm.Salesforce}
-Questo \glo{package} contiene tutte le classi che implementano le interfacce definite in Athesys.ADCrm.Common e restituiscono ai controller di Athesys.ADCrm.API i vari oggetti DTO di tipo Athesys.ADCrm.Common.Data al fine di incapsularli nella risposta HTTP.
+Questo \glo{package} contiene tutte le classi che implementano le interfacce definite in Athesys.ADCrm.Common e, sviluppando  restituiscono ai controllers di Athesys.ADCrm.API i vari oggetti DTO delle entità del \glo{package} Athesys.ADCrm.Common.Data.
+Di seguito vengono descritte brevemente le uniche tre classi che hanno un comportamento diverso da quanto sopracitato.
+
+\subsubsection{IdentityProvider (class)}
+\paragraph{Descrizione:}
+%TODO
+\subsubsection{ResponceMapper (class)}
+\paragraph{Descrizione:}
+%TODO
+\subsubsection{Entity (class)}
+\paragraph{Descrizione:}
+%TODO
 
 \subsection{Athesys.ADCrm.Dynamics}
 Questo \glo{package} contiene tutte le classi che implementano le interfacce definite in Athesys.ADCrm.Common e restituiscono ai controller di Athesys.ADCrm.API i vari oggetti DTO di tipo Athesys.ADCrm.Common.Data al fine di incapsularli nella risposta HTTP.
