@@ -227,8 +227,101 @@ Classe che serve per gestire le chiamate http richiedenti dati relativi all'enti
 		\label{fig:common}
 	\end{figure}
 \end{sidewaysfigure}
+
 Questo \glo{package} contiene il \glo{package} Data(avente le classi DTO) e tutte le interfacce che dovranno essere implementate diversamente per ogni CRM che si vuole collegare all'applicazione. 
 %TODO: da modificare la descrizione
+\newpage
+\subsubsection{IIdentityProvider (interface)}
+
+\paragraph{Descrizione:}
+Interfaccia che dovrà essere implementata dalle classi concrete Athesys.ADCrm.Salesforce::IdentityProvider e\\ Athesys.ADCrm.Dynamics::IdentityProvider, essa definisce i metodi utilizzati per ottenere i \glo{token} di autenticazione e di refresh dai CRM, ed inoltre espone il metodo per effettuare inviare le \glo{query} di recupero dei dati.
+
+\paragraph{Metodi:}\hfill
+\begin{itemize}
+	\itemsep0em 	
+	\item 
+	\begin{lstlisting}
+	 Task<AuthToken> GetAuthTokenAsync(string authorizationCode, string clientId, string clientSecret, string redirectUrl)
+	\end{lstlisting}
+	Metodo da implementare per ottenere i \glo{token} da aggiungere all'\glo{header} delle richieste HTTP per poter effettuare le query al CRM e il \glo{token} di refresh per otterene nuovi \glo{token} una volta scaduti. Tutti i paramentri passati al metodo sono essenziali per effettuare la suddetta richiesta.\\
+	\textbf{\small Argomenti:}
+	\begin{enumerate}[leftmargin=*]
+		\itemsep0em 
+		\item 
+		\begin{lstlisting}
+		authorizationCode : string
+		\end{lstlisting}
+		E' un codice che viene generato nel caso l'utente abbia inserito le credenziali d'accesso al CRM;
+		%TODO: da aggiungere i riferimenti alla sezione;
+		\item 
+		\begin{lstlisting}
+		clientSecret : string
+		\end{lstlisting}
+		E' un codice alfanumerico identificativo dell'applicazione, che non cambia nel tempo, generato dall'CRM. Esso è fondamentale per permettere il collegamento OAuth all'applicazione; 
+		%TODO: in caso da modificare questa parte
+		\item 
+		\begin{lstlisting}
+		clientId : string
+		\end{lstlisting}
+		E' un codice alfanumerico che non cambia nel tempo, generato dall'CRM. Esso è fondamentale per permettere il collegamento \glo{OAuth} all'applicazione. 
+		%TODO: in caso da modificare questa parte
+		\item 
+		\begin{lstlisting}
+		redirectUrl : string
+		\end{lstlisting}
+		E' l'url su cui si vuole far arrivare le risposte del CRM.
+		%TODO: in caso da modificare questa parte
+	\end{enumerate}
+	
+	\item 
+	\begin{lstlisting}
+	Task<string> RenewAuthTokenAsync(string refreshToken, string clientId, string clientSecret)
+	\end{lstlisting}
+	Metodo da implementare per ottenere un nuovo \glo{token} di autorizzazione nel caso il precedente sia scaduto.\\
+	\textbf{\small Argomenti:}
+	\begin{enumerate}[leftmargin=*]
+		\itemsep0em
+		\item 
+		\begin{lstlisting}
+		refreshToken : string
+		\end{lstlisting}
+		E' un codice generato dall'CRM fornito una volta effettuato l'accesso con \glo{OAuth}. Questo permette di ottenere nuovi \glo{token} di autorizzazione senza dover effettuare nuovamente la procedura di login;
+		\item 
+		\begin{lstlisting}
+		clientId : string
+		\end{lstlisting}
+		E' un codice alfanumerico che non cambia nel tempo, generato dall'CRM. Esso è fondamentale per permettere il collegamento OAuth all'applicazione. 
+		%TODO: in caso da modificare questa parte
+		\item 
+		\begin{lstlisting}
+		clientSecret : string
+		\end{lstlisting}
+		E' un codice alfanumerico identificativo dell'applicazione, che non cambia nel tempo, generato dall'CRM. Esso è fondamentale per permettere il collegamento OAuth all'applicazione; 
+		%TODO: in caso da modificare questa parte
+	\end{enumerate}
+
+	\item 
+	\begin{lstlisting}
+	 public async Task<QueryResponse> SendQueryWithRefresh(string resourceProvider,string accessToken,string refreshToken,string clientId,
+	string clientSecret,Action<HttpRequestMessage> addQuryAction)
+	\end{lstlisting}
+	Metodo da implementare per inviare la richiesta HTTP con la \glo{query} per ottenere i dati desiderati dal CRM. Nel caso il \glo{token} d'autorizzazione passato fosse scaduto il metodo si occupa di recuperarne uno nuovo tramite la procedura di refresh. Nella successiva descrizione degli argomenti, per evitare inutili ripetizioni, vengono esclusi quelli già descritti nei sopracitati metodi.\\
+	\textbf{\small Argomenti:}
+	\begin{enumerate}[leftmargin=*]
+		\itemsep0em
+		\item 
+		\begin{lstlisting}
+		resourceProvider : string
+		\end{lstlisting}
+		E' l'uri a cui si devono effettuare le \glo{query};
+		\item 
+		\begin{lstlisting}
+		addQuryAction : Action<HttpRequestMessage>
+		\end{lstlisting}
+		E' il corpo della \glo{query} in formato di HttpRequestMessage. 
+		%TODO: in caso da modificare questa parte
+	\end{enumerate}
+\end{itemize}
 
 \subsubsection{IProposal (interface)}
 
@@ -391,15 +484,19 @@ Di seguito vengono riportati alcuni metodi significativi della classe per esempl
 Questo \glo{package} contiene tutte le classi che implementano le interfacce definite in Athesys.ADCrm.Common e, sviluppando  restituiscono ai controllers di Athesys.ADCrm.API i vari oggetti DTO delle entità del \glo{package} Athesys.ADCrm.Common.Data.
 Di seguito vengono descritte brevemente le uniche tre classi che hanno un comportamento diverso da quanto sopracitato.
 
-\subsubsection{IdentityProvider (class)}
-\paragraph{Descrizione:}
-%TODO
 \subsubsection{ResponceMapper (class)}
 \paragraph{Descrizione:}
-%TODO
-\subsubsection{Entity (class)}
-\paragraph{Descrizione:}
-%TODO
+Questa classe ha la funzione di mappare le risposte provenienti dal CRM modificandole in base alle esigenze di ADProject.
+Per esempio se dal CRM arrivasse una risposta d'errore con codice di stato HTTP 500 (quindi un errore interno del server), non si dovrà restituire ad ADProject una risposta lo stesso codice di stato, in quanto verrebbe interpretato come un errore del servizio e non del CRM. C'è quindi l'esigenza di modificare ad-hoc le risposte per renderle fruibili dal richiedente delle stesse.
+%TODO: controllare questa parte
 
 \subsection{Athesys.ADCrm.Dynamics}
 Questo \glo{package} contiene tutte le classi che implementano le interfacce definite in Athesys.ADCrm.Common e restituiscono ai controller di Athesys.ADCrm.API i vari oggetti DTO di tipo Athesys.ADCrm.Common.Data al fine di incapsularli nella risposta HTTP.
+Viene omessa la descrizione delle classi e dei metodi in quanto risulta identica a quella del \glo{package} \textit{Athesys.ADCrm.Salesforce}
+
+\section{Database}
+Il database è utilizzato per salvare i dati necessari a collegarsi per effettuare l'accesso e le richieste ai CRM, vista la bassissima mole di dati da salvare si è deciso di optare per un semplicissimo database \glo{SQL} composto da una singola tabella avente la seguente struttura:
+
+%TODO: da aggiungere l'immagine della struttura ed una breve decsrizione dei campi
+
+ 
