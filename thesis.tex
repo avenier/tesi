@@ -103,12 +103,26 @@ l'obbiettivo di facilitare e automatizzare il suddetto insieme di attività.
 % Introduzione
 %**************************************************************
 \chapter{Il Progetto}\label{introduzione}
-\section{Studio del CRM}
-\subsection{Protocollo di accesso}
-\paragraph{OAuth2.0}
-\subsection{Protocolli di interrogazione}
-\paragraph{SOQL}
-\paragraph{OData}
+	\section{Studio delle applicazioni CRM}
+		\subsection{Autenticazione}
+			Per poter accedere ai dati dal CRM l'applicazione deve potersi autenticare presso i server di SalesForce e Dynamics. Entrambe le applicazione permettono l'autenticazione attraverso protocollo OAuth2.0.
+			\paragraph{OAuth2.0}
+			E' un protocollo aperto per permettere l'autorizzazione in maniera semplice e standard da applicazioni web, mobile e desktop. Viene comunemente usato come un modo per autorizzare siti web o applicazioni ad accedere ad altri siti senza fornire direttamente le credenziali dell'utente.\\
+			La scelta di utilizzare questo protocollo è stata dettata dalla volontà di rendere più sicuro il sistema, in quanto permette di limitare la quantità di dati sensibili salvati all'interno dell'applicazione, ma anche dal fatto di sgravare il sistema dalle procedure di cambio password in quanto sono a carico del \glo{provider} OAuth (SalesForce e Dynamics).
+			%TODO: da ricontrollare
+			\paragraph{Authentication Flow}
+			%In questo paragrafo viene descritta la 
+		\subsection{Protocolli di interrogazione}
+			Entrambi i CRM permettono l'interrogazione dei propri dati attraverso l'implementazione di protocolli \textit{REST-based}. Questi offrono anche la possibilità di mettere in relazioni dati differenti, in maniera simile al comportamento della clausola \glo{JOIN} per le \glo{query} \glo{SQL}, anche se con limitazioni.\\ 
+			La sfida che si è presentata in quest'ambito è stata quella di trovare il modo migliore di recuperare tutti i dati necessari limitando al più possibile il numero di richieste HTTP inviate ai CRM, in quanto ogni nuova richiesta effettuata aumenta il tempo per reindirizzare i dati recuperati ad ADProject.
+			%TODO: migliorare
+			\paragraph{SOQL}
+			o \textit{\textbf{S}alesforce \textbf{O}bject \textbf{Q}uery \textbf{L}anguage} permette recuperare i della propria organizzazione da SalesForce. SOQL è basato su richieste HTTP con una specifica sintassi simile alle \glo{query} SQL, ad uno specifico \glo{endpoint}. Il CRM, se la richiesta è corretta, risponde con i dati richiesti in formato \glo{JSON}.
+			\paragraph{OData}
+			E' un protocollo aperto (Open Data Protocol) creato da Microsoft, che definisce un insieme di best-practices per costruire e utilizzare API RESTful.
+			Dynamics permette l'interrogazione dei propri dati attraverso semplici richieste HTTP basate su questo protocollo, dando in risposta i dati richiesti in formato \glo{JSON}.
+			
+			
 %**************************************************************
 % Tecnologie e Strumenti
 %**************************************************************

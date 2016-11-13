@@ -61,14 +61,17 @@ Inoltre si noti che è necessario da parte di chi effettua chiamate verso questo
 		\end{longtable}		
 	\end{small}
 	
-\section{Progettazione di dettaglio}
+\section{Progettazione}
+In questa sezione verranno descritti in maniera dettagliata tutti i \glo{package}, le classi principali dell'applicazione e i metodi più importanti delle stesse al fine mostrare al meglio il progetto di stage svolto.
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=\linewidth]{images/modulesDiagram}
-	\caption{Diagramma dei moduli di ADCrm}
-	\label{fig:generalUMLDiagram}
-\end{figure}
+Nella figura \ref{fig:modulesdiagram} viene illustrato il diagramma \glo{UML} delle classi dell'applicazione.
+
+%\begin{figure}[H]
+%	\centering
+%	\includegraphics[width=\linewidth]{images/modulesDiagram}
+%	\caption{Diagramma dei moduli di ADCrm}
+%	\label{fig:generalUMLDiagram}
+%\end{figure}
 
 \begin{figure}[H]
 	\centering
@@ -80,33 +83,34 @@ Inoltre si noti che è necessario da parte di chi effettua chiamate verso questo
 
 
 \subsection{Athesys.ADCrm.API}
-
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{images/modules/API}
-	\caption{}
+	\caption{Diagramma UML del package Athesys.ADCrm.API}
 	\label{fig:api}
 \end{figure}
-
+\paragraph{Descrizione:} 
 Questo \glo{package} è utilizzato per esporre le API REST all'applicazione web ADProject. In esso vengono definite le \glo{route} che è possibile chiamare e ad ognuna di esse viene associato un metodo di un particolare controller. 
 
+
+
+
+
 \subsection{Athesys.ADCrm.API.AppStart}
+\paragraph{Descrizione:} 
 Questo \glo{package} contiene la classe che si occupa di definire le \glo{route} che verranno esposte dall'applicazione.
 
 \subsection{Athesys.ADCrm.API.Controllers}
-
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{images/modules/Controllers}
-	\caption{}
+	\caption{Diagramma UML del package Athesys.ADCrm.API::Controllers}
 	\label{fig:controllers}
 \end{figure}
+\paragraph{Descrizione:} Questo \glo{package} contiene tutte le classi controller contenenti i metodi necessari a rispondere alle richieste http effettuate alle \glo{route}.
 
-
-Questo \glo{package} contiene tutte le classi controller contenenti i metodi necessari a rispondere alle richieste http effettuate alle \glo{route}.
 
 \subsubsection{AccountsController (class)}
-
 \paragraph{Descrizione:}
 Classe che serve per gestire le chiamate http richiedenti dati relativi all'entità Account. Utilizzando la classe Athesys.ADCrm.Model::Crm (che implementa il design pattern Factory) vengono creati oggetti sui quali si possono invocare metodi per interrogare le API di uno specifico CRM.
 I dati recuperati vengono incapsulati in una risposta http e ritornati ad ADProject.
@@ -212,25 +216,23 @@ Classe che serve per gestire le chiamate http richiedenti dati relativi all'enti
 	\end{enumerate}
 \end{itemize}
 
-
-
 \vfill
-
-
-
 \subsection{Athesys.ADCrm.Common}
-\begin{sidewaysfigure}
+
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=\linewidth]{images/modules/common}
-		\caption{}
+		\rotatebox{90}{\includegraphics[width=.89\textheight,height=1.08\linewidth]{images/modules/common}}
+		
+		\caption{Diagramma UML del package Athesys.ADCrm.Common}
 		\label{fig:common}
 	\end{figure}
-\end{sidewaysfigure}
 
+
+\newpage
+\paragraph{Descrizione:}
 Questo \glo{package} contiene il \glo{package} Data(avente le classi DTO) e tutte le interfacce che dovranno essere implementate diversamente per ogni CRM che si vuole collegare all'applicazione. 
 %TODO: da modificare la descrizione
-\newpage
+
 \subsubsection{IIdentityProvider (interface)}
 
 \paragraph{Descrizione:}
@@ -369,14 +371,16 @@ Interfaccia che dovrà essere implementata dalle classi concrete Athesys.ADCrm.S
 \end{itemize}
 
 \subsection{Athesys.ADCrm.API.Data}
-Questo \glo{package} contiene tutti i vari DTO definiti per ogni entità di dati che si vuole restituire alle chiamate effettuate da ADProject ed inoltre quelle necessarie per gestire le risposte le risposte provenienti dai CRM. 
-Segue in questa sezione una breve descrizione delle classi principali, sorvolando sui metodi delle stesse in quanto sono tutti \glo{accessors} \glo{getter} e \glo{setter}.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{images/modules/Data}
-	\caption{}
+	\caption{Diagramma UML del package Athesys.ADCrm.Common::Data}
 	\label{fig:data}
 \end{figure}
+\paragraph{Description:}
+Questo \glo{package} contiene tutti i vari DTO definiti per ogni entità di dati che si vuole restituire alle chiamate effettuate da ADProject ed inoltre quelle necessarie per gestire le risposte le risposte provenienti dai CRM. 
+Segue in questa sezione una breve descrizione delle classi principali, sorvolando sui metodi delle stesse in quanto sono tutti \glo{accessors} \glo{getter} e \glo{setter}.
+
 
 \subsubsection{ProposalData (class)}
 \paragraph{Descrizione:}
@@ -494,9 +498,10 @@ Per esempio se dal CRM arrivasse una risposta d'errore con codice di stato HTTP 
 Questo \glo{package} contiene tutte le classi che implementano le interfacce definite in Athesys.ADCrm.Common e restituiscono ai controller di Athesys.ADCrm.API i vari oggetti DTO di tipo Athesys.ADCrm.Common.Data al fine di incapsularli nella risposta HTTP.
 Viene omessa la descrizione delle classi e dei metodi in quanto risulta identica a quella del \glo{package} \textit{Athesys.ADCrm.Salesforce}
 
-\section{Database}
+\subsection{Database}
 Il database è utilizzato per salvare i dati necessari a collegarsi per effettuare l'accesso e le richieste ai CRM, vista la bassissima mole di dati da salvare si è deciso di optare per un semplicissimo database \glo{SQL} composto da una singola tabella avente la seguente struttura:
 
 %TODO: da aggiungere l'immagine della struttura ed una breve decsrizione dei campi
 
- 
+\subsection{Diagramma di sequenza}
+%TODO: aggiungere i diagrammi di sequenza per una chiamata a proposal 
