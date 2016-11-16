@@ -1,22 +1,23 @@
 \section{Architettura del sistema}
-L'applicazione ADCrm presenta un'architettura client-server, assumendo entrambi i ruoli:
+L'applicazione ADCrm presenta un'architettura client-server, assumendone entrambi i ruoli:
 \paragraph{Server}
-L'applicazione assume il ruolo di server nel momento in cui deve assolvere alle richieste che arrivano da ADProject mediante le API REST. Deve quindi rispondere ad un'esigenza principale due esigenze:
+L'applicazione assume il ruolo di server nel momento in cui deve assolvere alle richieste che arrivano da ADProject mediante le API REST. Deve quindi rispondere a due esigenze principali:
 \begin{itemize}
-	\item esporre API REST per poter rispondere, in formato \glo{JSON}, alle richieste HTTP ricevute;
-	\item salvare le credenziali per il processo di autenticazione e collegamento con il CRM su un piccolo database interno.
+	\item esporre API REST per poter rispondere, in formato \glo{JSON}, alle richieste http ricevute;
+	\item salvare i dati, non sensibili, necessari per il processo di autenticazione e collegamento con il CRM su un piccolo database interno.
 \end{itemize} 
 
 Si è deciso di mantenere il database sul servizio ADCrm per togliere l'onere ad ADProject di conoscere: non solo le procedure di autenticazione al CRM, ma anche la tipologia di CRM che si va ad interrogare (Salesforce, Dynamics, ...). In questo modo si riesce a mantenere una netta separazione dei ruoli tra le varie componenti. 
 
 \paragraph{Client}
-L'applicazione funge da client nel momento in cui deve interrogare il server del CRM per recuperare i dati di cui ha bisogno ADProject; deve quindi:
+L'applicazione assume il ruolo di client nel momento in cui deve interrogare il server del CRM per recuperare i dati di cui ha bisogno ADProject, deve quindi:
 \begin{itemize}
-	\item interrogare il server remoto attraverso il set di API che espone;
-	\item organizzare i dati ricevuti in modo tale che siano fruibili da ADProject.
+	\item interrogare il server remoto attraverso il set di API esposto;
+	\item organizzare i dati ricevuti in modo tale che siano fruibili da ADProject;
+	\item restituire gli stessi in formato \glo{JSON}.
 \end{itemize}
 
-Nelle prime fasi della progettazione si è valutata l'ipotesi di utilizzare un database per fare \glo{caching} dei dati provenienti dal CRM, così da limitare le richieste HTTP necessarie e da velocizzare le risposte fornite, tuttavia la necessità di ADProject di utilizzare sempre dati aggiornati ha fatto abbandonare quest'opzione.\\
+Nelle prime fasi della progettazione si è valutata l'ipotesi di utilizzare un database per fare \glo{caching} dei dati provenienti dal CRM, così da limitare le richieste http necessarie e da velocizzare le risposte fornite, tuttavia la necessità di ADProject di utilizzare sempre dati aggiornati ha fatto abbandonare quest'opzione.\\
 
 La figura \ref{fig:architetturasistema} illustra l'architettura ad alto livello del sistema; una descrizione più dettagliata delle varie componenti verrà esposta nelle sezioni successive.
 
@@ -29,7 +30,7 @@ La figura \ref{fig:architetturasistema} illustra l'architettura ad alto livello 
 
 \section{API REST}\label{apiRest}
 Di seguito si trova la definizione delle API REST esposte dal servizio ADCrm.\\
-I metodi HTTP con cui chiamare tutti i successivi URL sono metodi \textbf{GET} ed i dati ricevuti nelle risposte sono forniti in formato \glo{JSON}.
+I metodi http con cui chiamare tutti i successivi URL sono metodi \textbf{GET} ed i dati ricevuti nelle risposte sono forniti in formato \glo{JSON}.
 
 	\begin{small}
 		\begin{longtable}{ | l | p{8cm} | }
@@ -90,7 +91,7 @@ Nella figura \ref{fig:modulesdiagram} viene illustrato il diagramma \glo{UML} de
 	\label{fig:api}
 \end{figure}
 \paragraph{Descrizione:} 
-Questo \glo{package} è utilizzato per esporre le API REST all'applicazione web ADProject. In esso vengono definite le \glo{route} che è possibile chiamare e ad ognuna di esse viene associato un metodo di un particolare controller. 
+Questo \glo{package} è utilizzato per esporre le API REST all'applicazione web ADProject. In esso vengono definite le \glo{route} che è possibile chiamare, ad ognuna di esse viene associato un metodo di un particolare controller. 
 
 
 
@@ -245,7 +246,7 @@ Interfaccia che dovrà essere implementata dalle classi concrete Athesys.ADCrm.S
 	\begin{lstlisting}
 	 Task<AuthToken> GetAuthTokenAsync(string authorizationCode, string clientId, string clientSecret, string redirectUrl)
 	\end{lstlisting}
-	Metodo da implementare per ottenere i \glo{token} da aggiungere all'\glo{header} delle richieste HTTP per poter effettuare le query al CRM e il \glo{token} di refresh per otterene nuovi \glo{token} una volta scaduti. Tutti i paramentri passati al metodo sono essenziali per effettuare la suddetta richiesta.\\
+	Metodo da implementare per ottenere i \glo{token} da aggiungere all'\glo{header} delle richieste http per poter effettuare le query al CRM e il \glo{token} di refresh per otterene nuovi \glo{token} una volta scaduti. Tutti i paramentri passati al metodo sono essenziali per effettuare la suddetta richiesta.\\
 	\textbf{\small Argomenti:}
 	\begin{enumerate}[leftmargin=*]
 		\itemsep0em 
@@ -304,10 +305,9 @@ Interfaccia che dovrà essere implementata dalle classi concrete Athesys.ADCrm.S
 
 	\item 
 	\begin{lstlisting}
-	 public async Task<QueryResponse> SendQueryWithRefresh(string resourceProvider,string accessToken,string refreshToken,string clientId,
-	string clientSecret,Action<HttpRequestMessage> addQuryAction)
+	 public async Task<QueryResponse> SendQueryWithRefresh(string resourceProvider,string accessToken,string refreshToken,string clientId, string clientSecret, Action<HttpRequestMessage> addQuryAction)
 	\end{lstlisting}
-	Metodo da implementare per inviare la richiesta HTTP con la \glo{query} per ottenere i dati desiderati dal CRM. Nel caso il \glo{token} d'autorizzazione passato fosse scaduto il metodo si occupa di recuperarne uno nuovo tramite la procedura di refresh. Nella successiva descrizione degli argomenti, per evitare inutili ripetizioni, vengono esclusi quelli già descritti nei sopracitati metodi.\\
+	Metodo da implementare per inviare la richiesta http con la \glo{query} per ottenere i dati desiderati dal CRM. Nel caso il \glo{token} d'autorizzazione passato fosse scaduto il metodo si occupa di recuperarne uno nuovo tramite la procedura di refresh. Nella successiva descrizione degli argomenti, per evitare inutili ripetizioni, vengono esclusi quelli già descritti nei sopracitati metodi.\\
 	\textbf{\small Argomenti:}
 	\begin{enumerate}[leftmargin=*]
 		\itemsep0em
@@ -328,7 +328,7 @@ Interfaccia che dovrà essere implementata dalle classi concrete Athesys.ADCrm.S
 \subsubsection{IProposal (interface)}
 
 \paragraph{Descrizione:}
-Interfaccia che dovrà essere implementata dalle classi concrete Athesys.ADCrm.Salesforce::Proposal e\\ Athesys.ADCrm.Dynamics::Proposal, essa definisce i metodi utilizzati per interrogare i rispettivi CRM attraverso le API REST esposte, restituendo la risposta HTTP incapsulata all'interno di un DTO di tipo ResponseContainerData.
+Interfaccia che dovrà essere implementata dalle classi concrete Athesys.ADCrm.Salesforce::Proposal e\\ Athesys.ADCrm.Dynamics::Proposal, essa definisce i metodi utilizzati per interrogare i rispettivi CRM attraverso le API REST esposte, restituendo la risposta http incapsulata all'interno di un DTO di tipo ResponseContainerData.
 
 \paragraph{Metodi:}\hfill
 \begin{itemize}
@@ -386,18 +386,18 @@ Segue in questa sezione una breve descrizione delle classi principali, sorvoland
 \paragraph{Descrizione:}
 Classe che rappresenta un oggetto DTO per modellare l'entità \textit{Proposal}.
 In essa sono presenti i metodi \glo{getter} e \glo{setter} e tutti i campi dati (privati) contenenti gli elementi che caratterizzano un offerta commerciale, quali: l'identificativo univoco della stessa, il cliente a cui è stata proposta, il costo totale, un eventuale sconto e molti altri dati.
-Gli oggetti di questa classe, contenente i dati provenienti dal CRM, verranno incapsulati all'interno della risposta HTTP restituita ad ADProject.
+Gli oggetti di questa classe, contenente i dati provenienti dal CRM, verranno incapsulati all'interno della risposta http restituita ad ADProject.
 
 \subsubsection{CrmResponseData (class)}
 \paragraph{Descrizione:}
-Classe che rappresenta un oggetto DTO per modellare le risposte HTTP provenienti dal CRM.
+Classe che rappresenta un oggetto DTO per modellare le risposte http provenienti dal CRM.
 Questa classe ha solamente due campi dati (ed i relativi \glo{accessors}):
 \begin{itemize}
 	\item 	
 	\begin{lstlisting}
 	Private HttpStatusCode Status
 	\end{lstlisting}
-	In questo campo dati viene salvato il codice di stato HTTP della risposta mandata dal CRM;
+	In questo campo dati viene salvato il codice di stato http della risposta mandata dal CRM;
 	\item
 	\begin{lstlisting}
 	Private string Content
@@ -407,7 +407,7 @@ Questa classe ha solamente due campi dati (ed i relativi \glo{accessors}):
 
 \subsubsection{ResponseContainerData (class)}
 \paragraph{Descrizione:}
-Classe che rappresenta un oggetto DTO per modellare le risposte HTTP da inviare a ADProject.
+Classe che rappresenta un oggetto DTO per modellare le risposte http da inviare a ADProject.
 Questa classe ha tre campi dati (ed i relativi \glo{accessors}):
 \begin{itemize}
 	\item 	
@@ -420,7 +420,7 @@ Questa classe ha tre campi dati (ed i relativi \glo{accessors}):
 	\begin{lstlisting}
 	private HttpStatusCode Status
 	\end{lstlisting}
-	In questo campo dati viene salvato il codice di stato HTTP che dovrà assumere la risposta da inviare ad ADProject;
+	In questo campo dati viene salvato il codice di stato http che dovrà assumere la risposta da inviare ad ADProject;
 	
 	\item
 	\begin{lstlisting}
@@ -491,17 +491,52 @@ Di seguito vengono descritte brevemente le uniche tre classi che hanno un compor
 \subsubsection{ResponceMapper (class)}
 \paragraph{Descrizione:}
 Questa classe ha la funzione di mappare le risposte provenienti dal CRM modificandole in base alle esigenze di ADProject.
-Per esempio se dal CRM arrivasse una risposta d'errore con codice di stato HTTP 500 (quindi un errore interno del server), non si dovrà restituire ad ADProject una risposta lo stesso codice di stato, in quanto verrebbe interpretato come un errore del servizio e non del CRM. C'è quindi l'esigenza di modificare ad-hoc le risposte per renderle fruibili dal richiedente delle stesse.
+Per esempio se dal CRM arrivasse una risposta d'errore con codice di stato http 500 (quindi un errore interno del server), non si dovrà restituire ad ADProject una risposta lo stesso codice di stato, in quanto verrebbe interpretato come un errore del servizio e non del CRM. C'è quindi l'esigenza di modificare ad-hoc le risposte per renderle fruibili dal richiedente delle stesse.
 %TODO: controllare questa parte
 
 \subsection{Athesys.ADCrm.Dynamics}
-Questo \glo{package} contiene tutte le classi che implementano le interfacce definite in Athesys.ADCrm.Common e restituiscono ai controller di Athesys.ADCrm.API i vari oggetti DTO di tipo Athesys.ADCrm.Common.Data al fine di incapsularli nella risposta HTTP.
+Questo \glo{package} contiene tutte le classi che implementano le interfacce definite in Athesys.ADCrm.Common e restituiscono ai controller di Athesys.ADCrm.API i vari oggetti DTO di tipo Athesys.ADCrm.Common.Data al fine di incapsularli nella risposta http.
 Viene omessa la descrizione delle classi e dei metodi in quanto risulta identica a quella del \glo{package} \textit{Athesys.ADCrm.Salesforce}
 
 \subsection{Database}
-Il database è utilizzato per salvare i dati necessari a collegarsi per effettuare l'accesso e le richieste ai CRM, vista la bassissima mole di dati da salvare si è deciso di optare per un semplicissimo database \glo{SQL} composto da una singola tabella avente la seguente struttura:
+Il database è utilizzato per salvare i dati necessari a collegarsi per effettuare l'accesso e le richieste ai CRM, vista la bassissima mole di dati da salvare si è deciso di optare per un semplicissimo database \glo{SQL} composto da una singola tabella, di nome Organization, avente la seguente struttura:
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{images/schemaDB}
+	\caption{Struttura tabella Organization del database}
+	\label{fig:schemadb}
+\end{figure}
 
-%TODO: da aggiungere l'immagine della struttura ed una breve decsrizione dei campi
+\begin{itemize}
+	\item \textbf{Id} : è un identificativo univoco alfanumerico, marcato come \textit{primary key} per poter distinguere i dati di  un'applicazione CRM di una specifica azienda;
+	\item \textbf{Name} : è il nome del software CRM (eg. SalesForce o Dynamics);
+	\item \textbf{Type} : è un campo intero per distinguere la tipologia di CRM (eg. SalesForce o Dynamics)  
+	\item \textbf{ResoureProvider} :
+	Ogni software CRM \textit{cloud-based} viene \glo{hostato} su un server, e per identificare a quale di questi ci si dovrà collegare bisogna anteporre a
+	\item \textbf{ClientId} : è l’identificativo univoco (pubblico) del client ed è uno dei dati fondamentali che le applicazioni CRM devono fornire per permettere il collegamento di terze applicazioni-web tramite procedura OAuth;
+	\item \textbf{ClietSecret} :  è l’identificativo segreto del client ed è il secondo dato fondamentale che le applicazioni CRM devono fornire per permettere il collegamento di terze applicazioni-web tramite procedura OAuth;
+	\item \textbf{AuthToken} : è il campo contenente la risposta \glo{JSON} restituita da un CRM dopo la procedura di autenticazione OAuth; quindi non solo conterrà il \glo{token} da allegare per poter fare le richieste, ma anche il \glo{token} di refresh ed altri dati. Ne segue un esempio.
+	
+	
+	\begin{lstlisting}[language=json,firstnumber=1]
+	{
+	"id":"https://login.salesforce.com/***",
+	"issued_at":"1278448101416",
+	"refresh_token":"***",
+	"instance_url":"https://***.salesforce.com/",
+	"signature":"***",
+	"access_token":"***"
+	}
+	\end{lstlisting}
+	
+\end{itemize}
+
 
 \subsection{Diagramma di sequenza}
-%TODO: aggiungere i diagrammi di sequenza per una chiamata a proposal 
+	\begin{figure}[H]
+	\centering
+	\rotatebox{90}{\includegraphics[width=\textheight,height=1.08\linewidth]{images/sdProposals}}
+	
+	\caption{Diagramma di sequenza per una chiamata per recuperare le proposte commerciali da un CRM }
+	\label{fig:sdProposals}
+\end{figure}

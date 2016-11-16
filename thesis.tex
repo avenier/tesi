@@ -68,10 +68,7 @@
 
 \cleardoublepage
 %\begingroup\onehalfspacing
-%**************************************************************
-% Abstract
-%**************************************************************
-\chapter*{Abstract}\label{abstract}
+
 
 %**************************************************************
 % Keywords
@@ -86,9 +83,14 @@ L'azienda \large{\myCompany{}}, basandosi sull'importanza e sulla diffusione dei
 \paragraph*{Project Management Software}
 La disciplina di \textit{Project Management} si occupa di sovraintendere la pianificazione, l'organizzazione e l'implementazione di un progetto. Dove con progetto si intende un insieme ordinato di compiti da svolgere, caratterizzati da: vincoli di tempo (date di inizio e fine), risorse utilizzabili e risultati attesi.\\
 Questa disciplina è fondamentale per controllare i costi, l'utilizzo delle risorse aziendali e per poter assicurare che il prodotto finale di questi processi soddisfi a pieno le esigenze del cliente.\\
-In questo contesto \large{\myCompany{}} ha deciso di sviluppare \textbf{ADProject}, una soluzione software pensata ad-hoc per i propri clienti
-l'obbiettivo di facilitare e automatizzare il suddetto insieme di attività.
+In questo contesto \large{\myCompany{}} ha deciso di sviluppare \textbf{ADProject}, una soluzione software pensata ad-hoc per i propri clienti con l'obbiettivo di facilitare e automatizzare il suddetto insieme di attività.
 
+%**************************************************************
+% Abstract
+%**************************************************************
+\chapter*{Abstract}\label{abstract}
+Questa tesi è basata sull'esperienza di stage che ho svolto presso l'azienda \textbf{Athesys s.r.l.}.
+L’azienda \textbf{Athesys s.r.l.} ha costruito un software gestionale di Project Management, chiamato ADProject, che va ad integrare e ampliare le funzionalità di Microsoft Project, fornendo ai clienti la possibilità di avere un programma customizzato in base alle loro esigenze. ADProject permette di avere una panoramica costantemente aggiornata dei progetti presenti e passati dell’azienda, consente di spostare e assegnare risorse su determinati task di progetto, rendicontare il lavoro svolto dal personale ed inoltre di tenere sotto controllo i costi e le scadenze. Il progetto di stage consta nel costruire un modulo software che vada ad ampliare le funzionalità fornite da ADProject attraverso l’integrazione con Salesforce. In questo modo con ADProject si riusciranno a fornire, non solo strumenti all’avanguardia per la gestione di progetto, ma si potranno avere dati costantemente aggiornati relativi ai clienti dell’azienda, facilitando la gestione con gli stessi e permettendo inoltre la loro fidelizzazione grazie a rapporti e trattamenti aziendali mirati.
 
 %**************************************************************
 % Table of contents, list of figures and list of tables
@@ -103,27 +105,28 @@ l'obbiettivo di facilitare e automatizzare il suddetto insieme di attività.
 % Introduzione
 %**************************************************************
 \chapter{Il Progetto}\label{introduzione}
-
-	Il progetto, per quanto stabilito nel piano di lavoro dello stage, comporta l'integrazione di \textit{ADProject} con \textit{Salesforce}, tuttavia dato che la parte principale dell'applicazione è stata finita con 2 settimane di anticipo, si è deciso di integrare nel servizio \textit{ADCrm} anche un secondo CRM: \textit{Microsoft Dynamics}.
-	Nei successivi capitoli verrà descritta l'integrazione con entrambi i sistemi e verranno spiegate le sfide riscontrate in questo progetto, tuttavia per evitare eccessive ripetizioni ci si concentrerà soprattutto sulle parti riguardanti \textit{SalesForce}.
+	\section{Scopo del progetto}
+	Il progetto, per quanto stabilito nel piano di lavoro dello stage, comporta l'integrazione di \textit{ADProject} con \textit{Salesforce} ma, dato che la parte principale dell'applicazione è stata finita con 2 settimane di anticipo, si è deciso di integrare nel servizio \textit{\textbf{ADCrm}} anche un secondo CRM: \textit{\textbf{Microsoft Dynamics}}.
+	Nei successivi capitoli verrà descritta l'integrazione con entrambi i sistemi e verranno spiegate le sfide riscontrate in questo progetto, tuttavia per evitare eccessive ripetizioni ci si concentrerà soprattutto sulle parti riguardanti \textit{\textbf{SalesForce}}.
 	\section{Studio delle applicazioni CRM}
 		\subsection{Autenticazione}
-			Per poter accedere ai dati dal CRM l'applicazione deve potersi autenticare presso i server di SalesForce e Dynamics. Entrambe le applicazione permettono l'autenticazione attraverso protocollo OAuth2.0.
+			Per avere l'accesso ai dati l'applicazione deve potersi autenticare presso i server di SalesForce e Dynamics ed entrambe le applicazioie permettono l'autenticazione attraverso protocollo OAuth2.0.
 			\paragraph{OAuth2.0}
-			E' un protocollo aperto per permettere l'autorizzazione in maniera semplice e standard da applicazioni web, mobile e desktop. Viene comunemente usato come un modo per autorizzare siti web o applicazioni ad accedere ad altri siti senza fornire direttamente le credenziali dell'utente.\\
-			La scelta di utilizzare questo protocollo è stata dettata dalla volontà di rendere più sicuro il sistema, in quanto permette di limitare la quantità di dati sensibili salvati all'interno dell'applicazione, ma anche dal fatto di sgravare il sistema dalle procedure di cambio password in quanto sono a carico del \glo{provider} OAuth (SalesForce e Dynamics).
+			E' un protocollo aperto che permettere, in maniera semplice e standard, di autenticare e autorizzare applicazioni web, mobile e desktop ad accedere ai dati che si vogliono esporre. Viene comunemente usato come un modo per autorizzare siti web o applicazioni ad accedere ad altri siti senza fornire direttamente le credenziali dell'utente.\\
+			La scelta di questo protocollo è stata obbligata, dato che è l'unico metodo d'autenticazione esposto dai CRM, tuttavia è un ottima opzione in quanto permette di rendere più sicuro il sistema, limitando la quantità di dati sensibili salvati all'interno dell'applicazione; inoltre sgrava il sistema dalle procedure di cambio password dato che sono a carico del \glo{provider} OAuth (SalesForce e Dynamics).
 			%TODO: da ricontrollare
 			\paragraph{Authentication Flow}
 			%In questo paragrafo viene descritta la 
 		\subsection{Protocolli di interrogazione}
 			Entrambi i CRM permettono l'interrogazione dei propri dati attraverso l'implementazione di protocolli \textit{REST-based}. Questi offrono anche la possibilità di mettere in relazioni dati differenti, in maniera simile al comportamento della clausola \glo{JOIN} per le \glo{query} \glo{SQL}, anche se con limitazioni.\\ 
-			La sfida che si è presentata in quest'ambito è stata quella di trovare il modo migliore di recuperare tutti i dati necessari limitando al più possibile il numero di richieste HTTP inviate ai CRM, in quanto ogni nuova richiesta effettuata aumenta il tempo per reindirizzare i dati recuperati ad ADProject.
+			La sfida che si è presentata in quest'ambito è stata quella di trovare il modo migliore di recuperare tutti i dati necessari limitando al più possibile il numero di richieste http inviate ai CRM, in quanto ogni nuova richiesta effettuata aumenta il tempo di re-indirizzamento dei dati recuperati verso ADProject.
+			SalesForce e Microsoft Dynamics sfruttano due protocolli molto diversi tra di loro:
 			%TODO: migliorare
 			\paragraph{SOQL}
-			o \textit{\textbf{S}alesforce \textbf{O}bject \textbf{Q}uery \textbf{L}anguage} permette recuperare i della propria organizzazione da SalesForce. SOQL è basato su richieste HTTP con una specifica sintassi simile alle \glo{query} SQL, ad uno specifico \glo{endpoint}. Il CRM, se la richiesta è corretta, risponde con i dati richiesti in formato \glo{JSON}.
+			o \textit{\textbf{S}alesforce \textbf{O}bject \textbf{Q}uery \textbf{L}anguage} permette recuperare i della propria organizzazione da SalesForce. SOQL è basato su richieste http ad uno specifico \glo{endpoint}, al cui url viene accodata una \glo{query} simile a quelle formulate nel linguaggio \glo{SQL}. In caso di richiesta corretta, Il CRM risponde con i dati richiesti in formato \glo{JSON}.
 			\paragraph{OData}
-			E' un protocollo aperto (Open Data Protocol) creato da Microsoft, che definisce un insieme di best-practices per costruire e utilizzare API RESTful.
-			Dynamics permette l'interrogazione dei propri dati attraverso semplici richieste HTTP basate su questo protocollo, dando in risposta i dati richiesti in formato \glo{JSON}.
+			E' un protocollo aperto (Open Data Protocol) creato da Microsoft, che definisce un insieme di best-practices per costruire e utilizzare API RESTful.\\
+			Dynamics permette l'interrogazione dei propri dati attraverso semplici richieste http basate su questo protocollo, dando in risposta i dati richiesti in formato \glo{JSON}.
 			
 			
 %**************************************************************
@@ -151,12 +154,12 @@ Con questo linguaggio è stato sviluppato ADProject, e sono tuttora in sviluppo 
 è un linguaggio di programmazione orientato agli oggetti sviluppato su .NET.
 La sintassi del linguaggio prende spunto da C++ , da Java
 e da Visual Basic.
-Questo linguaggio sta alla base di tutto lo sviluppo del microservice ADCrm, scelta che si potrebbe pensare poco sensata in quanto ADCrm deve integrarsi con un applicazione web interamente scritta con Visual Basic .NET, tuttavia ci sono delle forti motivazioni che hanno fatto propendere il team di sviluppo ad adottare questo linguaggio:
+Questo linguaggio sta alla base di tutto lo sviluppo del microservice ADCrm,soggetto di questa tesi. La scelta si potrebbe pensare poco sensata in quanto ADCrm deve integrarsi con un applicazione web interamente scritta con Visual Basic .NET, tuttavia ci sono delle forti motivazioni che hanno fatto propendere il team di sviluppo ad adottare questo linguaggio:
 \begin{itemize}
 	\item avendo scelto di adottare una struttura basata su microservices per lo sviluppo di ADCrm, ed essendo quindi un modulo fisicamente slegato da ADProject, è possibile scegliere un linguaggio di programmazione differente da VB.NET, pur rimanendo all'interno dei linguaggi offerti dal \glo{framework};
 	\item i programmatori assegnati allo sviluppo del progetto hanno maggiore familiarità con questo linguaggio;
 	\item C\# ha una vastissima comunity e mediamente è più facile reperire documentazione e teamplate rispetto a VB.NET;
-	\item è più probabile trovare futuri developer C\#, nel caso si debba incrementare o manutenere ADCrm.	
+	\item è più probabile trovare futuri developer C\#, in caso di incremento e manutenzione di ADCrm.	
 \end{itemize}
 
 \section{Ambiente di sviluppo}
@@ -202,7 +205,7 @@ In questo capitolo viene dettagliatamente descritta l'applicazione, presentando:
 
 \section{Design pattern}\label{design_pattern}
 \subsection{Microservices}
-Lo stile architetturale a microservizi è un approccio per sviluppare una singola applicazione come un insieme di piccoli servizi autonomi che interagiscono tra di loro, ognuno dei quali gestisce i suoi processi e comunica attraverso meccanismi snelli, spesso \glo{API} HTTP.
+Lo stile architetturale a microservizi è un approccio per sviluppare una singola applicazione come un insieme di piccoli servizi autonomi che interagiscono tra di loro, ognuno dei quali gestisce i suoi processi e comunica attraverso meccanismi snelli, spesso \glo{API} http.
 Questa architettura permette di velocizzare i tempi di sviluppo (essendo i servizi autonomi tra di loro essi possono raggiungere l'ambiente di produzione anche in momenti separati ed inoltre possono essere sviluppati da persone diverse), aumentare la resilienza del sistema (se uno dei servizi smette di funzionare essendo separato dagli altri, non pregiudica il funzionamento del sistema) ed è più facilmente scalabile rispetto ad un architettura monolitica.\\
 Si è deciso di sviluppare ADCrm seguendo quest'ottica, ottenendo in questo modo:
 \begin{itemize}
@@ -215,8 +218,8 @@ Si è deciso di sviluppare ADCrm seguendo quest'ottica, ottenendo in questo modo
 \subsection{RESTful}
 REST o \textit{\textbf{Re}presentational \textbf{S}tate \textbf{T}ransfer} è un architettura software che permette di rendere interoperabili sistemi di computer attraverso internet. 
 Un servizio web REST permette ai sistemi richiedenti, di accedere e manipolare una rappresentazione testuale delle sue risorse web attraverso un insieme predefinito di operazioni \glo{stateless}.
-Utilizzare i metodi definiti per il protocollo HTTP (GET, POST, PUT, DELETE) è il modo più comune accedere alle risorse web del sistema che le espone.
-Questa architettura attraverso l'utilizzo del protocollo \glo{stateless} e di insiemi di operazioni standard, mira a garantire ottime performance, essere affidabile e scalabile senza dover necessitare di modificare tutto il sistema nel caso di modifiche a qualche sua componente.
+Utilizzare i metodi definiti per il protocollo http (GET, POST, PUT, DELETE) è il modo più comune accedere alle risorse web del sistema che le espone.
+Questa architettura attraverso l'utilizzo del protocollo \glo{stateless} e di insiemi di operazioni standard, mira a garantire ottime performance, essere affidabile e scalabile senza dover necessitare di modificare tutto il sistema nel caso di cambiamenti a qualche sua componente.
 L'architettura REST viene utilizzata da \textbf{ADCrm\textbf{}} per recuperare ed esporre a sua volta le risorse presenti sul CRM.
 Concretamente sarà presente quindi un microservizio per ogni CRM che si vorrà collegare all'applicazione.
 
@@ -232,7 +235,7 @@ Il pattern fornisce un interfaccia per la creazione di un oggetto, ma lascia all
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{images/abstract_factory_structure}
-	\caption{Schema UML per il Factory design pattern}
+	\caption{Schema UML d'esempio per il Factory design pattern}
 	\label{fig:abstractfactorystructure}
 \end{figure}
 
