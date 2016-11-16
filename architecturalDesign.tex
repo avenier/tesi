@@ -512,7 +512,8 @@ Il database è utilizzato per salvare i dati necessari a collegarsi per effettua
 	\item \textbf{Name} : è il nome del software CRM (eg. SalesForce o Dynamics);
 	\item \textbf{Type} : è un campo intero per distinguere la tipologia di CRM (eg. SalesForce o Dynamics)  
 	\item \textbf{ResoureProvider} :
-	Ogni software CRM \textit{cloud-based} viene \glo{hostato} su un server, e per identificare a quale di questi ci si dovrà collegare bisogna anteporre a
+	Ogni software CRM \textit{cloud-based} viene \glo{hostato} su un server, e per identificare a quale di questi ci si dovrà collegare, bisogna inserire questo campo nel \glo{url} (eg. \url{https://emea.salesforce.com} dove il campo ResoureProvider corrisponde alla voce \textit{emea} )
+	%TODO: verificare il termine hostare
 	\item \textbf{ClientId} : è l’identificativo univoco (pubblico) del client ed è uno dei dati fondamentali che le applicazioni CRM devono fornire per permettere il collegamento di terze applicazioni-web tramite procedura OAuth;
 	\item \textbf{ClietSecret} :  è l’identificativo segreto del client ed è il secondo dato fondamentale che le applicazioni CRM devono fornire per permettere il collegamento di terze applicazioni-web tramite procedura OAuth;
 	\item \textbf{AuthToken} : è il campo contenente la risposta \glo{JSON} restituita da un CRM dopo la procedura di autenticazione OAuth; quindi non solo conterrà il \glo{token} da allegare per poter fare le richieste, ma anche il \glo{token} di refresh ed altri dati. Ne segue un esempio.
