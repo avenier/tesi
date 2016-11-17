@@ -77,20 +77,57 @@
 \paragraph*{CRM}
 sta per \textit{Customer relationship management} e rappresenta un approccio per gestire le interazioni di un azienda con i suoi clienti, attuali e potenziali.\\
 Attraverso questa metodologia si punta a raccogliere e analizzare i dati relativi ai cliente (email, sito aziendale, numeri telefonici ed in particolar modo lo storico delle offerte e degli ordini effettuati) con il fine di incrementare le vendite grazie alla fidelizzazione dello stesso mediante offerte e sconti mirati.\\
-Seguendo questi concetti sono nati, e si sono affermati, diversi software CRM e tra i maggiori esponenti possiamo trovare: \textbf{Salesforce} e \textbf{Microsoft Dynamics}.\\
-L'azienda \large{\myCompany{}}, basandosi sull'importanza e sulla diffusione dei suddetti software ha deciso di integrarli nella propria applicazione web di \textit{Project Management}.
+%Seguendo questi concetti sono nati, e si sono affermati, diversi software CRM e tra i maggiori esponenti possiamo trovare: \textbf{Salesforce} e \textbf{Microsoft Dynamics}.\\
+%L'azienda \large{\myCompany{}}, basandosi sull'importanza e sulla diffusione dei suddetti software ha deciso di integrarli nella propria applicazione web di \textit{Project Management}.
  
 \paragraph*{Project Management Software}
 La disciplina di \textit{Project Management} si occupa di sovraintendere la pianificazione, l'organizzazione e l'implementazione di un progetto. Dove con progetto si intende un insieme ordinato di compiti da svolgere, caratterizzati da: vincoli di tempo (date di inizio e fine), risorse utilizzabili e risultati attesi.\\
 Questa disciplina è fondamentale per controllare i costi, l'utilizzo delle risorse aziendali e per poter assicurare che il prodotto finale di questi processi soddisfi a pieno le esigenze del cliente.\\
-In questo contesto \large{\myCompany{}} ha deciso di sviluppare \textbf{ADProject}, una soluzione software pensata ad-hoc per i propri clienti con l'obbiettivo di facilitare e automatizzare il suddetto insieme di attività.
+%In questo contesto \large{\myCompany{}} ha deciso di sviluppare \textbf{ADProject}, una soluzione software pensata ad-hoc per i propri clienti con l'obbiettivo di facilitare e automatizzare il suddetto insieme di attività.
 
 %**************************************************************
 % Abstract
 %**************************************************************
 \chapter*{Abstract}\label{abstract}
-Questa tesi è basata sull'esperienza di stage che ho svolto presso l'azienda \textbf{Athesys s.r.l.}.
-L’azienda \textbf{Athesys s.r.l.} ha costruito un software gestionale di Project Management, chiamato ADProject, che va ad integrare e ampliare le funzionalità di Microsoft Project, fornendo ai clienti la possibilità di avere un programma customizzato in base alle loro esigenze. ADProject permette di avere una panoramica costantemente aggiornata dei progetti presenti e passati dell’azienda, consente di spostare e assegnare risorse su determinati task di progetto, rendicontare il lavoro svolto dal personale ed inoltre di tenere sotto controllo i costi e le scadenze. Il progetto di stage consta nel costruire un modulo software che vada ad ampliare le funzionalità fornite da ADProject attraverso l’integrazione con Salesforce. In questo modo con ADProject si riusciranno a fornire, non solo strumenti all’avanguardia per la gestione di progetto, ma si potranno avere dati costantemente aggiornati relativi ai clienti dell’azienda, facilitando la gestione con gli stessi e permettendo inoltre la loro fidelizzazione grazie a rapporti e trattamenti aziendali mirati.
+	Il presente documento descrive l'esperienza di stage, della durata di 320 ore, svolta presso l'azienda \textbf{Athesys s.r.l.} di Padova.\\
+	%TODO: DA INCREMENTARE CONTROLLANDO GLI ALTRI ABSTRACT
+	Segue una breve presentazione delle componenti coinvolte nella realizzazione del progetto di stage.
+	
+	\paragraph{ADProject}~\\
+		L’azienda Athesys s.r.l. ha sviluppato un applicazione web di \textit{Project Management}, chiamata ADProject, fornendo ai propri clienti la possibilità di avere un programma personalizzato ad-hoc in base alle loro esigenze.\\
+		Questo software permette di:
+		\begin{itemize}
+			\itemsep-1em 
+			\item censire le risorse aziendali (umane e materiali);
+			\item creare progetti;
+			\item suddividere il progetto in un insieme di attività da svolgere, pianificate al fine di portarlo a termine;
+			\item suddividere le attività in \glo{task} assegnandovi le risorse necessarie per il completamento degli stessi;
+			\item tenere sotto controllo le scadenze, ritardi e costi di progetto;
+			\item costruire diagrammi di Gantt;
+			\item approvare e rendicontare le ore impiegate dal personale nello svolgimento dei \glo{task};
+			\item importare i file di Microsoft Project, un importante software nell'ambito del Project Management.
+			%TODO: incrementare le funzionalità
+		\end{itemize} 
+	\par
+	
+	\paragraph{SalesForce e Microsoft Dynamics}~\\
+		La maggior parte delle aziende con un reparto commerciale ha la necessità di utilizzare software CRM per gestire al meglio le offerte, gli ordini e in generale i rapporti con i clienti. In questo ambito i due maggiori esponenti sono senza dubbio: \textit{SalesForce} e \textit{Microsoft Dynamics}, entrambe applicazioni \textit{cloud-based}.
+	\par
+	
+	I concetti di Project Management e CRM ad un primo sguardo possono sembrare non direttamente collegati, tuttavia sono anelli di una stessa catena ed operano su entità analoghe:
+	\begin{itemize}
+		\itemsep-1em 
+		\item prodotti da realizzare e vendere;
+		\item la capacità di produzione, dipendente dal tempo e dalle risorse aziendali, che ovviamente limita la disponibilità dei prodotti;	
+		\item il cliente al quale, che nel caso di un prodotto \glo{custom}, devono essere imputati i costi delle risorse utilizzate e di sviluppo;
+		\item alcune delle figure aziendali (mediamente il personale del reparto contabilità), sono già censite all'interno del software CRM e queste sono sicuramente annoverabili tra e risorse di un azienda.
+		%TODO:  da rivedere
+	\end{itemize}
+	
+	\paragraph{Scopo del progetto e nascita di ADCrm}~\\
+		Ci sono moltissimi dati censiti nei CRM che possono essere utilizzati dai software di Project Management grazie ai quali verrebbero ridotti di molto i tempi di \textit{data-entry} necessari per il corretto funzionamento di una nuova installazione di ADProject.\\
+		L'esigenza ultima di Athesys s.r.l. è quella di fornire un prodotto completo, competitivo che renda l'esperienza utente migliore possibile andando ad attingere a tutti i dati utili, nell'ambito del Project Management, che i software CRM possono offrire. Con questo fine, attraverso il progetto di stage, è stato realizzato \textbf{ADCrm}: un servizio web che si pone come ponte tra le due realtà, fornendo la possibilità ad ADProject di fruire dei dati presenti su SalesForce e Dynamics, rielaborandoli secondo le proprie esigenze, attraverso l'utilizzo di web API.
+	\par
 
 %**************************************************************
 % Table of contents, list of figures and list of tables
@@ -98,18 +135,17 @@ L’azienda \textbf{Athesys s.r.l.} ha costruito un software gestionale di Proje
 \tableofcontents
 \listoffigures
 \listoftables
-
 \mainmatter
 
 %**************************************************************
 % Introduzione
 %**************************************************************
 \chapter{Il Progetto}\label{introduzione}
-	\section{Scopo del progetto}
-	Il progetto, per quanto stabilito nel piano di lavoro dello stage, comporta l'integrazione di \textit{ADProject} con \textit{Salesforce} ma, dato che la parte principale dell'applicazione è stata finita con 2 settimane di anticipo, si è deciso di integrare nel servizio \textit{\textbf{ADCrm}} anche un secondo CRM: \textit{\textbf{Microsoft Dynamics}}.
-	Nei successivi capitoli verrà descritta l'integrazione con entrambi i sistemi e verranno spiegate le sfide riscontrate in questo progetto, tuttavia per evitare eccessive ripetizioni ci si concentrerà soprattutto sulle parti riguardanti \textit{\textbf{SalesForce}}.
+	\section{Piano di Lavoro}
+		Il progetto, per quanto stabilito nel piano di lavoro dello stage, comporta l'integrazione di \textit{Salesforce} con \textit{ADProject} ma, dato che la parte principale dell'applicazione è stata finita con 2 settimane di anticipo, si è deciso di integrare nel servizio \textit{\textbf{ADCrm}} anche un secondo CRM: \textit{\textbf{Microsoft Dynamics}}.
+		Nei successivi capitoli verrà descritta l'integrazione con entrambi i sistemi e verranno spiegate le sfide riscontrate in questo progetto, tuttavia per evitare eccessive ripetizioni ci si concentrerà soprattutto sulle parti riguardanti \textit{\textbf{SalesForce}}.
 	\section{Studio delle applicazioni CRM}
-		\subsection{Autenticazione}
+		\subsection{Procedure di Autenticazione}
 			Per avere l'accesso ai dati l'applicazione deve potersi autenticare presso i server di SalesForce e Dynamics ed entrambe le applicazioie permettono l'autenticazione attraverso protocollo OAuth2.0.
 			\paragraph{OAuth2.0}
 			E' un protocollo aperto che permettere, in maniera semplice e standard, di autenticare e autorizzare applicazioni web, mobile e desktop ad accedere ai dati che si vogliono esporre. Viene comunemente usato come un modo per autorizzare siti web o applicazioni ad accedere ad altri siti senza fornire direttamente le credenziali dell'utente.\\
@@ -117,7 +153,7 @@ L’azienda \textbf{Athesys s.r.l.} ha costruito un software gestionale di Proje
 			%TODO: da ricontrollare
 			\paragraph{Authentication Flow}
 			%In questo paragrafo viene descritta la 
-		\subsection{Protocolli di interrogazione}
+		\subsection{API e Protocolli di interrogazione}
 			Entrambi i CRM permettono l'interrogazione dei propri dati attraverso l'implementazione di protocolli \textit{REST-based}. Questi offrono anche la possibilità di mettere in relazioni dati differenti, in maniera simile al comportamento della clausola \glo{JOIN} per le \glo{query} \glo{SQL}, anche se con limitazioni.\\ 
 			La sfida che si è presentata in quest'ambito è stata quella di trovare il modo migliore di recuperare tutti i dati necessari limitando al più possibile il numero di richieste http inviate ai CRM, in quanto ogni nuova richiesta effettuata aumenta il tempo di re-indirizzamento dei dati recuperati verso ADProject.
 			SalesForce e Microsoft Dynamics sfruttano due protocolli molto diversi tra di loro:
@@ -156,6 +192,7 @@ La sintassi del linguaggio prende spunto da C++ , da Java
 e da Visual Basic.
 Questo linguaggio sta alla base di tutto lo sviluppo del microservice ADCrm,soggetto di questa tesi. La scelta si potrebbe pensare poco sensata in quanto ADCrm deve integrarsi con un applicazione web interamente scritta con Visual Basic .NET, tuttavia ci sono delle forti motivazioni che hanno fatto propendere il team di sviluppo ad adottare questo linguaggio:
 \begin{itemize}
+	\itemsep-1em 
 	\item avendo scelto di adottare una struttura basata su microservices per lo sviluppo di ADCrm, ed essendo quindi un modulo fisicamente slegato da ADProject, è possibile scegliere un linguaggio di programmazione differente da VB.NET, pur rimanendo all'interno dei linguaggi offerti dal \glo{framework};
 	\item i programmatori assegnati allo sviluppo del progetto hanno maggiore familiarità con questo linguaggio;
 	\item C\# ha una vastissima comunity e mediamente è più facile reperire documentazione e teamplate rispetto a VB.NET;
@@ -181,6 +218,7 @@ I casi d'uso sono creati secondo lo standard UML 2.4 e sono identificati dalla s
 \end{center}
 dove il \textbf{codice} è un numero progressivo identificativo di ogni requisito, gerarchico nel  caso di sotto-casi d'uso tramite la notazione \textit{CodiceUCPadre.CodiceSottoUC}. Per ogni caso d'uso deve inoltre essere indicato:
 \begin{itemize}
+	\itemsep0em 
 	\item \textbf{Titolo:} breve ma non ambiguo
 	\item \textbf{Attori:} principali e secondari coinvolti
 	\item \textbf{Descrizione:} una descrizione sintetica del caso d'uso
@@ -247,6 +285,7 @@ Lo stile architetturale a microservizi è un approccio per sviluppare una singol
 Questa architettura permette di velocizzare i tempi di sviluppo (essendo i servizi autonomi tra di loro essi possono raggiungere l'ambiente di produzione anche in momenti separati ed inoltre possono essere sviluppati da persone diverse), aumentare la resilienza del sistema (se uno dei servizi smette di funzionare essendo separato dagli altri, non pregiudica il funzionamento del sistema) ed è più facilmente scalabile rispetto ad un architettura monolitica.\\
 Si è deciso di sviluppare ADCrm seguendo quest'ottica, ottenendo in questo modo:
 \begin{itemize}
+	\itemsep-1em 
 	\item una netta separazione dei compiti delle varie componenti del sistema;
 	\item la possibilità di collegarsi a nuovi CRM senza dover modificare in alcun modo ADProject, in quanto esso comunica con il servizio attraverso un interfaccia comune;
 	\item un aumento  della resilienza e la scalabilità dell'applicazione.
