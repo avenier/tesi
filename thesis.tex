@@ -97,7 +97,7 @@ Questa disciplina è fondamentale per controllare i costi, l'utilizzo delle riso
 		L’azienda Athesys s.r.l. ha sviluppato un'applicazione web di \textit{Project Management}, chiamata ADProject, fornendo ai propri clienti la possibilità di avere un programma personalizzato in base alle loro esigenze.\\
 		Questo software permette di:
 		\begin{itemize}
-			\itemsep-1em 
+			\itemsep-0.5em 
 			\item censire le risorse aziendali (umane e materiali);
 			\item creare progetti;
 			\item suddividere il progetto in un insieme di attività da svolgere, pianificate al fine di portarlo a termine;
@@ -194,7 +194,7 @@ La sintassi del linguaggio prende spunto da C++ , da Java
 e da Visual Basic.
 Questo linguaggio sta alla base di tutto lo sviluppo del microservice ADCrm,soggetto di questa tesi. La scelta si potrebbe pensare poco sensata in quanto ADCrm deve integrarsi con un applicazione web interamente scritta con Visual Basic .NET, tuttavia ci sono delle forti motivazioni che hanno fatto propendere il team di sviluppo ad adottare questo linguaggio:
 \begin{itemize}
-	\itemsep-1em 
+	\itemsep-0.5em
 	\item avendo scelto di adottare una struttura basata su microservices per lo sviluppo di ADCrm, ed essendo quindi un modulo fisicamente slegato da ADProject, è possibile scegliere un linguaggio di programmazione differente da VB.NET, pur rimanendo all'interno dei linguaggi offerti dal \glo{framework};
 	\item i programmatori assegnati allo sviluppo del progetto hanno maggiore familiarità con questo linguaggio;
 	\item C\# ha una vastissima comunity e mediamente è più facile reperire documentazione e teamplate rispetto a VB.NET;
@@ -220,7 +220,7 @@ I casi d'uso sono creati secondo lo standard UML 2.4 e sono identificati dalla s
 \end{center}
 dove il \textbf{codice} è un numero progressivo identificativo di ogni requisito, gerarchico nel  caso di sotto-casi d'uso tramite la notazione \textit{CodiceUCPadre.CodiceSottoUC}. Per ogni caso d'uso deve inoltre essere indicato:
 \begin{itemize}
-	\itemsep0em 
+	\itemsep-0.5em
 	\item \textbf{Titolo:} breve ma non ambiguo
 	\item \textbf{Attori:} principali e secondari coinvolti
 	\item \textbf{Descrizione:} una descrizione sintetica del caso d'uso
@@ -274,7 +274,7 @@ Ogni requisito dovrà essere classificato per tipo e importanza, utilizzando la 
 \chapter{Progettazione}\label{progettazione}
 In questo capitolo viene dettagliatamente descritta l'applicazione, presentando: 
 \begin{enumerate}
-	\itemsep-1em 
+	\itemsep-0.5em
 	\item I \glo{Design Pattern} utilizzati, contestualizzando il loro utilizzo;
 	\item La descrizione dell'architettura ad alto livello del sistema;
 	\item Le \glo{API} REST esposte per permettere al client di comunicare con l'applicazione;
@@ -287,7 +287,7 @@ Lo stile architetturale a microservizi è un approccio per sviluppare una singol
 Questa architettura permette di velocizzare i tempi di sviluppo (essendo i servizi autonomi tra di loro essi possono raggiungere l'ambiente di produzione anche in momenti separati ed inoltre possono essere sviluppati da persone diverse), aumentare la resilienza del sistema (se uno dei servizi smette di funzionare essendo separato dagli altri, non pregiudica il funzionamento del sistema) ed è più facilmente scalabile rispetto ad un architettura monolitica.\\
 Si è deciso di sviluppare ADCrm seguendo quest'ottica, ottenendo in questo modo:
 \begin{itemize}
-	\itemsep-1em 
+	\itemsep-0.5em
 	\item una netta separazione dei compiti delle varie componenti del sistema;
 	\item la possibilità di collegarsi a nuovi CRM senza dover modificare in alcun modo ADProject, in quanto esso comunica con il servizio attraverso un interfaccia comune;
 	\item un aumento  della resilienza e la scalabilità dell'applicazione.
