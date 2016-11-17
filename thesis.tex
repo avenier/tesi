@@ -75,8 +75,8 @@
 %**************************************************************
 \chapter*{Keywords}\label{keywords}
 \paragraph*{CRM}
-sta per \textit{Customer relationship management} e rappresenta un approccio per gestire le interazioni di un azienda con i suoi clienti, attuali e potenziali.\\
-Attraverso questa metodologia si punta a raccogliere e analizzare i dati relativi ai cliente (email, sito aziendale, numeri telefonici ed in particolar modo lo storico delle offerte e degli ordini effettuati) con il fine di incrementare le vendite grazie alla fidelizzazione dello stesso mediante offerte e sconti mirati.\\
+sta per \textit{Customer relationship management} e rappresenta un approccio per gestire le interazioni di un'azienda con i suoi clienti, attuali e potenziali.\\
+Attraverso questa metodologia si punta a raccogliere ed analizzare i dati relativi ai clienti (email, sito aziendale, numeri telefonici ed in particolar modo lo storico delle offerte e degli ordini effettuati) con il fine di incrementare le vendite grazie alla fidelizzazione dello stesso mediante offerte e sconti mirati.\\
 %Seguendo questi concetti sono nati, e si sono affermati, diversi software CRM e tra i maggiori esponenti possiamo trovare: \textbf{Salesforce} e \textbf{Microsoft Dynamics}.\\
 %L'azienda \large{\myCompany{}}, basandosi sull'importanza e sulla diffusione dei suddetti software ha deciso di integrarli nella propria applicazione web di \textit{Project Management}.
  
@@ -91,19 +91,19 @@ Questa disciplina è fondamentale per controllare i costi, l'utilizzo delle riso
 \chapter*{Abstract}\label{abstract}
 	Il presente documento descrive l'esperienza di stage, della durata di 320 ore, svolta presso l'azienda \textbf{Athesys s.r.l.} di Padova.\\
 	%TODO: DA INCREMENTARE CONTROLLANDO GLI ALTRI ABSTRACT
-	Segue una breve presentazione delle componenti coinvolte nella realizzazione del progetto di stage.
+	Di seguito una breve presentazione delle componenti coinvolte nella realizzazione del progetto di stage.
 	
 	\paragraph{ADProject}~\\
-		L’azienda Athesys s.r.l. ha sviluppato un applicazione web di \textit{Project Management}, chiamata ADProject, fornendo ai propri clienti la possibilità di avere un programma personalizzato ad-hoc in base alle loro esigenze.\\
+		L’azienda Athesys s.r.l. ha sviluppato un'applicazione web di \textit{Project Management}, chiamata ADProject, fornendo ai propri clienti la possibilità di avere un programma personalizzato in base alle loro esigenze.\\
 		Questo software permette di:
 		\begin{itemize}
 			\itemsep-1em 
 			\item censire le risorse aziendali (umane e materiali);
 			\item creare progetti;
 			\item suddividere il progetto in un insieme di attività da svolgere, pianificate al fine di portarlo a termine;
-			\item suddividere le attività in \glo{task} assegnandovi le risorse necessarie per il completamento degli stessi;
+			\item suddividere le attività in \glo{task}, assegnando le risorse necessarie per il completamento degli stessi;
 			\item tenere sotto controllo le scadenze, ritardi e costi di progetto;
-			\item costruire diagrammi di Gantt;
+			\item costruire diagrammi di \glo{Gantt};
 			\item approvare e rendicontare le ore impiegate dal personale nello svolgimento dei \glo{task};
 			\item importare i file di Microsoft Project, un importante software nell'ambito del Project Management.
 			%TODO: incrementare le funzionalità
@@ -113,20 +113,22 @@ Questa disciplina è fondamentale per controllare i costi, l'utilizzo delle riso
 	\paragraph{SalesForce e Microsoft Dynamics}~\\
 		La maggior parte delle aziende con un reparto commerciale ha la necessità di utilizzare software CRM per gestire al meglio le offerte, gli ordini e in generale i rapporti con i clienti. In questo ambito i due maggiori esponenti sono senza dubbio: \textit{SalesForce} e \textit{Microsoft Dynamics}, entrambe applicazioni \textit{cloud-based}.
 	\par
-	
-	I concetti di Project Management e CRM ad un primo sguardo possono sembrare non direttamente collegati, tuttavia sono anelli di una stessa catena ed operano su entità analoghe:
-	\begin{itemize}
-		\itemsep-1em 
-		\item prodotti da realizzare e vendere;
-		\item la capacità di produzione, dipendente dal tempo e dalle risorse aziendali, che ovviamente limita la disponibilità dei prodotti;	
-		\item il cliente al quale, che nel caso di un prodotto \glo{custom}, devono essere imputati i costi delle risorse utilizzate e di sviluppo;
-		\item alcune delle figure aziendali (mediamente il personale del reparto contabilità), sono già censite all'interno del software CRM e queste sono sicuramente annoverabili tra e risorse di un azienda.
-		%TODO:  da rivedere
-	\end{itemize}
+
+	\paragraph{Elementi in comune tra Project Management e CRM}~\\
+		I concetti di Project Management e CRM ad un primo sguardo possono sembrare non direttamente collegati, tuttavia sono anelli di una stessa catena ed operano su entità analoghe:
+		\begin{itemize}
+			\itemsep-0.5em 
+			\item i prodotti da realizzare e vendere;
+			\item la capacità di produzione, dipendente dal tempo e dalle risorse aziendali, che ovviamente limita la disponibilità dei prodotti;	
+			\item il cliente al quale devono essere imputati i costi delle risorse utilizzate e di sviluppo per la produzione di soluzioni software \glo{custom};
+			\item alcune figure aziendali (mediamente il personale del reparto contabilità) già censite all'interno del software CRM, annoverabili tra le risorse di un'azienda.
+			%TODO:  da rivedere
+		\end{itemize}
+	\par
 	
 	\paragraph{Scopo del progetto e nascita di ADCrm}~\\
-		Ci sono moltissimi dati censiti nei CRM che possono essere utilizzati dai software di Project Management grazie ai quali verrebbero ridotti di molto i tempi di \textit{data-entry} necessari per il corretto funzionamento di una nuova installazione di ADProject.\\
-		L'esigenza ultima di Athesys s.r.l. è quella di fornire un prodotto completo, competitivo che renda l'esperienza utente migliore possibile andando ad attingere a tutti i dati utili, nell'ambito del Project Management, che i software CRM possono offrire. Con questo fine, attraverso il progetto di stage, è stato realizzato \textbf{ADCrm}: un servizio web che si pone come ponte tra le due realtà, fornendo la possibilità ad ADProject di fruire dei dati presenti su SalesForce e Dynamics, rielaborandoli secondo le proprie esigenze, attraverso l'utilizzo di web API.
+		Ci sono moltissimi dati censiti nei CRM che possono essere utilizzati dai software di Project Management, grazie ai quali verrebbero ridotti di molto i tempi di \textit{data-entry}, necessari per il corretto funzionamento di una nuova installazione di ADProject.\\
+		L'esigenza ultima di Athesys s.r.l. è quella di fornire un prodotto completo e competitivo, andando ad attingere a tutti i dati utili che i software CRM possono offrire. Con questo fine, attraverso il progetto di stage, è stato realizzato \textbf{ADCrm}: un servizio web che si pone come ponte tra le due realtà, fornendo la possibilità ad ADProject di fruire dei dati presenti su SalesForce e Dynamics, rielaborandoli secondo le proprie esigenze, attraverso l'utilizzo di web API.
 	\par
 
 %**************************************************************
