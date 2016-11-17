@@ -17,31 +17,69 @@
 	\hline
 	& R-3F2.1 & Funzionale
 	
-	Obbligatorio & L'applicazione ADCrm deve poter interrogare Salesforce per otterere tutti i dati relativi alle Famiglie di Prodotti, recuperando: il campo identificativo della famiglia di prodotti, una descrizione della stessa ed un eventuale id del Parent\tabularnewline
+	Obbligatorio & L'applicazione ADCrm deve poter interrogare Salesforce per ottenere tutti i dati relativi alle Famiglie di Prodotti, recuperando: il campo identificativo della famiglia di prodotti, una descrizione della stessa ed un eventuale id del Parent\tabularnewline
 	\hline
 	 & R-3F2.2 & Funzionale
 	
-	Obbligatorio & L'applicazione ADCrm deve poter interrogare Salesforce per otterere tutti i dati relativi agli Account delle aziende clienti recuperando: il campo identificativo, il nome e tutti i dati informativi riguardanti l'azienda (email,telefono,sito web,città,...)\tabularnewline
+	Obbligatorio & L'applicazione ADCrm deve poter interrogare Salesforce per ottenere tutti i dati relativi agli Account delle aziende clienti recuperando: il campo identificativo, il nome e tutti i dati informativi riguardanti l'azienda (email,telefono,sito web,città,...)\tabularnewline
 	\hline
 	& R-3F2.3 & Funzionale
 	
-	Obbligatorio & L'applicazione ADCrm deve poter interrogare Salesforce per otterere tutti i dati relativi ai contatti di un azienda recuperando: il campo identificativo, il nome, il cognome e tutti i dati informativi riguardanti il contatto (email, telefono, fax, ...)\tabularnewline
+	Obbligatorio & L'applicazione ADCrm deve poter interrogare Salesforce per ottenere tutti i dati relativi ai contatti di un azienda recuperando: il campo identificativo, il nome, il cognome e tutti i dati informativi riguardanti il contatto (email, telefono, fax, ...)\tabularnewline
 	\hline
 	& R-3F2.4 & Funzionale
 	
-	Obbligatorio & L'applicazione ADCrm deve poter interrogare Salesforce per otterere tutti i dati relativi alle offerte commerciali legate ad un azienda recuperando: il campo identificativo, l'identificativo aziendale, il prezzo, lo sconto e se l'offerta ha ordini associati \tabularnewline
+	Obbligatorio & L'applicazione ADCrm deve poter interrogare Salesforce per ottenere tutti i dati relativi alle offerte commerciali legate ad un azienda recuperando: il campo identificativo, l'identificativo aziendale, il prezzo, lo sconto e se l'offerta ha ordini associati \tabularnewline
 	\hline
 	& R-3F2.5 & Funzionale
 	
-	Obbligatorio & L'applicazione ADCrm deve poter interrogare Salesforce per otterere tutti i dati relativi ai prodotti legati ad un offerta commerciale recuperando: il campo identificativo, il nome, la famiglia di prodotti a cui appartiene, l'identificativo dell'offerta, il prezzo, la quantità\tabularnewline
+	Obbligatorio & L'applicazione ADCrm deve poter interrogare Salesforce per ottenere tutti i dati relativi ai prodotti legati ad un offerta commerciale recuperando: il campo identificativo, il nome, la famiglia di prodotti a cui appartiene, l'identificativo dell'offerta, il prezzo, la quantità\tabularnewline
 	\hline
 	& R-3F2.6 & Funzionale
 	
-	Obbligatorio & L'applicazione ADCrm deve poter interrogare Salesforce per otterere tutti i dati relativi agli utenti dell'azienda che utilizzano il CRM recuperando: il campo identificativo, il nome, il cognome e la email\tabularnewline
+	Obbligatorio & L'applicazione ADCrm deve poter interrogare Salesforce per ottenere tutti i dati relativi agli utenti dell'azienda che utilizzano il CRM recuperando: il campo identificativo, il nome, il cognome e la email\tabularnewline
 	\hline
 	& R-3F3 & Funzionale
 	
-	Obbligatorio & L'applicazione ADCrm deve esporre delle API REST per poter essere interrogata da ADProject con il fine di fornire i dati recuperati da Salesforce\tabularnewline
+	Obbligatorio & L'applicazione ADCrm deve esporre delle API REST per poter essere interrogata da ADProject con il fine di fornire i dati recuperati\tabularnewline
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\hline
+	& \hypertarget{R-2F4}{R-2F4} & Funzionale
+	
+	Opzionale & E' necessario avere un account con permessi amministrativi per Microsoft Dynamics\tabularnewline
+	\hline
+	& R-2F4.1 & Funzionale
+	
+	Opzionale & E' necessario che Microsoft Dynamics sia configurato per esporre le API necessarie a recuperare i dati desiderati\tabularnewline
+	\hline
+	& \hypertarget{R-2F5}{R-2F5} & Funzionale
+	
+	Opzionale & L'applicazione ADCrm deve poter interrogare Microsoft Dynamics attraverso le API RESTful che vengono esposte
+	\tabularnewline
+	\hline
+	& R-2F5.1 & Funzionale
+	
+	Opzionale & L'applicazione ADCrm deve poter interrogare Microsoft Dynamics per ottenere tutti i dati relativi alle Famiglie di Prodotti, recuperando: il campo identificativo della famiglia di prodotti, una descrizione della stessa ed un eventuale id del Parent\tabularnewline
+	\hline
+	& R-2F5.2 & Funzionale
+	
+	Opzionale & L'applicazione ADCrm deve poter interrogare Microsoft Dynamics per ottenere tutti i dati relativi agli Account delle aziende clienti recuperando: il campo identificativo, il nome e tutti i dati informativi riguardanti l'azienda (email,telefono,sito web,città,...)\tabularnewline
+	\hline
+	& R-2F5.3 & Funzionale
+	
+	Opzionale & L'applicazione ADCrm deve poter interrogare Microsoft Dynamics per ottenere tutti i dati relativi ai contatti di un azienda recuperando: il campo identificativo, il nome, il cognome e tutti i dati informativi riguardanti il contatto (email, telefono, fax, ...)\tabularnewline
+	\hline
+	& R-2F5.4 & Funzionale
+	
+	Opzionale & L'applicazione ADCrm deve poter interrogare Microsoft Dynamics per ottenere tutti i dati relativi alle offerte commerciali legate ad un azienda recuperando: il campo identificativo, l'identificativo aziendale, il prezzo, lo sconto e se l'offerta ha ordini associati \tabularnewline
+	\hline
+	& R-2F5.5 & Funzionale
+	
+	Opzionale & L'applicazione ADCrm deve poter interrogare Microsoft Dynamics per ottenere tutti i dati relativi ai prodotti legati ad un offerta commerciale recuperando: il campo identificativo, il nome, la famiglia di prodotti a cui appartiene, l'identificativo dell'offerta, il prezzo, la quantità\tabularnewline
+	\hline
+	& R-2F5.6 & Funzionale
+	
+	Opzionale & L'applicazione ADCrm deve poter interrogare Microsoft Dynamics per ottenere tutti i dati relativi agli utenti dell'azienda che utilizzano il CRM recuperando: il campo identificativo, il nome, il cognome e la email\tabularnewline
 	\hline
 	\caption{Tabella requisiti} 
 	\tabularnewline

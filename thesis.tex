@@ -266,7 +266,7 @@ Il DTO (\textit{Data Transfer Object}) e DAO (\textit{Data Access Object}) sono 
 La loro funzione principale è quella di disaccoppiare il \textit{data layer} (la parte in cui risiedono i dati) dalla parte di \textit{business logic} (ciò che rappresenta la logica applicativa) dell'applicazione, aumentando cosi la separazione tra le varie componenti e quindi la loro modularità e manutenibilità.\\
 Le classi di oggetti DTO al loro interno avranno solamente campi dati accedibili attraverso metodi \textit{getter} e \textit{setter}, mentre gli oggetti DAO implementeranno i metodi, utilizzati dalla \textit{business logic}, per accedere ai dati dell'applicazione utilizzando quindi i sopracitati \textit{Data Transfer Object}.
 
-\subsection{Factory Method}
+\subsection{Factory Method} \label{factory}
 Questo design pattern creazionale, nell'ambito della programmazione orientata agli oggetti, permette di affrontare il problema della creazione di oggetti senza specificarne a priori l'esatta classe di appartenenza.
 Il pattern fornisce un interfaccia per la creazione di un oggetto, ma lascia alle classi che la implementano la decisione di quale oggetto istanziare.\\
 

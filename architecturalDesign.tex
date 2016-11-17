@@ -81,8 +81,6 @@ Nella figura \ref{fig:modulesdiagram} viene illustrato il diagramma \glo{UML} de
 	\label{fig:modulesdiagram}
 \end{figure}
 
-
-
 \subsection{Athesys.ADCrm.API}
 \begin{figure}[H]
 	\centering
@@ -111,7 +109,7 @@ Questo \glo{package} contiene la classe che si occupa di definire le \glo{route}
 \paragraph{Descrizione:} Questo \glo{package} contiene tutte le classi controller contenenti i metodi necessari a rispondere alle richieste http effettuate alle \glo{route}.
 
 
-\subsubsection{AccountsController (class)}
+\subsubsection{AccountsController (class)} \label{accountsController}
 \paragraph{Descrizione:}
 Classe che serve per gestire le chiamate http richiedenti dati relativi all'entità Account. Utilizzando la classe Athesys.ADCrm.Model::Crm (che implementa il design pattern Factory) vengono creati oggetti sui quali si possono invocare metodi per interrogare le API di uno specifico CRM.
 I dati recuperati vengono incapsulati in una risposta http e ritornati ad ADProject.
@@ -388,7 +386,7 @@ Classe che rappresenta un oggetto DTO per modellare l'entità \textit{Proposal}.
 In essa sono presenti i metodi \glo{getter} e \glo{setter} e tutti i campi dati (privati) contenenti gli elementi che caratterizzano un offerta commerciale, quali: l'identificativo univoco della stessa, il cliente a cui è stata proposta, il costo totale, un eventuale sconto e molti altri dati.
 Gli oggetti di questa classe, contenente i dati provenienti dal CRM, verranno incapsulati all'interno della risposta http restituita ad ADProject.
 
-\subsubsection{CrmResponseData (class)}
+\subsubsection{CrmResponseData (class)} \label{crmResponseDataClass}
 \paragraph{Descrizione:}
 Classe che rappresenta un oggetto DTO per modellare le risposte http provenienti dal CRM.
 Questa classe ha solamente due campi dati (ed i relativi \glo{accessors}):
@@ -405,7 +403,7 @@ Questa classe ha solamente due campi dati (ed i relativi \glo{accessors}):
 	In questo campo dati viene salvato il \glo{Json} della risposta mandata dal CRM.
 \end{itemize}
 
-\subsubsection{ResponseContainerData (class)}
+\subsubsection{ResponseContainerData (class)} \label{responseContainerDataClass}
 \paragraph{Descrizione:}
 Classe che rappresenta un oggetto DTO per modellare le risposte http da inviare a ADProject.
 Questa classe ha tre campi dati (ed i relativi \glo{accessors}):
@@ -435,7 +433,7 @@ Questa classe ha tre campi dati (ed i relativi \glo{accessors}):
 \subsection{Athesys.ADCrm.Model}
 Questo \glo{package} contiene tutte le classi concrete in comune tra i CRM che si vogliono collegare all'applicazione.
 La classe principale del \glo{package} è Athesys.ADCrm.Model::Crm.
-\subsubsection{Crm (class)}
+\subsubsection{Crm (class)} \label{crmClass}
 \paragraph{Descrizione:}
 Questa classe implementa il design pattern Factory ed è usata dai controllers per produrre oggetti concreti di un particolare CRM (su cui invocare i metodi per recuperare i dati dallo stesso) senza conoscere a priori il tipo di CRM richiesto (Dynamics o SalesForce).
 
@@ -488,7 +486,7 @@ Di seguito vengono riportati alcuni metodi significativi della classe per esempl
 Questo \glo{package} contiene tutte le classi che implementano le interfacce definite in Athesys.ADCrm.Common e, sviluppando  restituiscono ai controllers di Athesys.ADCrm.API i vari oggetti DTO delle entità del \glo{package} Athesys.ADCrm.Common.Data.
 Di seguito vengono descritte brevemente le uniche tre classi che hanno un comportamento diverso da quanto sopracitato.
 
-\subsubsection{ResponceMapper (class)}
+\subsubsection{ResponceMapper (class)}\label{responceMapperClass}
 \paragraph{Descrizione:}
 Questa classe ha la funzione di mappare le risposte provenienti dal CRM modificandole in base alle esigenze di ADProject.
 Per esempio se dal CRM arrivasse una risposta d'errore con codice di stato http 500 (quindi un errore interno del server), non si dovrà restituire ad ADProject una risposta lo stesso codice di stato, in quanto verrebbe interpretato come un errore del servizio e non del CRM. C'è quindi l'esigenza di modificare ad-hoc le risposte per renderle fruibili dal richiedente delle stesse.
@@ -534,6 +532,7 @@ Il database è utilizzato per salvare i dati necessari a collegarsi per effettua
 
 
 \subsection{Diagramma di sequenza}
+In questa sezione viene riportato un diagramma di sequenza  al fine di facilitare la comprensione della catena delle chiamate che viene effettuata per recuperare tutti i dati dei clienti dell'azienda dall'applicazione CRM durante il lavoro in fase di codifica.
 	\begin{figure}[H]
 	\centering
 	\rotatebox{90}{\includegraphics[width=\textheight,height=1.08\linewidth]{images/sdProposals}}
@@ -541,3 +540,15 @@ Il database è utilizzato per salvare i dati necessari a collegarsi per effettua
 	\caption{Diagramma di sequenza per una chiamata per recuperare le proposte commerciali da un CRM }
 	\label{fig:sdProposals}
 \end{figure}
+
+\begin{itemize}
+	\item \textbf{AccountsController:} è l'oggetto che si occupa di invocare il metodo appropriato ogni volta che viene instradata una chiamata all'\glo{endpoint} "\textit{accounts}" (sez. \ref{accountsController});  
+	\item \textbf{Crm:} è l'oggetto che implementa il design pattern \textit{Factory} (sez. \ref{factory}) costruendo oggetti per recuperare i dati da Salesforce o Dynamics (sez. \ref{crmClass});
+	\item \textbf{Account:} è l'oggetto attraverso il quale vengono recuperati tutti i dati richiesti, riguardanti le aziende clienti, dal CRM;
+	\item \textbf{CrmResponseData:} è un oggetto DTO nel quale viene incapsulata la risposta \glo{JSON} restituita dal CRM (sez. \ref{crmResponseDataClass});
+	\item \textbf{AccountData:} è un oggetto DTO che rappresenta l'account di un azienda cliente;
+	\item \textbf{ResponseContainerData:}
+	è un oggetto DTO nel quale viene incapsulata la risposta \glo{JSON} che si restituirà all'applicazione chiamante, ADProject (sez. \ref{responseContainerDataClass});
+	\item \textbf{ResponseMapper:} è la classe di utilità che si occupa di rimappare i codici http delle risposte provenienti dal CRM e di, in caso di errore modificare il JSON di risposta (sez. \ref{responceMapperClass}).
+
+\end{itemize}
