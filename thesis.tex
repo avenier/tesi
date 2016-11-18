@@ -144,26 +144,26 @@ Questa disciplina è fondamentale per controllare i costi, l'utilizzo delle riso
 %**************************************************************
 \chapter{Il Progetto}\label{introduzione}
 	\section{Piano di Lavoro}
-		Il progetto, per quanto stabilito nel piano di lavoro dello stage, comporta l'integrazione di \textit{Salesforce} con \textit{ADProject} ma, dato che la parte principale dell'applicazione è stata finita con 2 settimane di anticipo, si è deciso di integrare nel servizio \textit{\textbf{ADCrm}} anche un secondo CRM: \textit{\textbf{Microsoft Dynamics}}.
-		Nei successivi capitoli verrà descritta l'integrazione con entrambi i sistemi e verranno spiegate le sfide riscontrate in questo progetto, tuttavia per evitare eccessive ripetizioni ci si concentrerà soprattutto sulle parti riguardanti \textit{\textbf{SalesForce}}.
+		Il progetto, per quanto stabilito nel piano di lavoro dello stage, comporta l'integrazione di \textit{Salesforce} con \textit{ADProject} ma, dato che la parte principale dell'applicazione è stata ultimata con due settimane di anticipo rispetto al previsto, si è deciso di integrare nel servizio \textit{\textbf{ADCrm}} anche un secondo CRM: \textit{\textbf{Microsoft Dynamics}}.
+		Nei successivi capitoli verrà descritta l'integrazione con entrambi i sistemi e verranno spiegate le sfide riscontrate in questo progetto, tuttavia per evitare eccessive ripetizioni verrà posta particolare attenzione alle parti riguardanti \textit{\textbf{SalesForce}}.
 	\section{Studio delle applicazioni CRM}
 		La prima parte dello stage consisteva nello studio di SalesForce per  acquisire dimestichezza con lo stesso, con i principi che stanno dietro ai software CRM ma soprattutto per identificare tutti i dati potenzialmente utili per l'integrazione con ADProject.\\
 		In questa fase è stato analizzato il flusso di eventi necessari per il corretto utilizzo di Salesforce e le entità collegate.		
 		\begin{enumerate}
-			\item viene creata un entità \textbf{Account} per un'azienda cliente o che potrebbe potenzialmente diventarlo, nella quale vengono censiti tutti i dati che si hanno a disposizione (nome, sito web, email, ricavi annuali, numero di dipendenti, area commerciale,...);
-			\item vengono create una o più entità \textbf{contatto} associate agl'\textbf{Account}, queste contengono tutti i dati relativi alle persone dell'azienda cliente alle quali proporre offerte commerciali.
-			\item ogni \textbf{Prodotto} che si intende vendere deve essere inserito nel CRM  con un apposita descrizione ed un prezzo di listino associato;
-			\item nel momento in cui si vuole proporre un offerta commerciale ad un cliente, deve essere creata un entità \textbf{Offerta} alla quale associare una serie di prodotti (scontabili rispetto al prezzo di listino);
+			\item viene creata un'entità \textbf{Account} per un'azienda cliente o che potrebbe potenzialmente diventarlo, nella quale vengono censiti tutti i dati che si hanno a disposizione (nome, sito web, email, ricavi annuali, numero di dipendenti, area commerciale,...);
+			\item vengono create una o più entità \textbf{Contatto} associate ad ogni \textbf{Account}, queste contengono tutti i dati relativi alle persone dell'azienda cliente, alle quali proporre offerte commerciali;
+			\item ogni \textbf{Prodotto} che si intende vendere deve essere inserito nel CRM con un'apposita descrizione ed un prezzo di listino associato;
+			\item nel momento in cui si vuole proporre un'offerta commerciale ad un cliente, deve essere creata un'entità \textbf{Offerta} alla quale associare una serie di prodotti (scontabili rispetto al prezzo di listino);
 			\item approvata l'offerta da parte dal cliente, a questa può essere associato un \textbf{Ordine}, contenente tutti i dati di spedizione, fatturazione e molti altri.
 		\end{enumerate}
 		I software CRM offrono un insieme di operazioni e funzionalità molto più vasto, ma non utili (al momento) ai fini dell'integrazione con ADProject.\\
-		\paragraph{Le entità di dati}
-			Attraverso lo studio si SalesForce e di ADProject sono emerse le entità di dati che sarebbe stato utile importare dal CRM:
+		\paragraph{Le classi di dati}~\\
+			Attraverso lo studio di SalesForce e di ADProject sono emerse le classi di dati che sarebbero state utili importare dal CRM:
 			\begin{itemize}
 				\item \textbf{Account:} ogni progetto creato attraverso ADProject deve essere imputato ad un'azienda cliente
 				\item \textbf{Contatti:} ogni Account deve avere un contatto principale come referente
 				\item \textbf{Offerte:} ogni progetto deve avere una motivazione per essere creato, questa corrisponde all'offerta commerciale
-				\item \textbf{Prodotti:} i prodotti corrispondono con l'output principale ottenuto portando a termine un progetto
+				\item \textbf{Prodotti:} i prodotti corrispondono all'output principale dei progetti
 				\item \textbf{Famiglie di Prodotti:} è comodo e utile accorpare i prodotti in macro-famiglie in quanto rende più facile la ricerca degli stessi 
 				\item \textbf{Utenti:} il personale aziendale che utilizza il CRM (probabilmente il reparto commerciale) è bene che sia annoverato tra le risorse aziendali
 			\end{itemize}
@@ -171,13 +171,13 @@ Questa disciplina è fondamentale per controllare i costi, l'utilizzo delle riso
 		\subsection{Procedure di Autenticazione}
 			Per avere l'accesso ai dati del CRM, l'applicazione ADCrm deve potersi autenticare presso i server di SalesForce e Dynamics. Fortunatamente entrambe le applicazioni permettono l'autenticazione attraverso protocollo OAuth2.0.
 			\paragraph{OAuth2.0}
-			E' un protocollo aperto che permettere, in maniera semplice e standard, di autenticare e autorizzare applicazioni web, mobile e desktop ad accedere ai dati che si vogliono esporre. Viene comunemente usato come un modo per autorizzare siti web o applicazioni ad accedere ad altri siti senza fornire direttamente le credenziali dell'utente.\\
-			La scelta di questo protocollo è stata obbligata, dato che è l'unico metodo d'autenticazione esposto dai CRM, tuttavia è un ottima opzione in quanto permette di rendere più sicuro il sistema, limitando la quantità di dati sensibili salvati all'interno dell'applicazione; inoltre sgrava il sistema dalle procedure di cambio password dato che sono a carico del \glo{provider} OAuth (SalesForce e Dynamics).
+			è un protocollo aperto che permette, in maniera semplice e standard, di autenticare e autorizzare applicazioni web, mobile e desktop ad accedere ai dati che si vogliono esporre, senza fornire direttamente le credenziali dell'utente.\\
+			La scelta di questo protocollo è stata obbligata, dato che è l'unico metodo d'autenticazione esposto dai CRM, tuttavia è un'ottima opzione in quanto permette di rendere più sicuro il sistema, limitando la quantità di dati sensibili salvati all'interno dell'applicazione; inoltre sgrava il sistema dalle procedure di cambio password dato che sono a carico del \glo{provider} OAuth (SalesForce e Dynamics).
 			%TODO: da ricontrollare
 
-			\paragraph{Flusso di autenticazione}
+			\paragraph{Flusso di autenticazione}~\\
 			In questo paragrafo viene descritto il flusso di autenticazione per Salesforce, necessario per ottenere il \glo{token} d'accesso.
-			Questo \glo{token} è un una serie di caratteri alfanumerici da allegare all'\glo{header} della richiesta http, senza il quale non si potrebbero recuperare i dati richiesti al CRM.
+			Questo \glo{token} è composto da una serie di caratteri alfanumerici, che è necessario allegare all'\glo{header} della richiesta http, per recuperare i dati contenuti nel CRM.
 				\begin{figure}[!hb]
 					\centering
 					\includegraphics[width=0.7\linewidth]{images/webServerAuthFlow}
@@ -185,27 +185,28 @@ Questa disciplina è fondamentale per controllare i costi, l'utilizzo delle riso
 					\label{fig:webserverauthflow}
 				\end{figure}
 			\begin{enumerate}
-				\item L'applicazione client che vuole accedere ai dati del CRM deve effettuare una chiamata http con metodo POST (ed uno specifico set di parametri) all'appropriato \glo{endpoint} di SalesForce;
-				\item SalesForce risponde inviando al chiamante, una pagina web sulla quale l'utente dovrà inserire le proprie credenziali d'accesso al sito. L'utente interagisce direttamente con l'\glo{endpoint} di autorizzazione, in questo modo l'applicazione che effettua la richiesta d'accesso non necessita di conoscere le credenziali d'autenticazione;
+				\item L'applicazione client, che vuole accedere ai dati del CRM, deve effettuare una chiamata http con metodo POST (ed uno specifico set di parametri) all'appropriato \glo{endpoint} di SalesForce;
+				\item SalesForce risponde inviando al chiamante, una pagina web sulla quale l'utente dovrà inserire le proprie credenziali d'accesso al sito; %L'utente interagisce direttamente con l'\glo{endpoint} di autorizzazione, in questo modo l'applicazione che effettua la richiesta d'accesso non necessita di conoscere le credenziali d'autenticazione;
 				\item Una volta confermato che l'applicazione è autorizzata ad accedere al CRM, SalesForce invia al richiedente un codice alfanumerico in formato \glo{JSON};
 				\item L'applicazione deve quindi estrarre il codice ricevuto nel punto 3, inserirlo in una richiesta http con metodo POST insieme ad un set specifico di parametri, ed inoltrate la richiesta all'\glo{endpoint} designato;
-				\item nel caso in cui la richiesta sia stata effettuata con successo, il server risponde con un \glo{JSON} contenente i \glo{token} necessari ad interrogare il CRM;
+				\item Nel caso in cui la richiesta sia stata effettuata con successo, il server risponde con un file \glo{JSON}, contenente i \glo{token} necessari ad interrogare il CRM;
 				\item L'applicazione client utilizza i \glo{token} d'accesso forniti per effettuare richieste al CRM. 
 			\end{enumerate}
 		\subsection{API e Protocolli di interrogazione dati}
-			Entrambi i CRM permettono l'interrogazione dei propri dati attraverso l'implementazione di protocolli \textit{REST-based}. Questi offrono anche la possibilità di mettere in relazioni dati differenti, in maniera simile al comportamento della clausola \glo{JOIN} per le \glo{query} \glo{SQL}, anche se con limitazioni.\\ 
+			Entrambi i CRM permettono l'interrogazione dei propri dati attraverso l'implementazione di protocolli \textit{REST-based}. Questi offrono anche la possibilità di mettere in relazione dati differenti, in maniera simile al comportamento della clausola \glo{JOIN} per le \glo{query} \glo{SQL}, anche se con limitazioni.\\ 
 			La sfida che si è presentata in quest'ambito è stata quella di trovare il modo migliore di recuperare tutti i dati necessari limitando al più possibile il numero di richieste http inviate ai CRM, in quanto ogni nuova richiesta effettuata aumenta il tempo di re-indirizzamento dei dati recuperati verso ADProject.
+			~\\
 			SalesForce e Microsoft Dynamics sfruttano due protocolli molto diversi tra di loro:
 			%TODO: migliorare
 			\paragraph{SOQL}
-			o \textit{\textbf{S}alesforce \textbf{O}bject \textbf{Q}uery \textbf{L}anguage} permette recuperare i della propria organizzazione da SalesForce. SOQL è basato su richieste http ad uno specifico \glo{endpoint}, al cui url viene accodata una \glo{query} simile a quelle formulate nel linguaggio \glo{SQL}. In caso di richiesta corretta, Il CRM risponde con i dati richiesti in formato \glo{JSON}.
+			o \textit{\textbf{S}alesforce \textbf{O}bject \textbf{Q}uery \textbf{L}anguage} permette di recuperare i dati della propria organizzazione da SalesForce. SOQL è basato su richieste http ad uno specifico \glo{endpoint}, al cui url viene accodata una \glo{query} simile a quelle formulate nel linguaggio \glo{SQL}. In caso di richiesta corretta, Il CRM risponde con i dati richiesti in formato \glo{JSON}.
 			\paragraph{OData}
 			E' un protocollo aperto (Open Data Protocol) creato da Microsoft, che definisce un insieme di best-practices per costruire e utilizzare API RESTful.\\
-			Dynamics permette l'interrogazione dei propri dati attraverso semplici richieste http basate su questo protocollo, dando in risposta i dati richiesti in formato \glo{JSON}.
+			Dynamics permette l'interrogazione dei propri dati attraverso semplici richieste http basate su questo protocollo, restituendo i dati richiesti in formato \glo{JSON}.
 			
 		\subsection{Simulazione query}
 			Si è presto reso necessario verificare che il processo di autenticazione funzionasse correttamente e che fosse possibile recuperare tutti i dati voluti attraverso le \glo{query}, senza tuttavia cominciare la fase di codifica di ADCrm (dato che modifiche in corso d'opera all'architettura dell'applicazione, avrebbero causato un notevole spreco di tempo e sforzi).
-			Per venire in contro a questa esigenza si è deciso di simulare tutte le chiamate che il sistema avrebbe effettuato tramite \textit{Postman}.
+			Per risolvere questo problema si è deciso di simulare tutte le chiamate http, che il sistema avrebbe effettuato, tramite \textit{Postman}.
 			\paragraph{Postman Rest Client} è un applicazione che permette di comporre richieste http in maniera semplice e veloce, risultando particolarmente utile per testare il funzionamento di API proprie e altrui.
 			\par
 						
