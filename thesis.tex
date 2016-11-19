@@ -74,6 +74,8 @@
 % Keywords
 %**************************************************************
 \chapter*{Keywords}\label{keywords}
+Di seguito vengono descritte le parole chiave per poter capire al meglio questa tesi di laurea:
+
 \paragraph*{CRM}
 sta per \textit{Customer relationship management} e rappresenta un approccio per gestire le interazioni di un'azienda con i suoi clienti, attuali e potenziali.\\
 Attraverso questa metodologia si punta a raccogliere ed analizzare i dati relativi ai clienti (email, sito aziendale, numeri telefonici ed in particolar modo lo storico delle offerte e degli ordini effettuati) con il fine di incrementare le vendite grazie alla fidelizzazione dello stesso mediante offerte e sconti mirati.\\
@@ -90,8 +92,11 @@ Questa disciplina è fondamentale per controllare i costi, l'utilizzo delle riso
 %**************************************************************
 \chapter*{Abstract}\label{abstract}
 	Il presente documento descrive l'esperienza di stage, della durata di 320 ore, svolta presso l'azienda \textbf{Athesys s.r.l.} di Padova.\\
+	
+	\textit{Convenzioni utilizzate} : tutti i termini marcati con una 'G' a
+	pedice vengono spiegati nell'appendice Glossario alla fine del documento.\\
 
-	Di seguito una breve presentazione delle componenti coinvolte nella realizzazione del progetto di stage.
+	Segue una breve presentazione delle componenti coinvolte nella realizzazione del progetto di stage.
 	
 	\paragraph{ADProject}~\\
 		L’azienda Athesys s.r.l. ha sviluppato un'applicazione web di \textit{Project Management}, chiamata ADProject, fornendo ai propri clienti la possibilità di avere un programma personalizzato in base alle loro esigenze.\\
@@ -376,7 +381,18 @@ In questo modo l'applicazione ADCrm non solo non ha bisogno di sapere a priori s
 
 
 \chapter{Verifica e validazione}\label{verifica_validazione}
+\section{Verifica}
+\subsection{Soddisfacimento dei requisiti}
+\subsection{Software Testing}
+\paragraph{Test strutturale}
+o \textit{white box testing}, sono utilizzati per verificare la logica interna del codice di un unità software. Questo obbiettivo viene ottenuto fornendo in input una serie di dati che permetta di percorrere tutti i cammini (sequenze di istruzioni attraversate durante un'esecuzione) all'interno del modulo testato.\\
+Dato che questa tipologia di test è dipendente dai dati forniti in input, nello svolgimento progetto di stage è stato fatto largo uso di \textbf{Stub} e \textbf{Driver}.
 
+\paragraph{Stub} 
+in informatica i "test stubs" sono programmi o porzioni di codice che simulano il comportamento di componenti software o moduli, essi vengono spesso utilizzati per sostituire elementi non ancora codificati.\\
+Questa metodologia è stata utilizzata per testare il funzionamento complessivo del sistema prima di implementare i metodi (definiti nelle interfacce di Athesys.ADCrm.Common) delle classi contenute nei \glo{package} Athesys.ADCrm.SalesForce (sez. \ref{salesforce}) e Athesys.ADCrm.Dynamics (sez. \ref{dynamics}).
+\paragraph{Driver} 
+\section{Validazione}
 \chapter{Conclusioni}\label{conclusioni}
 
 %**************************************************************

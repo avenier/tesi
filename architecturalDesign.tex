@@ -484,7 +484,7 @@ Di seguito vengono riportati alcuni metodi significativi della classe per esempl
 	\end{enumerate}
 \end{itemize}
  
-\subsection{Athesys.ADCrm.Salesforce}
+\subsection{Athesys.ADCrm.Salesforce}\label{salesforce}
 Questo \glo{package} contiene tutte le classi che implementano le interfacce definite in Athesys.ADCrm.Common e, sviluppando  restituiscono ai controllers di Athesys.ADCrm.API i vari oggetti DTO delle entità del \glo{package} Athesys.ADCrm.Common.Data.
 Di seguito vengono descritte brevemente le uniche tre classi che hanno un comportamento diverso da quanto sopracitato.
 
@@ -494,7 +494,7 @@ Questa classe ha la funzione di mappare le risposte provenienti dal CRM modifica
 Per esempio se dal CRM arrivasse una risposta d'errore con codice di stato http 500 (quindi un errore interno del server), non si dovrà restituire ad ADProject una risposta lo stesso codice di stato, in quanto verrebbe interpretato come un errore del servizio e non del CRM. C'è quindi l'esigenza di modificare ad-hoc le risposte per renderle fruibili dal richiedente delle stesse.
 %TODO: controllare questa parte
 
-\subsection{Athesys.ADCrm.Dynamics}
+\subsection{Athesys.ADCrm.Dynamics}\label{dynamics}
 Questo \glo{package} contiene tutte le classi che implementano le interfacce definite in Athesys.ADCrm.Common e restituiscono ai controller di Athesys.ADCrm.API i vari oggetti DTO di tipo Athesys.ADCrm.Common.Data al fine di incapsularli nella risposta http.
 Viene omessa la descrizione delle classi e dei metodi in quanto risulta identica a quella del \glo{package} \textit{Athesys.ADCrm.Salesforce}
 
@@ -536,9 +536,9 @@ Il database è utilizzato per salvare i dati necessari a collegarsi per effettua
 \subsection{Diagramma di sequenza}
 	\begin{figure}[H]
 	\centering
-	\rotatebox{90}{\includegraphics[width=\textheight,height=1.08\linewidth]{images/sdProposals}}
+	\rotatebox{90}{\includegraphics[width=.87\textheight,height=1.08\linewidth]{images/sdProposals}}
 	
-	\caption{Diagramma di sequenza per una chiamata per recuperare le entità Account da un CRM }
+	\caption{Diagramma di sequenza per recuperare le entità Account da un CRM }
 	\label{fig:sdProposals}
 \end{figure}
 
