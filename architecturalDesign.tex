@@ -65,8 +65,6 @@ Inoltre si noti che è necessario da parte di chi effettua chiamate verso questo
 \section{Progettazione}
 In questa sezione verranno descritti in maniera dettagliata tutti i \glo{package}, le classi principali dell'applicazione e i metodi più importanti delle stesse al fine mostrare al meglio il progetto di stage svolto.
 
-Nella figura \ref{fig:modulesdiagram} viene illustrato il diagramma \glo{UML} delle classi dell'applicazione.
-
 %\begin{figure}[H]
 %	\centering
 %	\includegraphics[width=\linewidth]{images/modulesDiagram}
@@ -80,6 +78,8 @@ Nella figura \ref{fig:modulesdiagram} viene illustrato il diagramma \glo{UML} de
 	\caption{Diagramma UML di ADCrm}
 	\label{fig:modulesdiagram}
 \end{figure}
+\newpage
+Nella figura \ref{fig:modulesdiagram} viene illustrato il diagramma \glo{UML} delle classi dell'applicazione.
 
 \subsection{Athesys.ADCrm.API}
 \begin{figure}[H]
@@ -367,7 +367,7 @@ Interfaccia che dovrà essere implementata dalle classi concrete Athesys.ADCrm.S
 		Rappresenta l'identificativo univoco legato all'account di un azienda cliente CRM, attraverso il quale si andrà a richiedere i dati voluti.
 	\end{enumerate}
 \end{itemize}
-
+\vfill
 \subsection{Athesys.ADCrm.API.Data}
 \begin{figure}[H]
 	\centering
@@ -375,6 +375,7 @@ Interfaccia che dovrà essere implementata dalle classi concrete Athesys.ADCrm.S
 	\caption{Diagramma UML del package Athesys.ADCrm.Common::Data}
 	\label{fig:data}
 \end{figure}
+
 \paragraph{Description:}
 Questo \glo{package} contiene tutti i vari DTO definiti per ogni entità di dati che si vuole restituire alle chiamate effettuate da ADProject ed inoltre quelle necessarie per gestire le risposte le risposte provenienti dai CRM. 
 Segue in questa sezione una breve descrizione delle classi principali, sorvolando sui metodi delle stesse in quanto sono tutti \glo{accessors} \glo{getter} e \glo{setter}.
@@ -434,15 +435,16 @@ Questa classe ha tre campi dati (ed i relativi \glo{accessors}):
 Questo \glo{package} contiene tutte le classi concrete in comune tra i CRM che si vogliono collegare all'applicazione.
 La classe principale del \glo{package} è Athesys.ADCrm.Model::Crm.
 \subsubsection{Crm (class)} \label{crmClass}
-\paragraph{Descrizione:}
-Questa classe implementa il design pattern Factory ed è usata dai controllers per produrre oggetti concreti di un particolare CRM (su cui invocare i metodi per recuperare i dati dallo stesso) senza conoscere a priori il tipo di CRM richiesto (Dynamics o SalesForce).
-
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{images/factoryInADCrm}
 	\caption{Diagramma semplificato del pattern Factory per ADCrm}
 	\label{fig:factoryInADCrm}
 \end{figure}
+\paragraph{Descrizione:}
+Questa classe implementa il design pattern Factory ed è usata dai controllers per produrre oggetti concreti di un particolare CRM (su cui invocare i metodi per recuperare i dati dallo stesso) senza conoscere a priori il tipo di CRM richiesto (Dynamics o SalesForce).
+
+
 Di seguito vengono riportati alcuni metodi significativi della classe per esemplificarne il funzionamento generale.
 
 
@@ -532,14 +534,15 @@ Il database è utilizzato per salvare i dati necessari a collegarsi per effettua
 
 
 \subsection{Diagramma di sequenza}
-In questa sezione viene riportato un diagramma di sequenza  al fine di facilitare la comprensione della catena delle chiamate che viene effettuata per recuperare tutti i dati dei clienti dell'azienda dall'applicazione CRM durante il lavoro in fase di codifica.
 	\begin{figure}[H]
 	\centering
 	\rotatebox{90}{\includegraphics[width=\textheight,height=1.08\linewidth]{images/sdProposals}}
 	
-	\caption{Diagramma di sequenza per una chiamata per recuperare le proposte commerciali da un CRM }
+	\caption{Diagramma di sequenza per una chiamata per recuperare le entità Account da un CRM }
 	\label{fig:sdProposals}
 \end{figure}
+
+L'immagine soprastante è il diagramma di sequenza utile per facilitare la comprensione della catena di chiamate che viene effettuata per recuperare tutti i dati dei clienti dell'azienda dall'applicazione CRM durante il lavoro in fase di codifica.
 
 \begin{itemize}
 	\item \textbf{AccountsController:} è l'oggetto che si occupa di invocare il metodo appropriato ogni volta che viene instradata una chiamata all'\glo{endpoint} "\textit{accounts}" (sez. \ref{accountsController});  

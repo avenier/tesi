@@ -80,9 +80,9 @@ Attraverso questa metodologia si punta a raccogliere ed analizzare i dati relati
 %Seguendo questi concetti sono nati, e si sono affermati, diversi software CRM e tra i maggiori esponenti possiamo trovare: \textbf{Salesforce} e \textbf{Microsoft Dynamics}.\\
 %L'azienda \large{\myCompany{}}, basandosi sull'importanza e sulla diffusione dei suddetti software ha deciso di integrarli nella propria applicazione web di \textit{Project Management}.
  
-\paragraph*{Project Management Software}
-La disciplina di \textit{Project Management} si occupa di sovraintendere la pianificazione, l'organizzazione e l'implementazione di un progetto. Dove con progetto si intende un insieme ordinato di compiti da svolgere, caratterizzati da: vincoli di tempo (date di inizio e fine), risorse utilizzabili e risultati attesi.\\
-Questa disciplina è fondamentale per controllare i costi, l'utilizzo delle risorse aziendali e per poter assicurare che il prodotto finale di questi processi soddisfi a pieno le esigenze del cliente.\\
+\paragraph*{Project Management}
+è la disciplina di che si occupa di sovraintendere la pianificazione, l'organizzazione e l'implementazione di un progetto.\\ Per progetto si intende un insieme ordinato di compiti da svolgere, caratterizzati da: vincoli di tempo (date di inizio e fine), risorse utilizzabili e risultati attesi.\\
+Questa disciplina è fondamentale per controllare i costi, l'utilizzo delle risorse aziendali e assicurare che il prodotto finale dei relativi processi soddisfi le esigenze del cliente.\\
 %In questo contesto \large{\myCompany{}} ha deciso di sviluppare \textbf{ADProject}, una soluzione software pensata ad-hoc per i propri clienti con l'obbiettivo di facilitare e automatizzare il suddetto insieme di attività.
 
 %**************************************************************
@@ -119,16 +119,16 @@ Questa disciplina è fondamentale per controllare i costi, l'utilizzo delle riso
 		\begin{itemize}
 			\itemsep-0.5em 
 			\item i prodotti da realizzare e vendere;
-			\item la capacità di produzione, dipendente dal tempo e dalle risorse aziendali, che ovviamente limita la disponibilità dei prodotti;	
+			\item la capacità di produzione, dipendente dal tempo e dalle risorse aziendali, che incide sulla disponibilità dei prodotti;	
 			\item il cliente al quale devono essere imputati i costi delle risorse utilizzate e di sviluppo per la produzione di soluzioni software \glo{custom};
-			\item alcune figure aziendali (mediamente il personale del reparto contabilità) già censite all'interno del software CRM, annoverabili tra le risorse di un'azienda.
+			\item alcune figure aziendali (tipicamente il personale del reparto contabilità) già censite all'interno del software CRM, annoverabili tra le risorse di un'azienda.
 			%TODO:  da rivedere
 		\end{itemize}
 	\par
 	
 	\paragraph{Scopo del progetto e nascita di ADCrm}~\\
-		Ci sono moltissimi dati censiti nei CRM che possono essere utilizzati dai software di Project Management, grazie ai quali verrebbero ridotti di molto i tempi di \textit{data-entry}, necessari per il corretto funzionamento di una nuova installazione di ADProject.\\
-		L'esigenza ultima di Athesys s.r.l. è quella di fornire un prodotto completo e competitivo, andando ad attingere a tutti i dati utili che i software CRM possono offrire. Con questo fine, attraverso il progetto di stage, è stato realizzato \textbf{ADCrm}: un servizio web che si pone come ponte tra le due realtà, fornendo la possibilità ad ADProject di fruire dei dati presenti su SalesForce e Dynamics, rielaborandoli secondo le proprie esigenze, attraverso l'utilizzo di web API.
+		%Ci sono moltissimi dati all'interno dei software CRM che possono essere utilizzati nell'ambito del Project Management, grazie ai quali verrebbero ridotti di molto i tempi di \textit{data-entry}, necessari per il corretto funzionamento di una nuova installazione di ADProject.\\
+		L'esigenza ultima di Athesys s.r.l. è quella di fornire un prodotto completo e competitivo, attingendo a tutti i dati utili che i software CRM possono offrire, abbatendo i tempi di \textit{data-entry} e migliorando l'esperienza utente. Con questo fine, attraverso il progetto di stage, è stato realizzato \textbf{ADCrm}: un servizio web che si pone come ponte tra le due realtà, fornendo la possibilità ad ADProject di fruire dei dati presenti su SalesForce e Dynamics, rielaborandoli secondo le proprie esigenze, attraverso l'utilizzo di web \glo{API}.
 	\par
 
 %**************************************************************
@@ -144,32 +144,32 @@ Questa disciplina è fondamentale per controllare i costi, l'utilizzo delle riso
 %**************************************************************
 \chapter{Il Progetto}\label{introduzione}
 	\section{Piano di Lavoro}
-		Il progetto, per quanto stabilito nel piano di lavoro dello stage, comporta l'integrazione di \textit{Salesforce} con \textit{ADProject} ma, dato che la parte principale dell'applicazione è stata ultimata con due settimane di anticipo rispetto al previsto, si è deciso di integrare nel servizio \textit{\textbf{ADCrm}} anche un secondo CRM: \textit{\textbf{Microsoft Dynamics}}.
-		Nei successivi capitoli verrà descritta l'integrazione con entrambi i sistemi e verranno spiegate le sfide riscontrate in questo progetto, tuttavia per evitare eccessive ripetizioni verrà posta particolare attenzione alle parti riguardanti \textit{\textbf{SalesForce}}.
+		Il progetto, per quanto stabilito nel piano di lavoro dello stage, comporta l'integrazione di \textit{Salesforce} con \textit{ADProject}. Dato che la parte principale dell'applicazione è stata ultimata in anticipo rispetto al previsto, si è deciso di integrare nel servizio \textit{\textbf{ADCrm}} anche un secondo CRM: \textit{\textbf{Microsoft Dynamics}}.\\
+		Nei successivi capitoli verrà descritta l'integrazione con entrambi i sistemi e verranno spiegate le sfide riscontrate in questo progetto, ponendo particolare attenzione alle parti riguardanti \textit{\textbf{SalesForce}}.
 	\section{Studio delle applicazioni CRM}
 		La prima parte dello stage consisteva nello studio di SalesForce per  acquisire dimestichezza con lo stesso, con i principi che stanno dietro ai software CRM ma soprattutto per identificare tutti i dati potenzialmente utili per l'integrazione con ADProject.\\
 		In questa fase è stato analizzato il flusso di eventi necessari per il corretto utilizzo di Salesforce e le entità collegate.		
 		\begin{enumerate}
-			\item viene creata un'entità \textbf{Account} per un'azienda cliente o che potrebbe potenzialmente diventarlo, nella quale vengono censiti tutti i dati che si hanno a disposizione (nome, sito web, email, ricavi annuali, numero di dipendenti, area commerciale,...);
-			\item vengono create una o più entità \textbf{Contatto} associate ad ogni \textbf{Account}, queste contengono tutti i dati relativi alle persone dell'azienda cliente, alle quali proporre offerte commerciali;
-			\item ogni \textbf{Prodotto} che si intende vendere deve essere inserito nel CRM con un'apposita descrizione ed un prezzo di listino associato;
-			\item nel momento in cui si vuole proporre un'offerta commerciale ad un cliente, deve essere creata un'entità \textbf{Offerta} alla quale associare una serie di prodotti (scontabili rispetto al prezzo di listino);
-			\item approvata l'offerta da parte dal cliente, a questa può essere associato un \textbf{Ordine}, contenente tutti i dati di spedizione, fatturazione e molti altri.
+			\item creazione di un'entità \textbf{Account} per un'azienda cliente o che potrebbe potenzialmente diventarlo, nella quale vengono censiti tutti i dati che si hanno a disposizione (nome, sito web, email, ricavi annuali, numero di dipendenti, area commerciale,...);
+			\item creazione di una o più entità \textbf{Contatto} associate ad ogni \textbf{Account}, queste contengono tutti i dati relativi alle persone dell'azienda cliente, alle quali proporre offerte commerciali;
+			\item inserimento nel CRM di ogni \textbf{Prodotto} che si intende vendere,associato ad un'apposita descrizione ed un prezzo di listino;
+			\item creazione di un'entità \textbf{Offerta} alla quale associare una serie di prodotti (scontabili rispetto al prezzo di listino), nel momento in cui si vuole proporre un'offerta commerciale ad un cliente;
+			\item creazione di un entità \textbf{Ordine}, contenente tutti i dati di spedizione, fatturazione etc, nel momento in cui l'offerta viene approvata dal cliente.
 		\end{enumerate}
 		I software CRM offrono un insieme di operazioni e funzionalità molto più vasto, ma non utili (al momento) ai fini dell'integrazione con ADProject.\\
 		\paragraph{Le classi di dati}~\\
-			Attraverso lo studio di SalesForce e di ADProject sono emerse le classi di dati che sarebbero state utili importare dal CRM:
+			Attraverso lo studio di SalesForce e di ADProject sono emerse le classi di dati che sarebbe utile importare dal CRM:
 			\begin{itemize}
 				\item \textbf{Account:} ogni progetto creato attraverso ADProject deve essere imputato ad un'azienda cliente
 				\item \textbf{Contatti:} ogni Account deve avere un contatto principale come referente
 				\item \textbf{Offerte:} ogni progetto deve avere una motivazione per essere creato, questa corrisponde all'offerta commerciale
 				\item \textbf{Prodotti:} i prodotti corrispondono all'output principale dei progetti
 				\item \textbf{Famiglie di Prodotti:} è comodo e utile accorpare i prodotti in macro-famiglie in quanto rende più facile la ricerca degli stessi 
-				\item \textbf{Utenti:} il personale aziendale che utilizza il CRM (probabilmente il reparto commerciale) è bene che sia annoverato tra le risorse aziendali
+				\item \textbf{Utenti:} il personale aziendale che utilizza il CRM (tipicamente il reparto commerciale) è bene che sia annoverato tra le risorse aziendali
 			\end{itemize}
 		\par
 		\subsection{Procedure di Autenticazione}
-			Per avere l'accesso ai dati del CRM, l'applicazione ADCrm deve potersi autenticare presso i server di SalesForce e Dynamics. Fortunatamente entrambe le applicazioni permettono l'autenticazione attraverso protocollo OAuth2.0.
+			Per avere l'accesso ai dati del CRM, l'applicazione ADCrm deve potersi autenticare presso i server di SalesForce e Dynamics. Entrambe le applicazioni permettono l'autenticazione attraverso protocollo OAuth2.0.
 			\paragraph{OAuth2.0}
 			è un protocollo aperto che permette, in maniera semplice e standard, di autenticare e autorizzare applicazioni web, mobile e desktop ad accedere ai dati che si vogliono esporre, senza fornire direttamente le credenziali dell'utente.\\
 			La scelta di questo protocollo è stata obbligata, dato che è l'unico metodo d'autenticazione esposto dai CRM, tuttavia è un'ottima opzione in quanto permette di rendere più sicuro il sistema, limitando la quantità di dati sensibili salvati all'interno dell'applicazione; inoltre sgrava il sistema dalle procedure di cambio password dato che sono a carico del \glo{provider} OAuth (SalesForce e Dynamics).
@@ -193,8 +193,8 @@ Questa disciplina è fondamentale per controllare i costi, l'utilizzo delle riso
 				\item L'applicazione client utilizza i \glo{token} d'accesso forniti per effettuare richieste al CRM. 
 			\end{enumerate}
 		\subsection{API e Protocolli di interrogazione dati}
-			Entrambi i CRM permettono l'interrogazione dei propri dati attraverso l'implementazione di protocolli \textit{REST-based}. Questi offrono anche la possibilità di mettere in relazione dati differenti, in maniera simile al comportamento della clausola \glo{JOIN} per le \glo{query} \glo{SQL}, anche se con limitazioni.\\ 
-			La sfida che si è presentata in quest'ambito è stata quella di trovare il modo migliore di recuperare tutti i dati necessari limitando al più possibile il numero di richieste http inviate ai CRM, in quanto ogni nuova richiesta effettuata aumenta il tempo di re-indirizzamento dei dati recuperati verso ADProject.
+			Entrambi i CRM permettono l'interrogazione dei propri dati attraverso l'implementazione di protocolli \textit{\glo{REST-based}}. Questi offrono anche la possibilità di mettere in relazione dati differenti, in maniera simile al comportamento della clausola \glo{JOIN} per le \glo{query} \glo{SQL}, anche se con limitazioni.\\ 
+			La sfida che si è presentata in quest'ambito è stata quella di trovare il modo migliore di recuperare tutti i dati necessari limitando al massimo il numero di richieste http inviate ai CRM, in quanto ogni nuova richiesta effettuata aumenta il tempo di re-indirizzamento dei dati recuperati verso ADProject.
 			~\\
 			SalesForce e Microsoft Dynamics sfruttano due protocolli molto diversi tra di loro:
 			%TODO: migliorare
@@ -205,9 +205,9 @@ Questa disciplina è fondamentale per controllare i costi, l'utilizzo delle riso
 			Dynamics permette l'interrogazione dei propri dati attraverso semplici richieste http basate su questo protocollo, restituendo i dati richiesti in formato \glo{JSON}.
 			
 		\subsection{Simulazione query}
-			Si è presto reso necessario verificare che il processo di autenticazione funzionasse correttamente e che fosse possibile recuperare tutti i dati voluti attraverso le \glo{query}, senza tuttavia cominciare la fase di codifica di ADCrm (dato che modifiche in corso d'opera all'architettura dell'applicazione, avrebbero causato un notevole spreco di tempo e sforzi).
+			Si è presto reso necessario verificare che il processo di autenticazione funzionasse correttamente e che fosse possibile recuperare tutti i dati voluti attraverso le \glo{query}, senza tuttavia cominciare la fase di codifica di ADCrm (dato che modifiche in corso d'opera all'architettura dell'applicazione, avrebbero causato un costo eccessivo in tempo e sforzi).
 			Per risolvere questo problema si è deciso di simulare tutte le chiamate http, che il sistema avrebbe effettuato, tramite \textit{Postman}.
-			\paragraph{Postman Rest Client} è un applicazione che permette di comporre richieste http in maniera semplice e veloce, risultando particolarmente utile per testare il funzionamento di API proprie e altrui.
+			\paragraph{Postman Rest Client} è un applicazione che permette di comporre richieste http in maniera semplice e veloce, risultando particolarmente utile per testare il funzionamento di \glo{API} proprie e altrui.
 			\par
 						
 			\begin{figure}[!hb]
@@ -216,18 +216,18 @@ Questa disciplina è fondamentale per controllare i costi, l'utilizzo delle riso
 				\caption{Screenshot di una richiesta GET a SalesForce}
 				\label{fig:postman}
 			\end{figure}
-			Una volta simulate tutte le richieste è stato possibile iniziare la fase di progettazione avendo ben chiari i passaggi fondamentali che ADCrm avrebbe dovuto compiere.
+			Una volta simulate tutte le richieste è stato possibile iniziare la fase di progettazione avendo ben chiari i passaggi fondamentali richiesti a ADCrm.
 		
 %**************************************************************
 % Tecnologie e Strumenti
 %**************************************************************
 \chapter{Tecnologie e Strumenti}\label{tecnologie}
 \section{Frameworks e linguaggi di programmazione}
-In questa sezione verranno descritti brevemente i linguaggi di programmazione usati nella scrittura di \textbf{ADProject} e di \textbf{ADCrm}.
-Non tutti i linguaggi che verranno presentati in seguito sono stati usati nell'ambito del progetto di stage (in quanto limitato alla realizzazione del servizio \large{ADCrm}), tuttavia la loro contestualizzazione all'interno dei vari moduli sviluppati dall'azienda aiuta a capire meglio il funzionamento degli stessi.
+In questa sezione vengono descritti brevemente i linguaggi di programmazione usati nella scrittura di \textbf{ADProject} e di \textbf{ADCrm}.
+Non tutti i linguaggi che verranno presentati in seguito sono stati usati nell'ambito del progetto di stage (in quanto limitato alla realizzazione del servizio ADCrm), tuttavia la loro contestualizzazione all'interno dei vari moduli sviluppati dall'azienda aiuta a capire meglio il funzionamento degli stessi.
 
 \paragraph{.NET Framework}
-è un \glo{framework} software sviluppato da Microsoft. Include una vasta classe di librerie chiamata \textit{Framework Class Library} (FLC) che permette l'interoperabilità tra i linguaggi di programmazione del \glo{framework}. I programmi scritti per .NET vengono eseguiti in un ambiente software conosciuto come \textit{Common Language Runtime} (CLR), una \textit{virtual machine}  che fornisce servizi come la gestione delle eccezioni e la gestione della memoria. FCL e CLR insieme costituisco .NET.\\
+è un \glo{framework} software sviluppato da Microsoft. Include una vasta classe di librerie chiamata \textit{Framework Class Library} (FLC) che permette l'interoperabilità tra i linguaggi di programmazione del \glo{framework}. I programmi scritti per .NET vengono eseguiti in un ambiente software conosciuto come \textit{Common Language Runtime} (CLR), una \textit{\glo{virtual machine}}  che fornisce servizi come la gestione delle eccezioni e la gestione della memoria. FCL e CLR insieme costituiscono .NET.\\
 Il software di project management \textbf{ADProject} e il modulo \textbf{ADCrm} sono sviluppati su questo \glo{framework}.
 %TODO da incrementare questa parte o specificarla meglio
 
@@ -243,18 +243,18 @@ Con questo linguaggio è stato sviluppato ADProject, e sono tuttora in sviluppo 
 è un linguaggio di programmazione orientato agli oggetti sviluppato su .NET.
 La sintassi del linguaggio prende spunto da C++ , da Java
 e da Visual Basic.
-Questo linguaggio sta alla base di tutto lo sviluppo del microservice ADCrm,soggetto di questa tesi. La scelta si potrebbe pensare poco sensata in quanto ADCrm deve integrarsi con un applicazione web interamente scritta con Visual Basic .NET, tuttavia ci sono delle forti motivazioni che hanno fatto propendere il team di sviluppo ad adottare questo linguaggio:
+Questo linguaggio sta alla base di tutto lo sviluppo del microservice ADCrm, soggetto di questa tesi. La scelta si potrebbe pensare poco sensata in quanto ADCrm deve integrarsi con un applicazione web interamente scritta con Visual Basic .NET, tuttavia ci sono delle forti motivazioni che hanno fatto propendere il team di sviluppo ad adottare questo linguaggio:
 \begin{itemize}
 	\itemsep-0.5em
 	\item avendo scelto di adottare una struttura basata su microservices per lo sviluppo di ADCrm, ed essendo quindi un modulo fisicamente slegato da ADProject, è possibile scegliere un linguaggio di programmazione differente da VB.NET, pur rimanendo all'interno dei linguaggi offerti dal \glo{framework};
 	\item i programmatori assegnati allo sviluppo del progetto hanno maggiore familiarità con questo linguaggio;
-	\item C\# ha una vastissima comunity e mediamente è più facile reperire documentazione e teamplate rispetto a VB.NET;
+	\item C\# ha una vastissima comunity e mediamente è più facile reperire documentazione e template rispetto a VB.NET;
 	\item è più probabile trovare futuri developer C\#, in caso di incremento e manutenzione di ADCrm.	
 \end{itemize}
 
 \section{Ambiente di sviluppo}
 \paragraph{Visual Studio}
- è un potente l'ambiente di sviluppo multipiattaforma fornito da Microsoft ed è stata la scelta naturale per lo sviluppo di ogni componente di ADProject ed ADCrm.
+ è un potente ambiente di sviluppo multipiattaforma fornito da Microsoft ed è stata la scelta naturale per lo sviluppo di ogni componente di ADProject ed ADCrm.
 Visual Studio supporta, oltre ai linguaggi e \glo{framework} sopracitati: C, C++, F\#, Html e Javascript. 
 %TODO da specificare cosa vuol dire multipiattaforma
 
