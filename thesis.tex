@@ -382,23 +382,57 @@ In questo modo l'applicazione ADCrm non solo non ha bisogno di sapere a priori s
 
 \chapter{Verifica e validazione}\label{verifica_validazione}
 \section{Verifica}
-\subsection{Soddisfacimento dei requisiti}
+L'obbiettivo della verifica è quello di accertare che l'esecuzione di un dato processo o attività non abbia introdotto errori nel sistema.
+Per il processo di verifica mediamente sono usate due tecniche principali:
+\begin{itemize}
+	\item \textbf{Analisi statica:} tipologia di analisi che mira a verificare il codice senza doverlo eseguire
+	\item \textbf{Analisi dinamica:} tipologia di analisi che mira a verificare il codice attraverso l'esecuzione dello stesso
+\end{itemize}
+
 \subsection{Software Testing}
+I test sono stati effettuati attraverso gli strumenti integrati in Visual Studio (facendo anche largo uso del \textit{\glo{Debugger}}), permettendo di rilevare e correggere piccoli errori mediamente dovuti a distrazione ed all'inesperienza nell'utilizzo dei linguaggi coinvolti.\\
+I test di integrazione e di sistema sono stati condotti a mano mentre si è fatto uso di test strutturali per verificare il corretto comportamento delle unità di software.
+
 \paragraph{Test strutturale}
-o \textit{white box testing}, sono utilizzati per verificare la logica interna del codice di un unità software. Questo obbiettivo viene ottenuto fornendo in input una serie di dati che permetta di percorrere tutti i cammini (sequenze di istruzioni attraversate durante un'esecuzione) all'interno del modulo testato.\\
-Dato che questa tipologia di test è dipendente dai dati forniti in input, nello svolgimento progetto di stage è stato fatto largo uso di \textbf{Stub} e \textbf{Driver}.
+o \textit{white box testing}, sono utilizzati per verificare la logica interna del codice di un unità software. Questo obbiettivo viene ottenuto fornendo in input una serie di dati che permetta di percorrere tutti i cammini (sequenze di istruzioni attraversate durante un'esecuzione) all'interno del modulo testato, controllando che esso produca output attesi .\\
+Dato che questa tipologia di test è dipendente dai dati forniti in input e ottenuti in output, nello svolgimento progetto di stage è stato fatto largo uso di \textbf{Stub} e \textbf{Driver}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{images/stubDriver}
+	\caption{Stub e Driver}
+	\label{fig:stubdriver}
+\end{figure}
 
 \paragraph{Stub} 
-in informatica i "test stubs" sono programmi o porzioni di codice che simulano il comportamento di componenti software o moduli, essi vengono spesso utilizzati per sostituire elementi non ancora codificati.\\
+in informatica i "test stubs" sono programmi o porzioni di codice che simulano il comportamento di componenti software o moduli (imitando l'output di un unità chiamata), essi vengono spesso utilizzati per sostituire elementi non ancora codificati.\\
 Questa metodologia è stata utilizzata per testare il funzionamento complessivo del sistema prima di implementare i metodi (definiti nelle interfacce di Athesys.ADCrm.Common) delle classi contenute nei \glo{package} Athesys.ADCrm.SalesForce (sez. \ref{salesforce}) e Athesys.ADCrm.Dynamics (sez. \ref{dynamics}).
+
 \paragraph{Driver} 
+i "test driver" sono porzioni di codice per simulare il comportamento di un unità chiamante, non ancora implementata, per verificare se l'unità chiamata funziona correttamente e produce output attesi.\\
+Questa tipologia di test è stata utilizzata per simulare tutte le chiamate alle API di ADCrm, cosi da assicurarsi che il sistema fosse funzionante dopo ogni eventuale modifica a \glossary{query} o metodi.
 \section{Validazione}
+Il processo di validazione è indispensabile e serve per accertarsi, mediante misurazioni e prove oggettive, che il prodotto (in questo caso ADCrm) risponda a tutte le specifiche attese dall'utente.
+Per accertarsi di ciò vengono effettuati i test di accettazione, dove il cliente finale controlla che il prodotto risponda correttamente a tutti i requisiti fissati nella fase iniziale di analisi.
+Questi test sono stati effettuati in presenza del referente aziendale per il progetto di stage eseguendo un controllo completo di tutte le funzionalità del software.
+
+
 \chapter{Conclusioni}\label{conclusioni}
+\section{Soddisfacimento dei requisiti}
+A conclusione del progetto di stage i requisiti sono stati soddisfatti secondo le seguenti percentuali.
+\begin{itemize}
+	\item \textbf{Requisiti Obbligatori:} 100\%
+	\item \textbf{Requisiti Opzionali:} 88\%
+\end{itemize}
+Non è stato possibile concludere solamente il requisito opzionale \textbf{R-2F5.5} (riguardante il recupero dei dati riguardanti i prodotti su Microsoft Dynamics) in quanto, per poter ridurre al minimo il numero di chiamate http al CRM, è stato necessario modificare la \glossary{query} per interrogare Dynamics.
+%todo da rimuovere
+Chop the \gls{cabbage}, \glspl{potato} and \glspl{carrot}.
 
 %**************************************************************
 % Glossary and bibliography
 %**************************************************************
-\printglossaries
+%\printglossaries
+\printnoidxglossaries
 \bibliographystyle{unsrt}
 %\bibliography{thesis}
 
@@ -407,7 +441,7 @@ Questa metodologia è stata utilizzata per testare il funzionamento complessivo 
 % Ringraziamenti
 %**************************************************************
 
-%\chapter*{Thanksgivings}
+%\chapter*{Ringraziamenti}
 %rr 
 
 %\noindent\textit{\myLocation, \myTime}
