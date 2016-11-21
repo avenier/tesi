@@ -11,6 +11,7 @@
 	\end{figure}
 	\begin{longtable}{ | p{2.7cm} | p{12cm} |}
 		\hline \textbf{Attori} & Utente con privilegi di scrittura\\ 
+		\hline \textbf{Precondizione} & L’utente deve essere autenticato, deve possedere i privilegi di configurazione aziendale e deve essere stato configurato il collegamento ad un CRM\\
 		\hline \textbf{Descrizione} & Attraverso l’interfaccia di configurazione aziendale, l’utente coi permessi corretti è in grado di visualizzare le impostazioni riguardanti la configurazione aziendale e modificarle\\ 
 		\hline \textbf{Scenario Principale} & \begin{enumerate}
 			\itemsep-0.5em 
@@ -37,6 +38,7 @@
 
 	\begin{longtable}{ | p{2.7cm} | p{12cm} |}
 		\hline \textbf{Attori} & Utente con privilegi di scrittura\\ 
+		\hline \textbf{Precondizione} & L’utente deve essere autenticato, deve possedere i privilegi di configurazione aziendale e deve essere stato configurato il collegamento ad un CRM\\
 		\hline \textbf{Descrizione} & Attraverso l’interfaccia di configurazione aziendale, l’utente coi permessi corretti è in grado di specificare con quale tipologia di risorsa (figura professionale, asset o servizio) dovrà essere mappata ciascuna tipologia di prodotto proveniente dal CRM\\ 
 		\hline \textbf{Scenario Principale} & \begin{enumerate}
 			\itemsep-0.5em 
@@ -66,7 +68,8 @@
 		\label{fig:uc1.3}
 	\end{figure}
 	\begin{longtable}{ | p{2.7cm} | p{12cm} |}
-		\hline \textbf{Attori} & Utente con privilegi di scrittura\\ 
+		\hline \textbf{Attori} & Utente con privilegi di scrittura\\
+		\hline \textbf{Precondizione} &  L’utente deve essere autenticato, deve possedere i privilegi di configurazione di progetto, deve essere nella pagina di configurazione del progetto, deve aver selezionato il progetto e deve aver associato al progetto un’offerta che presenta prodotti con una mappatura anomala\\
 		\hline \textbf{Descrizione} & Attraverso l’interfaccia di configurazione di progetto, l’utente coi permessi corretti è in grado di effettuare una mappatura \textit{just-in-time} di eventuali prodotti legati all’offerta che appartengono ad una famiglia di prodotti non mappata (perché ad esempio è stata aggiunta da poco nel CRM) o che non sono associati ad una famiglia (perché magari sono prodotti associati puntualmente all’offerta\\ 
 		\hline \textbf{Scenario Principale} & \begin{enumerate}
 			\itemsep-0.5em 
@@ -91,7 +94,8 @@
 		\label{fig:uc2}
 	\end{figure}
 	\begin{longtable}{ | p{2.7cm} | p{12cm} |}
-		\hline \textbf{Attori} & Utente con privilegi di lettura, Utente con privilegi di scrittura\\ 
+		\hline \textbf{Attori} & Utente con privilegi di lettura, Utente con privilegi di scrittura\\
+		\hline \textbf{Precondizione} &  L’utente deve essere autenticato, deve possedere almeno i privilegi di visualizzazione di configurazione di progetto. Non è necessario che l’applicazione sia collegata ad un CRM\\ 
 		\hline \textbf{Descrizione} & Attraverso l’interfaccia di gestione delle anagrafiche aziendali, l’utente coi permessi corretti è in grado di visualizzare le informazioni relative alle schede di anagrafica aziendali e modificarle\\ 
 		\hline \textbf{Scenario Principale} & \begin{enumerate}
 			\itemsep-0.5em 
@@ -117,7 +121,8 @@
 		\label{fig:uc2.4}
 	\end{figure}
 	\begin{longtable}{ | p{2.7cm} | p{12cm} |}
-		\hline \textbf{Attori} & Utente con privilegi di scrittura\\ 
+		\hline \textbf{Attori} & Utente con privilegi di scrittura\\
+		\hline \textbf{Precondizione} &  L’utente deve essere autenticato, deve possedere almeno i privilegi di visualizzazione di configurazione di progetto. Non è necessario che l’applicazione sia collegata ad un CRM\\  
 		\hline \textbf{Descrizione} & Attraverso l’interfaccia di gestione delle anagrafiche aziendali, l’utente coi permessi corretti è in grado di visualizzare le informazioni sui contatti di riferimento per le diverse aziende ed eventualmente modificarle\\ 
 		\hline \textbf{Scenario Principale} & \begin{enumerate}
 			\itemsep-0.5em 
@@ -142,7 +147,8 @@
 		\label{fig:uc3}
 	\end{figure}
 	\begin{longtable}{ | p{2.7cm} | p{12cm} |}
-		\hline \textbf{Attori} & Utente con privilegi di lettura, Utente con privilegi di scrittura\\ 
+		\hline \textbf{Attori} & Utente con privilegi di lettura, Utente con privilegi di scrittura\\
+		\hline \textbf{Precondizione} &  L’utente deve essere autenticato, possedere almeno i privilegi di visualizzazione di configurazione di progetto, essere nella pagina di configurazione del progetto, aver selezionato il progetto, il tipo del progetto non deve essere Interno. È necessario che l’applicazione sia collegata ad un CRM per quanto riguarda la parte relativa alle offerte\\  
 		\hline \textbf{Descrizione} & Attraverso l’interfaccia di configurazione di progetto, l’utente coi permessi corretti è in grado di modificare le informazioni di progetto \\ 
 		\hline \textbf{Scenario Principale} & \begin{enumerate}
 			\itemsep-0.5em 
@@ -171,7 +177,8 @@
 		\label{fig:uc3.4}
 	\end{figure}
 	\begin{longtable}{ | p{2.7cm} | p{12cm} |}
-		\hline \textbf{Attori} & Utente con privilegi di scrittura\\ 
+		\hline \textbf{Attori} & Utente con privilegi di scrittura\\
+		\hline \textbf{Precondizione} &  L'utente ha selezionato la voce per gestire il contatto principale del progetto\\ 
 		\hline \textbf{Descrizione} & Attraverso l’interfaccia di configurazione di progetto, l’utente coi permessi corretti è in grado di modificare le informazioni relative al contatto principale di riferimento per un progetto (il PM lato cliente)\\ 
 		\hline \textbf{Scenario Principale} & \begin{enumerate}
 			\itemsep-0.5em 
@@ -202,6 +209,7 @@
 	\end{figure}
 	\begin{longtable}{ | p{2.7cm} | p{12cm} |}
 		\hline \textbf{Attori} & Utente con privilegi di scrittura\\ 
+		\hline \textbf{Precondizione} &  L'utente selezionata la voce per creare un nuovo progetto partendo da un offerta esistente\\ 
 		\hline \textbf{Descrizione} & L'utente crea un progetto a partire dai dati di una specifica offerta, auto-completando quindi l'associazione tra progetto con account, offerta e contatto\\ 
 		\hline \textbf{Scenario Principale} & \begin{enumerate}
 			\itemsep-0.5em 

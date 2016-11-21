@@ -69,7 +69,11 @@
 \cleardoublepage
 %\begingroup\onehalfspacing
 
+\chapter*{Note Iniziali}\label{notes}
+Il presente documento descrive l'esperienza di stage, della durata di 320 ore, svolta presso l'azienda \textbf{Athesys s.r.l.} di Padova.\\
 
+\textit{\textbf{Convenzioni utilizzate}} : tutti i termini marcati con una 'G' a
+pedice vengono spiegati nell'appendice Glossario alla fine del documento.\\
 %**************************************************************
 % Keywords
 %**************************************************************
@@ -91,9 +95,9 @@ Questa disciplina è fondamentale per controllare i costi, l'utilizzo delle riso
 % Abstract
 %**************************************************************
 \chapter*{Abstract}\label{abstract}
-	Il presente documento descrive l'esperienza di stage, della durata di 320 ore, svolta presso l'azienda \textbf{Athesys s.r.l.} di Padova.\\
+	%Il presente documento descrive l'esperienza di stage, della durata di 320 ore, svolta presso l'azienda \textbf{Athesys s.r.l.} di Padova.\\
 	
-	\textit{Convenzioni utilizzate} : tutti i termini marcati con una 'G' a
+	%\textit{Convenzioni utilizzate} : tutti i termini marcati con una 'G' a
 	pedice vengono spiegati nell'appendice Glossario alla fine del documento.\\
 
 	Segue una breve presentazione delle componenti coinvolte nella realizzazione del progetto di stage.
@@ -418,16 +422,34 @@ Questi test sono stati effettuati in presenza del referente aziendale per il pro
 
 
 \chapter{Conclusioni}\label{conclusioni}
-\section{Soddisfacimento dei requisiti}
-A conclusione del progetto di stage i requisiti sono stati soddisfatti secondo le seguenti percentuali.
+\section{Copertura dei requisiti}
+A conclusione del progetto di stage la quasi totalità degli obbiettivi prefissati sono stati raggiunti; i requisiti sono stati soddisfatti secondo le seguenti percentuali:
 \begin{itemize}
 	\item \textbf{Requisiti Obbligatori:} 100\%
 	\item \textbf{Requisiti Opzionali:} 88\%
 \end{itemize}
-Non è stato possibile concludere solamente il requisito opzionale \textbf{R-2F5.5} (riguardante il recupero dei dati riguardanti i prodotti su Microsoft Dynamics) in quanto, per poter ridurre al minimo il numero di chiamate http al CRM, è stato necessario modificare la \glossary{query} per interrogare Dynamics.
-%todo da rimuovere
-Chop the \gls{cabbage}, \glspl{potato} and \glspl{carrot}.
+Non è stato possibile, per mancanza di tempo, concludere solamente il requisito opzionale \textbf{R-2F5.5} (riguardante il recupero dati dei prodotti su Microsoft Dynamics) in quanto, per poter ridurre al minimo il numero di chiamate http al CRM, è stato necessario modificare le \glo{query} per interrogare Dynamics.
+\section{Sviluppi futuri}
+Attraverso il progetto di stage è nato il servizio web \textbf{ADCrm}, ma non può ancora definirsi concluso. Sono infatti previsti una serie di incrementi che dovranno essere attuati nell'immediato futuro per rendere il software totalmente operativo:
+\begin{itemize}
+	\item conclusione della integrazione con Microsoft Dyamics e completamento del requisito \textbf{R-2F5.5};
+	\item incrementare la parte di gestione degli errori attraverso un sistema completo di \glo{logging} delle eccezioni sul servizio ADCrm.
+\end{itemize}
+Inoltre l'azienda ha ipotizzato alcuni sviluppi futuri riguardo l'incremento delle funzionalità di ADProject nell'ambito dei CRM:
+\begin{itemize}
+	\item dare la possibilità di effettuare operazioni di scrittura da ADProject sul CRM;
+	\item fornire opzioni di sincronizzazione da ADProject verso i CRM;
+	\item integrare ulteriori tipologie di software CRM.
+\end{itemize}
 
+\section{Considerazioni personali}
+Durante l'insegnamento del corso di Ingegneria del Software, è stata più volte sottolineata l'importanza dello stage come conclusione del percorso formativo di ogni studente di Informatica, ma solo durante lo stesso si riesce ad apprezzare realmente quanto questo sia essenziale.\\
+Il primo contatto con Athesys s.r.l è avvenuto grazie a STAGE-IT ed è stata l'azienda che, oltre ad aver presentato progetti estremamente interessanti, mi ha messo a mio agio durante tutti gli incontri avvenuti. Avendo già avuto in precedenza un'esperienza lavorativa nell'ambito dell'informatica, ho imparato che l'ambiente ed il team di lavoro sono tanto importanti quanto il progetto che si andrà a svolgere, ed è stato il connubio di questi due elementi che, a seguito di incontri e colloqui, mi ha dato la certezza della scelta di Athesys s.r.l per lo stage.\\
+All'inizio mi mancavano molte delle conoscenze necessarie per realizzare il progetto, ma questo l'ho vissuto come una sfida, superata grazie alle competenze acquisite in questi anni di studio. La realizzazione di ADCrm mi ha fatto capire che il percorso di laurea in informatica non mi ha insegnato solamente dei linguaggi di programmazione, bensì mi ha dato la forma mentis per apprenderli ed usarli tutti, per reagire a problemi inaspettati e trovare soluzioni per superarli.\\ 
+Ritengo quindi questa esperienza estremamente positiva, sia per gli obbiettivi raggiunti sia per le persone che ho conosciuto e che mi hanno affiancato durante lo stage.
+
+
+\cleardoublepage
 %**************************************************************
 % Glossary and bibliography
 %**************************************************************
