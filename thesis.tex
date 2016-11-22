@@ -95,12 +95,8 @@ Questa disciplina è fondamentale per controllare i costi, l'utilizzo delle riso
 % Abstract
 %**************************************************************
 \chapter*{Abstract}\label{abstract}
-	%Il presente documento descrive l'esperienza di stage, della durata di 320 ore, svolta presso l'azienda \textbf{Athesys s.r.l.} di Padova.\\
-	
-	%\textit{Convenzioni utilizzate} : tutti i termini marcati con una 'G' a
-	pedice vengono spiegati nell'appendice Glossario alla fine del documento.\\
 
-	Segue una breve presentazione delle componenti coinvolte nella realizzazione del progetto di stage.
+	In questo capitolo viene presentato il progetto di stage svolto, iniziando da una breve presentazione delle componenti coinvolte nella realizzazione stesso.
 	
 	\paragraph{ADProject}~\\
 		L’azienda Athesys s.r.l. ha sviluppato un'applicazione web di \textit{Project Management}, chiamata ADProject, fornendo ai propri clienti la possibilità di avere un programma personalizzato in base alle loro esigenze.\\
@@ -120,24 +116,24 @@ Questa disciplina è fondamentale per controllare i costi, l'utilizzo delle riso
 	\par
 	
 	\paragraph{SalesForce e Microsoft Dynamics}~\\
-		La maggior parte delle aziende con un reparto commerciale ha la necessità di utilizzare software CRM per gestire al meglio le offerte, gli ordini e in generale i rapporti con i clienti. In questo ambito i due maggiori esponenti sono senza dubbio: \textit{SalesForce} e \textit{Microsoft Dynamics}, entrambe applicazioni \textit{cloud-based}.
+		La maggior parte delle aziende con un reparto commerciale ha la necessità di utilizzare software \gls{CRM} per gestire al meglio le offerte, gli ordini e in generale i rapporti con i clienti. In questo ambito i due maggiori esponenti sono senza dubbio: \textit{SalesForce} e \textit{Microsoft Dynamics}, entrambe applicazioni \textit{cloud-based}.
 	\par
 
 	\paragraph{Elementi in comune tra Project Management e CRM}~\\
-		I concetti di Project Management e CRM ad un primo sguardo possono sembrare non direttamente collegati, tuttavia sono anelli di una stessa catena ed operano su entità analoghe:
+		I concetti di Project Management e \gls{CRM} ad un primo sguardo possono sembrare non direttamente collegati, tuttavia sono anelli di una stessa catena ed operano su entità analoghe:
 		\begin{itemize}
 			\itemsep-0.5em 
 			\item i prodotti da realizzare e vendere;
 			\item la capacità di produzione, dipendente dal tempo e dalle risorse aziendali, che incide sulla disponibilità dei prodotti;	
 			\item il cliente al quale devono essere imputati i costi delle risorse utilizzate e di sviluppo per la produzione di soluzioni software \glo{custom};
-			\item alcune figure aziendali (tipicamente il personale del reparto contabilità) già censite all'interno del software CRM, annoverabili tra le risorse di un'azienda.
+			\item alcune figure aziendali (tipicamente il personale del reparto contabilità) già censite all'interno del software \gls{CRM}, annoverabili tra le risorse di un'azienda.
 			%TODO:  da rivedere
 		\end{itemize}
 	\par
 	
 	\paragraph{Scopo del progetto e nascita di ADCrm}~\\
 		%Ci sono moltissimi dati all'interno dei software CRM che possono essere utilizzati nell'ambito del Project Management, grazie ai quali verrebbero ridotti di molto i tempi di \textit{data-entry}, necessari per il corretto funzionamento di una nuova installazione di ADProject.\\
-		L'esigenza ultima di Athesys s.r.l. è quella di fornire un prodotto completo e competitivo, attingendo a tutti i dati utili che i software CRM possono offrire, abbatendo i tempi di \textit{data-entry} e migliorando l'esperienza utente. Con questo fine, attraverso il progetto di stage, è stato realizzato \textbf{ADCrm}: un servizio web che si pone come ponte tra le due realtà, fornendo la possibilità ad ADProject di fruire dei dati presenti su SalesForce e Dynamics, rielaborandoli secondo le proprie esigenze, attraverso l'utilizzo di web \glo{API}.
+		L'esigenza ultima di Athesys s.r.l. è quella di fornire un prodotto completo e competitivo, attingendo a tutti i dati utili che i software \gls{CRM} possono offrire, abbatendo i tempi di \textit{data-entry} e migliorando l'esperienza utente. Con questo fine, attraverso il progetto di stage, è stato realizzato \textbf{ADCrm}: un servizio web che si pone come ponte tra le due realtà, fornendo la possibilità ad ADProject di fruire dei dati presenti su SalesForce e Dynamics, rielaborandoli secondo le proprie esigenze, attraverso l'utilizzo di web \glo{API}.
 	\par
 
 %**************************************************************
@@ -153,40 +149,40 @@ Questa disciplina è fondamentale per controllare i costi, l'utilizzo delle riso
 %**************************************************************
 \chapter{Il Progetto}\label{introduzione}
 	\section{Piano di Lavoro}
-		Il progetto, per quanto stabilito nel piano di lavoro dello stage, comporta l'integrazione di \textit{Salesforce} con \textit{ADProject}. Dato che la parte principale dell'applicazione è stata ultimata in anticipo rispetto al previsto, si è deciso di integrare nel servizio \textit{\textbf{ADCrm}} anche un secondo CRM: \textit{\textbf{Microsoft Dynamics}}.\\
+		Il progetto, per quanto stabilito nel piano di lavoro dello stage, comporta l'integrazione di \textit{Salesforce} con \textit{ADProject}. Dato che la parte principale dell'applicazione è stata ultimata in anticipo rispetto al previsto, si è deciso di integrare nel servizio \textit{\textbf{ADCrm}} anche un secondo \gls{CRM}: \textit{\textbf{Microsoft Dynamics}}.\\
 		Nei successivi capitoli verrà descritta l'integrazione con entrambi i sistemi e verranno spiegate le sfide riscontrate in questo progetto, ponendo particolare attenzione alle parti riguardanti \textit{\textbf{SalesForce}}.
 	\section{Studio delle applicazioni CRM}
-		La prima parte dello stage consisteva nello studio di SalesForce per  acquisire dimestichezza con lo stesso, con i principi che stanno dietro ai software CRM ma soprattutto per identificare tutti i dati potenzialmente utili per l'integrazione con ADProject.\\
+		La prima parte dello stage consisteva nello studio di SalesForce per  acquisire dimestichezza con lo stesso, con i principi che stanno dietro ai software \gls{CRM} ma soprattutto per identificare tutti i dati potenzialmente utili per l'integrazione con ADProject.\\
 		In questa fase è stato analizzato il flusso di eventi necessari per il corretto utilizzo di Salesforce e le entità collegate.		
 		\begin{enumerate}
 			\item creazione di un'entità \textbf{Account} per un'azienda cliente o che potrebbe potenzialmente diventarlo, nella quale vengono censiti tutti i dati che si hanno a disposizione (nome, sito web, email, ricavi annuali, numero di dipendenti, area commerciale,...);
 			\item creazione di una o più entità \textbf{Contatto} associate ad ogni \textbf{Account}, queste contengono tutti i dati relativi alle persone dell'azienda cliente, alle quali proporre offerte commerciali;
-			\item inserimento nel CRM di ogni \textbf{Prodotto} che si intende vendere,associato ad un'apposita descrizione ed un prezzo di listino;
+			\item inserimento nel \gls{CRM} di ogni \textbf{Prodotto} che si intende vendere,associato ad un'apposita descrizione ed un prezzo di listino;
 			\item creazione di un'entità \textbf{Offerta} alla quale associare una serie di prodotti (scontabili rispetto al prezzo di listino), nel momento in cui si vuole proporre un'offerta commerciale ad un cliente;
 			\item creazione di un entità \textbf{Ordine}, contenente tutti i dati di spedizione, fatturazione etc, nel momento in cui l'offerta viene approvata dal cliente.
 		\end{enumerate}
-		I software CRM offrono un insieme di operazioni e funzionalità molto più vasto, ma non utili (al momento) ai fini dell'integrazione con ADProject.\\
+		I software \gls{CRM} offrono un insieme di operazioni e funzionalità molto più vasto, ma non utili (al momento) ai fini dell'integrazione con ADProject.\\
 		\paragraph{Le classi di dati}~\\
-			Attraverso lo studio di SalesForce e di ADProject sono emerse le classi di dati che sarebbe utile importare dal CRM:
+			Attraverso lo studio di SalesForce e di ADProject sono emerse le classi di dati che sarebbe utile importare dal \gls{CRM}:
 			\begin{itemize}
 				\item \textbf{Account:} ogni progetto creato attraverso ADProject deve essere imputato ad un'azienda cliente
 				\item \textbf{Contatti:} ogni Account deve avere un contatto principale come referente
 				\item \textbf{Offerte:} ogni progetto deve avere una motivazione per essere creato, questa corrisponde all'offerta commerciale
 				\item \textbf{Prodotti:} i prodotti corrispondono all'output principale dei progetti
 				\item \textbf{Famiglie di Prodotti:} è comodo e utile accorpare i prodotti in macro-famiglie in quanto rende più facile la ricerca degli stessi 
-				\item \textbf{Utenti:} il personale aziendale che utilizza il CRM (tipicamente il reparto commerciale) è bene che sia annoverato tra le risorse aziendali
+				\item \textbf{Utenti:} il personale aziendale che utilizza il \gls{CRM} (tipicamente il reparto commerciale) è bene che sia annoverato tra le risorse aziendali
 			\end{itemize}
 		\par
 		\subsection{Procedure di Autenticazione}
-			Per avere l'accesso ai dati del CRM, l'applicazione ADCrm deve potersi autenticare presso i server di SalesForce e Dynamics. Entrambe le applicazioni permettono l'autenticazione attraverso protocollo OAuth2.0.
+			Per avere l'accesso ai dati del \gls{CRM}, l'applicazione ADCrm deve potersi autenticare presso i server di SalesForce e Dynamics. Entrambe le applicazioni permettono l'autenticazione attraverso protocollo OAuth2.0.
 			\paragraph{OAuth2.0}
 			è un protocollo aperto che permette, in maniera semplice e standard, di autenticare e autorizzare applicazioni web, mobile e desktop ad accedere ai dati che si vogliono esporre, senza fornire direttamente le credenziali dell'utente.\\
-			La scelta di questo protocollo è stata obbligata, dato che è l'unico metodo d'autenticazione esposto dai CRM, tuttavia è un'ottima opzione in quanto permette di rendere più sicuro il sistema, limitando la quantità di dati sensibili salvati all'interno dell'applicazione; inoltre sgrava il sistema dalle procedure di cambio password dato che sono a carico del \glo{provider} OAuth (SalesForce e Dynamics).
+			La scelta di questo protocollo è stata obbligata, dato che è l'unico metodo d'autenticazione esposto dai \gls{CRM}, tuttavia è un'ottima opzione in quanto permette di rendere più sicuro il sistema, limitando la quantità di dati sensibili salvati all'interno dell'applicazione; inoltre sgrava il sistema dalle procedure di cambio password dato che sono a carico del \glo{provider} OAuth (SalesForce e Dynamics).
 			%TODO: da ricontrollare
 
 			\paragraph{Flusso di autenticazione}~\\
 			In questo paragrafo viene descritto il flusso di autenticazione per Salesforce, necessario per ottenere il \glo{token} d'accesso.
-			Questo \glo{token} è composto da una serie di caratteri alfanumerici, che è necessario allegare all'\glo{header} della richiesta http, per recuperare i dati contenuti nel CRM.
+			Questo \glo{token} è composto da una serie di caratteri alfanumerici, che è necessario allegare all'\glo{header} della richiesta \gls{http}, per recuperare i dati contenuti nel \gls{CRM}.
 				\begin{figure}[!hb]
 					\centering
 					\includegraphics[width=0.7\linewidth]{images/webServerAuthFlow}
@@ -194,29 +190,29 @@ Questa disciplina è fondamentale per controllare i costi, l'utilizzo delle riso
 					\label{fig:webserverauthflow}
 				\end{figure}
 			\begin{enumerate}
-				\item L'applicazione client, che vuole accedere ai dati del CRM, deve effettuare una chiamata http con metodo POST (ed uno specifico set di parametri) all'appropriato \glo{endpoint} di SalesForce;
+				\item L'applicazione client, che vuole accedere ai dati del \gls{CRM}, deve effettuare una chiamata \gls{http} con metodo POST (ed uno specifico set di parametri) all'appropriato \glo{endpoint} di SalesForce;
 				\item SalesForce risponde inviando al chiamante, una pagina web sulla quale l'utente dovrà inserire le proprie credenziali d'accesso al sito; %L'utente interagisce direttamente con l'\glo{endpoint} di autorizzazione, in questo modo l'applicazione che effettua la richiesta d'accesso non necessita di conoscere le credenziali d'autenticazione;
-				\item Una volta confermato che l'applicazione è autorizzata ad accedere al CRM, SalesForce invia al richiedente un codice alfanumerico in formato \glo{JSON};
-				\item L'applicazione deve quindi estrarre il codice ricevuto nel punto 3, inserirlo in una richiesta http con metodo POST insieme ad un set specifico di parametri, ed inoltrate la richiesta all'\glo{endpoint} designato;
-				\item Nel caso in cui la richiesta sia stata effettuata con successo, il server risponde con un file \glo{JSON}, contenente i \glo{token} necessari ad interrogare il CRM;
-				\item L'applicazione client utilizza i \glo{token} d'accesso forniti per effettuare richieste al CRM. 
+				\item Una volta confermato che l'applicazione è autorizzata ad accedere al \gls{CRM}, SalesForce invia al richiedente un codice alfanumerico in formato \glo{JSON};
+				\item L'applicazione deve quindi estrarre il codice ricevuto nel punto 3, inserirlo in una richiesta \gls{http} con metodo POST insieme ad un set specifico di parametri, ed inoltrate la richiesta all'\glo{endpoint} designato;
+				\item Nel caso in cui la richiesta sia stata effettuata con successo, il server risponde con un file \glo{JSON}, contenente i \glo{token} necessari ad interrogare il \gls{CRM};
+				\item L'applicazione client utilizza i \glo{token} d'accesso forniti per effettuare richieste al \gls{CRM}. 
 			\end{enumerate}
 		\subsection{API e Protocolli di interrogazione dati}
-			Entrambi i CRM permettono l'interrogazione dei propri dati attraverso l'implementazione di protocolli \textit{\glo{REST-based}}. Questi offrono anche la possibilità di mettere in relazione dati differenti, in maniera simile al comportamento della clausola \glo{JOIN} per le \glo{query} \glo{SQL}, anche se con limitazioni.\\ 
-			La sfida che si è presentata in quest'ambito è stata quella di trovare il modo migliore di recuperare tutti i dati necessari limitando al massimo il numero di richieste http inviate ai CRM, in quanto ogni nuova richiesta effettuata aumenta il tempo di re-indirizzamento dei dati recuperati verso ADProject.
+			Entrambi i \gls{CRM} permettono l'interrogazione dei propri dati attraverso l'implementazione di protocolli \textit{\glo{REST-based}}. Questi offrono anche la possibilità di mettere in relazione dati differenti, in maniera simile al comportamento della clausola \glo{JOIN} per le \glo{query} \glo{SQL}, anche se con limitazioni.\\ 
+			La sfida che si è presentata in quest'ambito è stata quella di trovare il modo migliore di recuperare tutti i dati necessari limitando al massimo il numero di richieste \gls{http} inviate ai \gls{CRM}, in quanto ogni nuova richiesta effettuata aumenta il tempo di re-indirizzamento dei dati recuperati verso ADProject.
 			~\\
 			SalesForce e Microsoft Dynamics sfruttano due protocolli molto diversi tra di loro:
 			%TODO: migliorare
 			\paragraph{SOQL}
-			o \textit{\textbf{S}alesforce \textbf{O}bject \textbf{Q}uery \textbf{L}anguage} permette di recuperare i dati della propria organizzazione da SalesForce. SOQL è basato su richieste http ad uno specifico \glo{endpoint}, al cui url viene accodata una \glo{query} simile a quelle formulate nel linguaggio \glo{SQL}. In caso di richiesta corretta, Il CRM risponde con i dati richiesti in formato \glo{JSON}.
+			o \textit{\textbf{S}alesforce \textbf{O}bject \textbf{Q}uery \textbf{L}anguage} permette di recuperare i dati della propria organizzazione da SalesForce. SOQL è basato su richieste \gls{http} ad uno specifico \glo{endpoint}, al cui url viene accodata una \glo{query} simile a quelle formulate nel linguaggio \glo{SQL}. In caso di richiesta corretta, Il \gls{CRM} risponde con i dati richiesti in formato \glo{JSON}.
 			\paragraph{OData}
-			E' un protocollo aperto (Open Data Protocol) creato da Microsoft, che definisce un insieme di best-practices per costruire e utilizzare API RESTful.\\
-			Dynamics permette l'interrogazione dei propri dati attraverso semplici richieste http basate su questo protocollo, restituendo i dati richiesti in formato \glo{JSON}.
+			E' un protocollo aperto (Open Data Protocol) creato da Microsoft, che definisce un insieme di best-practices per costruire e utilizzare \glo{API} RESTful.\\
+			Dynamics permette l'interrogazione dei propri dati attraverso semplici richieste \gls{http} basate su questo protocollo, restituendo i dati richiesti in formato \glo{JSON}.
 			
 		\subsection{Simulazione query}
 			Si è presto reso necessario verificare che il processo di autenticazione funzionasse correttamente e che fosse possibile recuperare tutti i dati voluti attraverso le \glo{query}, senza tuttavia cominciare la fase di codifica di ADCrm (dato che modifiche in corso d'opera all'architettura dell'applicazione, avrebbero causato un costo eccessivo in tempo e sforzi).
-			Per risolvere questo problema si è deciso di simulare tutte le chiamate http, che il sistema avrebbe effettuato, tramite \textit{Postman}.
-			\paragraph{Postman Rest Client} è un applicazione che permette di comporre richieste http in maniera semplice e veloce, risultando particolarmente utile per testare il funzionamento di \glo{API} proprie e altrui.
+			Per risolvere questo problema si è deciso di simulare tutte le chiamate \gls{http}, che il sistema avrebbe effettuato, tramite \textit{Postman}.
+			\paragraph{Postman Rest Client} è un applicazione che permette di comporre richieste \gls{http} in maniera semplice e veloce, risultando particolarmente utile per testare il funzionamento di \glo{API} proprie e altrui.
 			\par
 						
 			\begin{figure}[!hb]
@@ -343,13 +339,13 @@ In questo capitolo viene dettagliatamente descritta l'applicazione, presentando:
 
 \section{Design pattern}\label{design_pattern}
 \subsection{Microservices}
-Lo stile architetturale a microservizi è un approccio per sviluppare una singola applicazione come un insieme di piccoli servizi autonomi che interagiscono tra di loro, ognuno dei quali gestisce i suoi processi e comunica attraverso meccanismi snelli, spesso \glo{API} http.
+Lo stile architetturale a microservizi è un approccio per sviluppare una singola applicazione come un insieme di piccoli servizi autonomi che interagiscono tra di loro, ognuno dei quali gestisce i suoi processi e comunica attraverso meccanismi snelli, spesso \glo{API} \gls{http}.
 Questa architettura permette di velocizzare i tempi di sviluppo (essendo i servizi autonomi tra di loro essi possono raggiungere l'ambiente di produzione anche in momenti separati ed inoltre possono essere sviluppati da persone diverse), aumentare la resilienza del sistema (se uno dei servizi smette di funzionare essendo separato dagli altri, non pregiudica il funzionamento del sistema) ed è più facilmente scalabile rispetto ad un architettura monolitica.\\
 Si è deciso di sviluppare ADCrm seguendo quest'ottica, ottenendo in questo modo:
 \begin{itemize}
 	\itemsep-0.5em
 	\item una netta separazione dei compiti delle varie componenti del sistema;
-	\item la possibilità di collegarsi a nuovi CRM senza dover modificare in alcun modo ADProject, in quanto esso comunica con il servizio attraverso un interfaccia comune;
+	\item la possibilità di collegarsi a nuovi \gls{CRM} senza dover modificare in alcun modo ADProject, in quanto esso comunica con il servizio attraverso un interfaccia comune;
 	\item un aumento  della resilienza e la scalabilità dell'applicazione.
 \end{itemize}
 
@@ -357,15 +353,15 @@ Si è deciso di sviluppare ADCrm seguendo quest'ottica, ottenendo in questo modo
 \subsection{RESTful}\label{rest}
 REST o \textit{\textbf{Re}presentational \textbf{S}tate \textbf{T}ransfer} è un architettura software che permette di rendere interoperabili sistemi di computer attraverso internet. 
 Un servizio web REST permette ai sistemi richiedenti, di accedere e manipolare una rappresentazione testuale delle sue risorse web attraverso un insieme predefinito di operazioni \glo{stateless}.
-Utilizzare i metodi definiti per il protocollo http (GET, POST, PUT, DELETE) è il modo più comune accedere alle risorse web del sistema che le espone.
+Utilizzare i metodi definiti per il protocollo \gls{http} (GET, POST, PUT, DELETE) è il modo più comune accedere alle risorse web del sistema che le espone.
 Questa architettura attraverso l'utilizzo del protocollo \glo{stateless} e di insiemi di operazioni standard, mira a garantire ottime performance, essere affidabile e scalabile senza dover necessitare di modificare tutto il sistema nel caso di cambiamenti a qualche sua componente.
-L'architettura REST viene utilizzata da \textbf{ADCrm\textbf{}} per recuperare ed esporre a sua volta le risorse presenti sul CRM.
-Concretamente sarà presente quindi un microservizio per ogni CRM che si vorrà collegare all'applicazione.
+L'architettura REST viene utilizzata da \textbf{ADCrm\textbf{}} per recuperare ed esporre a sua volta le risorse presenti sul \gls{CRM}.
+Concretamente sarà presente quindi un microservizio per ogni \gls{CRM} che si vorrà collegare all'applicazione.
 
 \subsection{DTO \& DAO}
-Il DTO (\textit{Data Transfer Object}) e DAO (\textit{Data Access Object}) sono due design pattern architetturali spesso usati in congiunzione.\\
+Il \gls{DTO} (\textit{Data Transfer Object}) e \gls{DAO} (\textit{Data Access Object}) sono due design pattern architetturali spesso usati in congiunzione.\\
 La loro funzione principale è quella di disaccoppiare il \textit{data layer} (la parte in cui risiedono i dati) dalla parte di \textit{business logic} (ciò che rappresenta la logica applicativa) dell'applicazione, aumentando cosi la separazione tra le varie componenti e quindi la loro modularità e manutenibilità.\\
-Le classi di oggetti DTO al loro interno avranno solamente campi dati accedibili attraverso metodi \textit{getter} e \textit{setter}, mentre gli oggetti DAO implementeranno i metodi, utilizzati dalla \textit{business logic}, per accedere ai dati dell'applicazione utilizzando quindi i sopracitati \textit{Data Transfer Object}.
+Le classi di oggetti \gls{DTO} al loro interno avranno solamente campi dati accedibili attraverso metodi \textit{getter} e \textit{setter}, mentre gli oggetti \gls{DAO} implementeranno i metodi, utilizzati dalla \textit{business logic}, per accedere ai dati dell'applicazione utilizzando quindi i sopracitati \textit{Data Transfer Object}.
 
 \subsection{Factory Method} \label{factory}
 Questo design pattern creazionale, nell'ambito della programmazione orientata agli oggetti, permette di affrontare il problema della creazione di oggetti senza specificarne a priori l'esatta classe di appartenenza.
@@ -378,7 +374,7 @@ Il pattern fornisce un interfaccia per la creazione di un oggetto, ma lascia all
 	\label{fig:abstractfactorystructure}
 \end{figure}
 
-In questo modo l'applicazione ADCrm non solo non ha bisogno di sapere a priori se deve costruire oggetti per \textit{Salesforce} o altri CRM, ma ha anche la possibilità di aver collegarsi a più applicazioni CRM contemporaneamente.
+In questo modo l'applicazione ADCrm non solo non ha bisogno di sapere a priori se deve costruire oggetti per \textit{Salesforce} o altri \gls{CRM}, ma ha anche la possibilità di aver collegarsi a più applicazioni \gls{CRM} contemporaneamente.
 
 
 \input{architecturalDesign.tex}
@@ -414,7 +410,7 @@ Questa metodologia è stata utilizzata per testare il funzionamento complessivo 
 
 \paragraph{Driver} 
 i "test driver" sono porzioni di codice per simulare il comportamento di un unità chiamante, non ancora implementata, per verificare se l'unità chiamata funziona correttamente e produce output attesi.\\
-Questa tipologia di test è stata utilizzata per simulare tutte le chiamate alle API di ADCrm, cosi da assicurarsi che il sistema fosse funzionante dopo ogni eventuale modifica a \glossary{query} o metodi.
+Questa tipologia di test è stata utilizzata per simulare tutte le chiamate alle \glo{API} di ADCrm, cosi da assicurarsi che il sistema fosse funzionante dopo ogni eventuale modifica a \glossary{query} o metodi.
 \section{Validazione}
 Il processo di validazione è indispensabile e serve per accertarsi, mediante misurazioni e prove oggettive, che il prodotto (in questo caso ADCrm) risponda a tutte le specifiche attese dall'utente.
 Per accertarsi di ciò vengono effettuati i test di accettazione, dove il cliente finale controlla che il prodotto risponda correttamente a tutti i requisiti fissati nella fase iniziale di analisi.
@@ -428,20 +424,20 @@ A conclusione del progetto di stage la quasi totalità degli obbiettivi prefissa
 	\item \textbf{Requisiti Obbligatori:} 100\%
 	\item \textbf{Requisiti Opzionali:} 88\%
 \end{itemize}
-Non è stato possibile, per mancanza di tempo, concludere solamente il requisito opzionale \textbf{R-2F5.5} (riguardante il recupero dati dei prodotti su Microsoft Dynamics) in quanto, per poter ridurre al minimo il numero di chiamate http al CRM, è stato necessario modificare le \glo{query} per interrogare Dynamics.
+Non è stato possibile, per mancanza di tempo, concludere solamente il requisito opzionale \textbf{R-2F5.5} (riguardante il recupero dati dei prodotti su Microsoft Dynamics) in quanto, per poter ridurre al minimo il numero di chiamate \gls{http} al \gls{CRM}, è stato necessario modificare le \glo{query} per interrogare Dynamics.
 \section{Sviluppi futuri}
 Attraverso il progetto di stage è nato il servizio web \textbf{ADCrm}, ma non può ancora definirsi concluso. Sono infatti previsti una serie di incrementi che dovranno essere attuati nell'immediato futuro per rendere il software totalmente operativo:
 \begin{itemize}
 	\item conclusione della integrazione con Microsoft Dyamics e completamento del requisito \textbf{R-2F5.5};
 	\item incrementare la parte di gestione degli errori attraverso un sistema completo di \glo{logging} delle eccezioni sul servizio ADCrm.
 \end{itemize}
-Inoltre l'azienda ha ipotizzato alcuni sviluppi futuri riguardo l'incremento delle funzionalità di ADProject nell'ambito dei CRM:
+Inoltre l'azienda ha ipotizzato alcuni sviluppi futuri riguardo l'incremento delle funzionalità di ADProject nell'ambito dei \gls{CRM}:
 \begin{itemize}
-	\item dare la possibilità di effettuare operazioni di scrittura da ADProject sul CRM;
-	\item fornire opzioni di sincronizzazione da ADProject verso i CRM;
-	\item integrare ulteriori tipologie di software CRM.
+	\item dare la possibilità di effettuare operazioni di scrittura da ADProject sul \gls{CRM};
+	\item fornire opzioni di sincronizzazione da ADProject verso i \gls{CRM};
+	\item integrare ulteriori tipologie di software \gls{CRM}.
 \end{itemize}
-
+\newpage
 \section{Considerazioni personali}
 Durante l'insegnamento del corso di Ingegneria del Software, è stata più volte sottolineata l'importanza dello stage come conclusione del percorso formativo di ogni studente di Informatica, ma solo durante lo stesso si riesce ad apprezzare realmente quanto questo sia essenziale.\\
 Il primo contatto con Athesys s.r.l è avvenuto grazie a STAGE-IT ed è stata l'azienda che, oltre ad aver presentato progetti estremamente interessanti, mi ha messo a mio agio durante tutti gli incontri avvenuti. Avendo già avuto in precedenza un'esperienza lavorativa nell'ambito dell'informatica, ho imparato che l'ambiente ed il team di lavoro sono tanto importanti quanto il progetto che si andrà a svolgere, ed è stato il connubio di questi due elementi che, a seguito di incontri e colloqui, mi ha dato la certezza della scelta di Athesys s.r.l per lo stage.\\
@@ -453,10 +449,11 @@ Ritengo quindi questa esperienza estremamente positiva, sia per gli obbiettivi r
 %**************************************************************
 % Glossary and bibliography
 %**************************************************************
-%\printglossaries
-\printnoidxglossaries
+%
+%\printnoidxglossaries
+\printglossaries
 \bibliographystyle{unsrt}
-%\bibliography{thesis}
+\bibliography{thesis}
 
 
 %**************************************************************
