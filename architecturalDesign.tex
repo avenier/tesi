@@ -264,7 +264,7 @@ Interfaccia che dovrà essere implementata dalle classi concrete Athesys.ADCrm.S
 		\begin{lstlisting}
 		clientId : string
 		\end{lstlisting}
-		E' un codice alfanumerico che non cambia nel tempo, generato dall'CRM. Esso è fondamentale per permettere il collegamento \glo{OAuth} all'applicazione. 
+		E' un codice alfanumerico che non cambia nel tempo, generato dall'CRM. Esso è fondamentale per permettere il collegamento Oauth all'applicazione. 
 		%TODO: in caso da modificare questa parte
 		\item 
 		\begin{lstlisting}
@@ -286,7 +286,7 @@ Interfaccia che dovrà essere implementata dalle classi concrete Athesys.ADCrm.S
 		\begin{lstlisting}
 		refreshToken : string
 		\end{lstlisting}
-		E' un codice generato dall'CRM fornito una volta effettuato l'accesso con \glo{OAuth}. Questo permette di ottenere nuovi \glo{token} di autorizzazione senza dover effettuare nuovamente la procedura di login;
+		E' un codice generato dall'CRM fornito una volta effettuato l'accesso con OAuth. Questo permette di ottenere nuovi \glo{token} di autorizzazione senza dover effettuare nuovamente la procedura di login;
 		\item 
 		\begin{lstlisting}
 		clientId : string
@@ -378,7 +378,7 @@ Interfaccia che dovrà essere implementata dalle classi concrete Athesys.ADCrm.S
 
 \paragraph{Description:}
 Questo \glo{package} contiene tutti i vari DTO definiti per ogni entità di dati che si vuole restituire alle chiamate effettuate da ADProject ed inoltre quelle necessarie per gestire le risposte le risposte provenienti dai CRM. 
-Segue in questa sezione una breve descrizione delle classi principali, sorvolando sui metodi delle stesse in quanto sono tutti \glo{accessors} \glo{getter} e \glo{setter}.
+Segue in questa sezione una breve descrizione delle classi principali, sorvolando sui metodi delle stesse in quanto sono tutti \glopl{accessor} \glo{getter} e \glo{setter}.
 
 
 \subsubsection{ProposalData (class)}
@@ -390,7 +390,7 @@ Gli oggetti di questa classe, contenente i dati provenienti dal CRM, verranno in
 \subsubsection{CrmResponseData (class)} \label{crmResponseDataClass}
 \paragraph{Descrizione:}
 Classe che rappresenta un oggetto DTO per modellare le risposte http provenienti dal CRM.
-Questa classe ha solamente due campi dati (ed i relativi \glo{accessors}):
+Questa classe ha solamente due campi dati (ed i relativi \glopl{accessor}):
 \begin{itemize}
 	\item 	
 	\begin{lstlisting}
@@ -401,19 +401,19 @@ Questa classe ha solamente due campi dati (ed i relativi \glo{accessors}):
 	\begin{lstlisting}
 	Private string Content
 	\end{lstlisting}
-	In questo campo dati viene salvato il \glo{Json} della risposta mandata dal CRM.
+	In questo campo dati viene salvato il \glo{JSON} della risposta mandata dal CRM.
 \end{itemize}
 
 \subsubsection{ResponseContainerData (class)} \label{responseContainerDataClass}
 \paragraph{Descrizione:}
 Classe che rappresenta un oggetto DTO per modellare le risposte http da inviare a ADProject.
-Questa classe ha tre campi dati (ed i relativi \glo{accessors}):
+Questa classe ha tre campi dati (ed i relativi \glopl{accessor}):
 \begin{itemize}
 	\item 	
 	\begin{lstlisting}
 	private List<T> Payload
 	\end{lstlisting}
-	In questo campo dati è una lista di \glo{generics} che viene istanziata al tipo di uno degli oggetti DTO di questo \glo{package} (AccountData,ProposalData,ProductData,ContactData,UserData,ProductCategoryData o OrganizationData);
+	In questo campo dati è una lista di \glopl{generic} che viene istanziata al tipo di uno degli oggetti DTO di questo \glo{package} (AccountData,ProposalData,ProductData,ContactData,UserData,ProductCategoryData o OrganizationData);
 	
 	\item 	
 	\begin{lstlisting}
