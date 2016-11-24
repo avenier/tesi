@@ -43,6 +43,8 @@ I metodi \gls{http} con cui chiamare tutti i successivi URL sono metodi \textbf{
 Questo primo \glo{endpoint} necessita di ulteriori spiegazioni in quanto l'url specificato sopra è da anteporre a di tutti quelli che seguiranno \\(eg. "\textbf{api/organization/\{organizationId\}/accounts}" nel caso dell'url "/accounts").\\
 Inoltre si noti che è necessario da parte di chi effettua chiamate verso questo url (e quindi anche verso tutti gli altri) conoscere il campo \textit{organizationId} per poter ottenere una risposta. Questa restrizione è stata posta per far si che il sistema sia più sicuro, rendendo disponibili dei dati riguardanti l'azienda fruitrice del servizio solo se si conosce il corretto identificativo.
 %TODO: decidere se sistemare la parte qua sopra
+\newpage
+\begingroup\onehalfspacing
 	\begin{small}
 		\begin{longtable}{ | l | p{8cm} | }
 			\hline \textbf{URL} & \textbf{Descrizione Risposta}\\
@@ -62,7 +64,7 @@ Inoltre si noti che è necessario da parte di chi effettua chiamate verso questo
 			\hline 
 		\end{longtable}		
 	\end{small}
-	
+\endgroup
 \section{Progettazione}
 In questa sezione verranno descritti in maniera dettagliata tutti i \glo{package}, le classi principali dell'applicazione e i metodi più importanti delle stesse al fine mostrare al meglio il progetto di stage svolto.
 
