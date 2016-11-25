@@ -25,11 +25,12 @@
 	description={ è un attributo con cui si indica un manufatto, un dispositivo, o un componente, progettato e realizzato su misura in base alle necessità dell'acquirente o della funzione specifica che è destinato ad assolvere
 	}
 }
-\newglossaryentry{API} {
-	name=API,
+\newglossaryentry{APIg} {
+	name={API},
 	description={ è l'acronimo per Application Programming Interface (in italiano interfaccia di programmazione di un'applicazione), in informatica, indica ogni insieme di procedure disponibili al programmatore, di solito raggruppate a formare un set di strumenti specifici per l'espletamento di un determinato compito all'interno di un certo programma. Spesso con tale termine si intendono le librerie software disponibili in un certo linguaggio di programmazione
 	}
 }
+
 \newglossaryentry{provider} {
 	name=provider,
 	description={ è un'espressione inglese che indica imprese che forniscono servizi di vario tipo,  italiano si è soliti tradurre "service provider" letteralmente, chiamando l'impresa "fornitore di servizi"
@@ -53,11 +54,12 @@
 	},
 	plural=endpoints
 }
-\newglossaryentry{JSON} {
-	name=JSON,
+\newglossaryentry{JSONg} {
+	name={JSON},
 	description={  acronimo di Javascript Object Notation, è un formato adatto all'interscambio di dati fra applicazioni client-server
 	}
 }
+
 \newglossaryentry{REST-based} {
 	name=REST-based,
 	description={ fa riferimento ad architetture o chiamate  basate sul protocollo REST (vedi sez. \ref{rest})
@@ -143,8 +145,8 @@
 	plural=setters
 }
 
-\newglossaryentry{url} {
-	name=URL,
+\newglossaryentry{URLg} {
+	name={URL},
 	description={ o Uniform Resource Locator è una sequenza di caratteri che identifica univocamente l'indirizzo di una risorsa in Internet, tipicamente presente su un host server
 	}
 }
@@ -166,8 +168,9 @@
 	}
 }
 
-\newglossaryentry{URI} {
-	name=URI,
+
+\newglossaryentry{URIg} {
+	name={URI},
 	description={ o Uniform Resource Identifier, in informatica, si riferisce a una stringa che identifica univocamente una risorsa generica che può essere un indirizzo Web, un documento, un'immagine, un file, un servizio, un indirizzo di posta elettronica, ecc
 	}
 }
@@ -192,3 +195,16 @@
 \newacronym{DTO}{DTO}{Data Transfer Object}
 
 %\newacronym{URI}{URI}{Uniform Resource Identifier}
+
+
+
+
+
+%%% define the acronym and use the see= option
+\newglossaryentry{URI}{type=\acronymtype, name={URI}, description={Uniform Resource Identifier}, first={Uniform Resource Identifier (URI)\glsadd{URIg}}, see=[Glossary:]{URIg}}
+
+\newglossaryentry{JSON}{type=\acronymtype, name={JSON}, description={JavaScript Object Notation}, first={JavaScript Object Notation (JSON)\glsadd{JSONg}}, see=[Glossary:]{JSONg}}
+
+\newglossaryentry{API}{type=\acronymtype, name={API}, description={Application Programming Interface}, first={Application Programming Interface (API)\glsadd{APIg}}, see=[Glossary:]{APIg}}
+
+\newglossaryentry{URL}{type=\acronymtype, name={URL}, description={Uniform Resource Locator}, first={Uniform Resource Locator (URL)\glsadd{URLg}}, see=[Glossary:]{URLg}}

@@ -31,23 +31,23 @@ La figura \ref{fig:architetturasistema} illustra l'architettura ad alto livello 
 
 \section{API REST}\label{apiRest}
 Di seguito si trova la definizione delle \glo{API} REST esposte dal servizio ADCrm.\\
-I metodi \gls{http} con cui chiamare tutti i successivi URL sono metodi \textbf{GET} ed i dati ricevuti nelle risposte sono forniti in formato \glo{JSON}.
+I metodi \gls{http} con cui chiamare tutti i successivi \glo{URL} sono metodi \textbf{GET} ed i dati ricevuti nelle risposte sono forniti in formato \glo{JSON}.
 
 	\begin{small}
 		\begin{longtable}{ | l | p{8cm} | }
-			\hline \textbf{URL} & \textbf{Descrizione Risposta}\\
+			\hline \textbf{\glo{URL}} & \textbf{Descrizione Risposta}\\
 			\hline api/organization/\{organizationId\}/ & Risponde con i dati riguardante l'organizzazione avente \textit{id = organizationId}\\
 			\hline
 		\end{longtable}		
 	\end{small}
-Questo primo \glo{endpoint} necessita di ulteriori spiegazioni in quanto l'url specificato sopra è da anteporre a di tutti quelli che seguiranno \\(eg. "\textbf{api/organization/\{organizationId\}/accounts}" nel caso dell'url "/accounts").\\
-Inoltre si noti che è necessario da parte di chi effettua chiamate verso questo url (e quindi anche verso tutti gli altri) conoscere il campo \textit{organizationId} per poter ottenere una risposta. Questa restrizione è stata posta per far si che il sistema sia più sicuro, rendendo disponibili dei dati riguardanti l'azienda fruitrice del servizio solo se si conosce il corretto identificativo.
+Questo primo \glo{endpoint} necessita di ulteriori spiegazioni in quanto l'\glo{URL} specificato sopra è da anteporre a di tutti quelli che seguiranno \\(eg. "\textbf{api/organization/\{organizationId\}/accounts}" nel caso dell'\glo{URL} "/accounts").\\
+Inoltre si noti che è necessario da parte di chi effettua chiamate verso questo \glo{URL} (e quindi anche verso tutti gli altri) conoscere il campo \textit{organizationId} per poter ottenere una risposta. Questa restrizione è stata posta per far si che il sistema sia più sicuro, rendendo disponibili dei dati riguardanti l'azienda fruitrice del servizio solo se si conosce il corretto identificativo.
 %TODO: decidere se sistemare la parte qua sopra
 \newpage
 \begingroup\onehalfspacing
 	\begin{small}
 		\begin{longtable}{ | l | p{8cm} | }
-			\hline \textbf{URL} & \textbf{Descrizione Risposta}\\
+			\hline \textbf{\glo{URL}} & \textbf{Descrizione Risposta}\\
 			\hline /accounts & Risponde con la lista contenente i dati di tutti gli account\\
 			\hline /accounts/\{\textit{accountId}\} & Risponde con i dati dell'account avente \textit{id = accountId}\\    
 			\hline /accounts/\{\textit{accountId}\}/contacts & Risponde con la lista contenente i dati di tutti gli i contatti legati all'account avente \textit{id = accountId}\\
@@ -273,7 +273,7 @@ Interfaccia che dovrà essere implementata dalle classi concrete Athesys.ADCrm.S
 		\begin{lstlisting}
 		redirectUrl : string
 		\end{lstlisting}
-		E' l'url su cui si vuole far arrivare le risposte del CRM.
+		E' l'\glo{URL} su cui si vuole far arrivare le risposte del CRM.
 		%TODO: in caso da modificare questa parte
 	\end{enumerate}
 	
@@ -515,7 +515,7 @@ Il database è utilizzato per salvare i dati necessari a collegarsi per effettua
 	\item \textbf{Name} : è il nome del software \gls{CRM} (eg. SalesForce o Dynamics);
 	\item \textbf{Type} : è un campo intero per distinguere la tipologia di \gls{CRM} (eg. SalesForce o Dynamics)  
 	\item \textbf{ResoureProvider} :
-	Ogni software \gls{CRM} \textit{cloud-based} viene ospitato su un server, e per identificare a quale di questi ci si dovrà collegare, bisogna inserire questo campo nel \glo{url} (eg. \url{https://emea.salesforce.com} dove il campo ResoureProvider corrisponde alla voce \textit{emea} )
+	Ogni software \gls{CRM} \textit{cloud-based} viene ospitato su un server, e per identificare a quale di questi ci si dovrà collegare, bisogna inserire questo campo nel \glo{URL} (eg. \url{https://emea.salesforce.com} dove il campo ResoureProvider corrisponde alla voce \textit{emea} )
 	%TODO: verificare il termine hostare
 	\item \textbf{ClientId} : è l’identificativo univoco (pubblico) del client ed è uno dei dati fondamentali che le applicazioni \gls{CRM} devono fornire per permettere il collegamento di terze applicazioni-web tramite procedura OAuth;
 	\item \textbf{ClietSecret} :  è l’identificativo segreto del client ed è il secondo dato fondamentale che le applicazioni \gls{CRM} devono fornire per permettere il collegamento di terze applicazioni-web tramite procedura OAuth;
