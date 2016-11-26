@@ -30,7 +30,7 @@ La figura \ref{fig:architetturasistema} illustra l'architettura ad alto livello 
 \end{figure}
 
 \section{API REST}\label{apiRest}
-Di seguito si trova la definizione delle \glo{API} REST esposte dal servizio ADCrm.\\
+Di seguito si trova la definizione delle \glo{API} REST esposte dal servizio \textbf{ADCrm}.\\
 I metodi \gls{http} con cui chiamare tutti i successivi \glo{URL} sono metodi \textbf{GET} ed i dati ricevuti nelle risposte sono forniti in formato \glo{JSON}.
 
 	\begin{small}
@@ -232,7 +232,7 @@ Classe che serve per gestire le chiamate \gls{http} richiedenti dati relativi al
 
 \newpage
 \paragraph{Descrizione:}
-Questo \glo{package} contiene il \glo{package} Data(avente le classi \gls{DTO}) e tutte le interfacce che dovranno essere implementate diversamente per ogni CRM che si vuole collegare all'applicazione. 
+Questo \glo{package} contiene il \glo{package} \textbf{Data} (avente le classi \gls{DTO}) e tutte le interfacce che dovranno essere implementate diversamente per ogni CRM che si vuole collegare all'applicazione. 
 %TODO: da modificare la descrizione
 
 \subsubsection{IIdentityProvider (interface)}
@@ -488,7 +488,7 @@ Di seguito vengono riportati alcuni metodi significativi della classe per esempl
 \end{itemize}
  
 \subsection{Athesys.ADCrm.Salesforce}\label{salesforce}
-Questo \glo{package} contiene tutte le classi che implementano le interfacce definite in Athesys.ADCrm.Common e, sviluppando  restituiscono ai controllers di Athesys.ADCrm.API i vari oggetti \gls{DTO} delle entità del \glo{package} Athesys.ADCrm.Common.Data.
+Questo \glo{package} contiene tutte le classi che implementano le interfacce definite in Athesys.ADCrm.Common e, restituiscono ai controllers di Athesys.ADCrm.API i vari oggetti \gls{DTO} delle entità del \glo{package} Athesys.ADCrm.Common.Data.
 Di seguito vengono descritte brevemente le uniche tre classi che hanno un comportamento diverso da quanto sopracitato.
 
 \subsubsection{ResponceMapper (class)}\label{responceMapperClass}
@@ -499,7 +499,7 @@ Per esempio se dal \gls{CRM} arrivasse una risposta d'errore con codice di stato
 
 \subsection{Athesys.ADCrm.Dynamics}\label{dynamics}
 Questo \glo{package} contiene tutte le classi che implementano le interfacce definite in Athesys.ADCrm.Common e restituiscono ai controller di Athesys.ADCrm.API i vari oggetti \gls{DTO} di tipo Athesys.ADCrm.Common.Data al fine di incapsularli nella risposta \gls{http}.
-Viene omessa la descrizione delle classi e dei metodi in quanto risulta identica a quella del \glo{package} \textit{Athesys.ADCrm.Salesforce}
+Viene omessa la descrizione delle classi e dei metodi in quanto risulta identica a quella del \glo{package} Athesys.ADCrm.Salesforce.
 
 \subsection{Database}
 Il database è utilizzato per salvare i dati necessari a collegarsi per effettuare l'accesso e le richieste ai \gls{CRM}, vista la bassissima mole di dati da salvare si è deciso di optare per un semplicissimo database \glo{SQL} composto da una singola tabella, di nome Organization, avente la seguente struttura:
@@ -511,14 +511,14 @@ Il database è utilizzato per salvare i dati necessari a collegarsi per effettua
 \end{figure}
 
 \begin{itemize}
-	\item \textbf{Id} : è un identificativo univoco alfanumerico, marcato come \textit{primary key} per poter distinguere i dati di  un'applicazione \gls{CRM} di una specifica azienda;
-	\item \textbf{Name} : è il nome del software \gls{CRM} (eg. SalesForce o Dynamics);
-	\item \textbf{Type} : è un campo intero per distinguere la tipologia di \gls{CRM} (eg. SalesForce o Dynamics)  
+	\item \textbf{Id} : è un identificativo univoco alfanumerico, marcato come \textit{primary key} per poter distinguere i dati di  un'applicazione \gls{CRM} di una specifica azienda
+	\item \textbf{Name} : è il nome del software \gls{CRM} (eg. SalesForce o Dynamics)
+	\item \textbf{Type} : è un campo intero per distinguere la tipologia di \gls{CRM} (eg. \textit{SalesForce} o \textit{Dynamics})  
 	\item \textbf{ResoureProvider} :
-	Ogni software \gls{CRM} \textit{cloud-based} viene ospitato su un server, e per identificare a quale di questi ci si dovrà collegare, bisogna inserire questo campo nel \glo{URL} (eg. \url{https://emea.salesforce.com} dove il campo ResoureProvider corrisponde alla voce \textit{emea} )
+	Ogni software \gls{CRM} \textit{cloud-based} viene ospitato su un server, e per identificare a quale di questi ci si dovrà collegare, bisogna inserire questo campo nel \glo{URL} (eg. \url{https://emea.salesforce.com} dove il campo ResoureProvider corrisponde alla voce \textit{"emea"} )
 	%TODO: verificare il termine hostare
-	\item \textbf{ClientId} : è l’identificativo univoco (pubblico) del client ed è uno dei dati fondamentali che le applicazioni \gls{CRM} devono fornire per permettere il collegamento di terze applicazioni-web tramite procedura OAuth;
-	\item \textbf{ClietSecret} :  è l’identificativo segreto del client ed è il secondo dato fondamentale che le applicazioni \gls{CRM} devono fornire per permettere il collegamento di terze applicazioni-web tramite procedura OAuth;
+	\item \textbf{ClientId} : è l’identificativo univoco (pubblico) del client ed è uno dei dati fondamentali che le applicazioni \gls{CRM} devono fornire per permettere il collegamento di terze applicazioni-web tramite procedura OAuth
+	\item \textbf{ClietSecret} :  è l’identificativo segreto del client ed è il secondo dato fondamentale che le applicazioni \gls{CRM} devono fornire per permettere il collegamento di terze applicazioni-web tramite procedura OAuth
 	\item \textbf{AuthToken} : è il campo contenente la risposta \glo{JSON} restituita da un \gls{CRM} dopo la procedura di autenticazione OAuth; quindi non solo conterrà il \glo{token} da allegare per poter fare le richieste, ma anche il \glo{token} di refresh ed altri dati. Ne segue un esempio.
 	
 	
@@ -546,16 +546,16 @@ Per realizzare questo database \glo{SQL} è necessario avere le credenziali azie
 	\label{fig:sdProposals}
 \end{figure}
 
-L'immagine soprastante è il diagramma di sequenza utile per facilitare la comprensione della catena di chiamate che viene effettuata per recuperare tutti i dati dei clienti dell'azienda dall'applicazione \gls{CRM} durante il lavoro in fase di codifica.
+L'immagine soprastante è il diagramma di sequenza utile per facilitare la comprensione della catena di chiamate che viene effettuata per recuperare tutti i dati dei clienti dell'azienda dall'applicazione \gls{CRM}.
 
 \begin{itemize}
-	\item \textbf{AccountsController:} è l'oggetto che si occupa di invocare il metodo appropriato ogni volta che viene instradata una chiamata all'\glo{endpoint} "\textit{accounts}" (sez. \ref{accountsController});  
-	\item \textbf{Crm:} è l'oggetto che implementa il design pattern \textit{Factory} (sez. \ref{factory}) costruendo oggetti per recuperare i dati da Salesforce o Dynamics (sez. \ref{crmClass});
-	\item \textbf{Account:} è l'oggetto attraverso il quale vengono recuperati tutti i dati richiesti, riguardanti le aziende clienti, dal \gls{CRM};
-	\item \textbf{CrmResponseData:} è un oggetto \gls{DTO} nel quale viene incapsulata la risposta \glo{JSON} restituita dal \gls{CRM} (sez. \ref{crmResponseDataClass});
-	\item \textbf{AccountData:} è un oggetto \gls{DTO} che rappresenta l'account di un azienda cliente;
+	\item \textbf{AccountsController:} è l'oggetto che si occupa di invocare il metodo appropriato ogni volta che viene instradata una chiamata all'\glo{endpoint} "\textit{accounts}" (sez. \ref{accountsController})  
+	\item \textbf{Crm:} è l'oggetto che implementa il design pattern \textit{Factory} (sez. \ref{factory}) costruendo oggetti per recuperare i dati da Salesforce o Dynamics (sez. \ref{crmClass})
+	\item \textbf{Account:} è l'oggetto attraverso il quale vengono recuperati tutti i dati richiesti, riguardanti le aziende clienti, dal \gls{CRM}
+	\item \textbf{CrmResponseData:} è un oggetto \gls{DTO} nel quale viene incapsulata la risposta \glo{JSON} restituita dal \gls{CRM} (sez. \ref{crmResponseDataClass})
+	\item \textbf{AccountData:} è un oggetto \gls{DTO} che rappresenta l'account di un azienda cliente
 	\item \textbf{ResponseContainerData:}
-	è un oggetto \gls{DTO} nel quale viene incapsulata la risposta \glo{JSON} che si restituirà all'applicazione chiamante, ADProject (sez. \ref{responseContainerDataClass});
-	\item \textbf{ResponseMapper:} è la classe di utilità che si occupa di rimappare i codici \gls{http} delle risposte provenienti dal \gls{CRM} e di, in caso di errore modificare il JSON di risposta (sez. \ref{responceMapperClass}).
+	è un oggetto \gls{DTO} nel quale viene incapsulata la risposta \glo{JSON} che si restituirà all'applicazione chiamante, ADProject (sez. \ref{responseContainerDataClass})
+	\item \textbf{ResponseMapper:} è la classe di utilità che si occupa di rimappare i codici \gls{http} delle risposte provenienti dal \gls{CRM} e di, in caso di errore modificare il JSON di risposta (sez. \ref{responceMapperClass})
 
 \end{itemize}

@@ -70,7 +70,7 @@
 %\begingroup\onehalfspacing
 
 \chapter*{Note Iniziali}\label{notes}
-Il presente documento descrive l'esperienza di stage, della durata di 320 ore, svolta presso l'azienda \textbf{Athesys s.r.l.} di Padova.\\
+Il presente documento descrive l'esperienza di stage, della durata di 320 ore, svolta presso l'azienda \textbf{\textit{Athesys s.r.l.}} di Padova.\\
 
 \textit{\textbf{Convenzioni utilizzate}} : tutti i termini marcati con una 'G' a
 pedice vengono spiegati nell'appendice Glossario alla fine del documento.\\
@@ -99,7 +99,7 @@ Questa disciplina è fondamentale per controllare i costi, l'utilizzo delle riso
 	In questo capitolo viene presentato il progetto di stage svolto, iniziando da una breve presentazione delle componenti coinvolte nella realizzazione stesso.
 	
 	\paragraph{ADProject}~\\
-		L’azienda Athesys s.r.l. ha sviluppato un'applicazione web di \textit{Project Management}, chiamata ADProject, fornendo ai propri clienti la possibilità di avere un programma personalizzato in base alle loro esigenze.\\
+		L’azienda \textit{Athesys s.r.l.} ha sviluppato un'applicazione web di \textit{Project Management}, chiamata \textit{ADProject}, fornendo ai propri clienti la possibilità di avere un programma personalizzato in base alle loro esigenze.\\
 		Questo software permette di:
 		\begin{itemize}
 			\itemsep-0.5em 
@@ -107,7 +107,7 @@ Questa disciplina è fondamentale per controllare i costi, l'utilizzo delle riso
 			\item creare progetti;
 			\item suddividere il progetto in un insieme di attività da svolgere, pianificate al fine di portarlo a termine;
 			\item suddividere le attività in \glo{task}, assegnando le risorse necessarie per il completamento degli stessi;
-			\item tenere sotto controllo le scadenze, ritardi e costi di progetto;
+			\item tenere sotto controllo le scadenze, i ritardi ed i costi di progetto;
 			\item costruire diagrammi di \glo{Gantt};
 			\item approvare e rendicontare le ore impiegate dal personale nello svolgimento dei \glo{task};
 			\item importare i file di Microsoft Project, un importante software nell'ambito del Project Management.
@@ -116,7 +116,7 @@ Questa disciplina è fondamentale per controllare i costi, l'utilizzo delle riso
 	\par
 	
 	\paragraph{SalesForce e Microsoft Dynamics}~\\
-		La maggior parte delle aziende con un reparto commerciale ha la necessità di utilizzare software \gls{CRM} per gestire al meglio le offerte, gli ordini e in generale i rapporti con i clienti. In questo ambito i due maggiori esponenti sono senza dubbio: \textit{SalesForce} e \textit{Microsoft Dynamics}, entrambe applicazioni \textit{\glo{cloud-based}}.
+		La maggior parte delle aziende con un reparto commerciale ha la necessità di utilizzare software CRM per gestire al meglio le offerte, gli ordini e in generale i rapporti con i clienti. In questo ambito i due maggiori esponenti sono senza dubbio: \textit{SalesForce} e \textit{Microsoft Dynamics}, entrambe applicazioni \textit{\glo{cloud-based}}.
 	\par
 
 	\paragraph{Elementi in comune tra Project Management e CRM}~\\
@@ -133,7 +133,7 @@ Questa disciplina è fondamentale per controllare i costi, l'utilizzo delle riso
 	
 	\paragraph{Scopo del progetto e nascita di ADCrm}~\\
 		%Ci sono moltissimi dati all'interno dei software CRM che possono essere utilizzati nell'ambito del Project Management, grazie ai quali verrebbero ridotti di molto i tempi di \textit{data-entry}, necessari per il corretto funzionamento di una nuova installazione di ADProject.\\
-		L'esigenza ultima di Athesys s.r.l. è quella di fornire un prodotto completo e competitivo, attingendo a tutti i dati utili che i software \gls{CRM} possono offrire, abbattendo i tempi di \textit{data-entry} e migliorando l'esperienza utente. Con questo fine, attraverso il progetto di stage, è stato realizzato \textbf{ADCrm}: un servizio web che si pone come ponte tra le due realtà, fornendo la possibilità ad ADProject di fruire dei dati presenti su SalesForce e Dynamics, rielaborandoli secondo le proprie esigenze, attraverso l'utilizzo di web \glo{API}.
+		L'esigenza ultima di \textit{Athesys s.r.l.} è quella di fornire un prodotto completo e competitivo, attingendo a tutti i dati utili che i software \gls{CRM} possono offrire, abbattendo i tempi di \textit{data-entry} e migliorando l'esperienza utente. Con questo fine, attraverso il progetto di stage, è stato realizzato \textbf{ADCrm}: un servizio web che si pone come ponte tra le due realtà, fornendo la possibilità ad ADProject di fruire dei dati presenti su SalesForce e Dynamics, rielaborandoli secondo le proprie esigenze, attraverso l'utilizzo di web \glo{API}.
 	\par
 
 %**************************************************************
@@ -149,19 +149,20 @@ Questa disciplina è fondamentale per controllare i costi, l'utilizzo delle riso
 %**************************************************************
 \chapter{Il Progetto}\label{introduzione}
 	\section{Piano di Lavoro}
-		Il progetto, per quanto stabilito nel piano di lavoro dello stage, comporta l'integrazione di \textit{Salesforce} con \textit{ADProject}. Dato che la parte principale dell'applicazione è stata ultimata in anticipo rispetto al previsto, si è deciso di integrare nel servizio \textit{\textbf{ADCrm}} anche un secondo \gls{CRM}: \textit{\textbf{Microsoft Dynamics}}.\\
+		Il progetto, per quanto stabilito nel piano di lavoro dello stage, comporta l'integrazione di \textit{Salesforce} con \textit{ADProject}. Dato che la parte principale dell'applicazione è stata ultimata in anticipo rispetto al previsto, si è deciso di integrare nel servizio \textbf{ADCrm} anche un secondo \gls{CRM}: \textit{\textbf{Microsoft Dynamics}}.\\
 		Nei successivi capitoli verrà descritta l'integrazione con entrambi i sistemi e verranno spiegate le sfide riscontrate in questo progetto, ponendo particolare attenzione alle parti riguardanti \textit{\textbf{SalesForce}}.
 	\section{Studio delle applicazioni CRM}
 		La prima parte dello stage consisteva nello studio di SalesForce per  acquisire dimestichezza con lo stesso, con i principi che stanno dietro ai software \gls{CRM} ma soprattutto per identificare tutti i dati potenzialmente utili per l'integrazione con ADProject.\\
 		In questa fase è stato analizzato il flusso di eventi necessari per il corretto utilizzo di Salesforce e le entità collegate.		
 		\begin{enumerate}
-			\item creazione di un'entità \textbf{Account} per un'azienda cliente o che potrebbe potenzialmente diventarlo, nella quale vengono censiti tutti i dati che si hanno a disposizione (nome, sito web, email, ricavi annuali, numero di dipendenti, area commerciale,...);
+			\item creazione di un'entità \textbf{Account} per un'azienda cliente o che potrebbe potenzialmente diventarlo, nella quale vengono inseriti tutti i dati che si hanno a disposizione (nome, sito web, email, ricavi annuali, numero di dipendenti, area commerciale, ...);
 			\item creazione di una o più entità \textbf{Contatto} associate ad ogni \textbf{Account}, queste contengono tutti i dati relativi alle persone dell'azienda cliente, alle quali proporre offerte commerciali;
 			\item inserimento nel \gls{CRM} di ogni \textbf{Prodotto} che si intende vendere,associato ad un'apposita descrizione ed un prezzo di listino;
 			\item creazione di un'entità \textbf{Offerta} alla quale associare una serie di prodotti (scontabili rispetto al prezzo di listino), nel momento in cui si vuole proporre un'offerta commerciale ad un cliente;
 			\item creazione di un entità \textbf{Ordine}, contenente tutti i dati di spedizione, fatturazione etc, nel momento in cui l'offerta viene approvata dal cliente.
 		\end{enumerate}
 		I software \gls{CRM} offrono un insieme di operazioni e funzionalità molto più vasto, ma non utili (al momento) ai fini dell'integrazione con ADProject.\\
+		\newpage
 		\paragraph{Le classi di dati}~\\
 			Attraverso lo studio di SalesForce e di ADProject sono emerse le classi di dati che sarebbe utile importare dal \gls{CRM}:
 			\begin{itemize}
@@ -170,29 +171,30 @@ Questa disciplina è fondamentale per controllare i costi, l'utilizzo delle riso
 				\item \textbf{Offerte:} ogni progetto deve avere una motivazione per essere creato, questa corrisponde all'offerta commerciale
 				\item \textbf{Prodotti:} i prodotti corrispondono all'output principale dei progetti
 				\item \textbf{Famiglie di Prodotti:} è comodo e utile accorpare i prodotti in macro-famiglie in quanto rende più facile la ricerca degli stessi 
-				\item \textbf{Utenti:} il personale aziendale che utilizza il \gls{CRM} (tipicamente il reparto commerciale) è bene che sia annoverato tra le risorse aziendali
+				\item \textbf{Utenti:} il personale aziendale che utilizza il \gls{CRM} (tipicamente il reparto commerciale) deve essere annoverato tra le risorse aziendali
 			\end{itemize}
 		\par
+		\newpage
 		\subsection{Procedure di Autenticazione}
-			Per avere l'accesso ai dati del \gls{CRM}, l'applicazione ADCrm deve potersi autenticare presso i server di SalesForce e Dynamics. Entrambe le applicazioni permettono l'autenticazione attraverso protocollo OAuth2.0.
+			Per avere l'accesso ai dati del \gls{CRM}, l'applicazione ADCrm deve potersi autenticare presso i server di \textit{SalesForce} e \textit{Dynamics}. Entrambe le applicazioni permettono l'autenticazione attraverso protocollo OAuth2.0.
 			\paragraph{OAuth2.0}
 			è un protocollo aperto che permette, in maniera semplice e standard, di autenticare e autorizzare applicazioni web, mobile e desktop ad accedere ai dati che si vogliono esporre, senza fornire direttamente le credenziali dell'utente.\\
-			La scelta di questo protocollo è stata obbligata, dato che è l'unico metodo d'autenticazione esposto dai \gls{CRM}, tuttavia è un'ottima opzione in quanto permette di rendere più sicuro il sistema, limitando la quantità di dati sensibili salvati all'interno dell'applicazione; inoltre sgrava il sistema dalle procedure di cambio password dato che sono a carico del \glo{provider} OAuth (SalesForce e Dynamics).
+			La scelta di questo protocollo è stata obbligata, dato che è l'unico metodo d'autenticazione esposto dai \gls{CRM}, tuttavia è un'ottima opzione in quanto permette di rendere più sicuro il sistema, limitando la quantità di dati sensibili salvati all'interno dell'applicazione; inoltre sgrava il sistema dalle procedure di cambio password dato che sono a carico del \glo{provider} OAuth (\textit{SalesForce} e \textit{Dynamics}).
 			%TODO: da ricontrollare
 
 			\paragraph{Flusso di autenticazione}~\\
 			In questo paragrafo viene descritto il flusso di autenticazione per Salesforce, necessario per ottenere il \glo{token} d'accesso.
 			Questo \glo{token} è composto da una serie di caratteri alfanumerici, che è necessario allegare all'\glo{header} della richiesta \gls{http}, per recuperare i dati contenuti nel \gls{CRM}.
-				\begin{figure}[!hb]
+				\begin{figure}[H]
 					\centering
 					\includegraphics[width=0.7\linewidth]{images/webServerAuthFlow}
 					\caption{Flusso di autenticazione per SalesForce}
 					\label{fig:webserverauthflow}
 				\end{figure}
 			\begin{enumerate}
-				\item L'applicazione client, che vuole accedere ai dati del \gls{CRM}, deve effettuare una chiamata \gls{http} con metodo POST (ed uno specifico set di parametri) all'appropriato \glo{endpoint} di SalesForce;
-				\item SalesForce risponde inviando al chiamante, una pagina web sulla quale l'utente dovrà inserire le proprie credenziali d'accesso al sito; %L'utente interagisce direttamente con l'\glo{endpoint} di autorizzazione, in questo modo l'applicazione che effettua la richiesta d'accesso non necessita di conoscere le credenziali d'autenticazione;
-				\item Una volta confermato che l'applicazione è autorizzata ad accedere al \gls{CRM}, SalesForce invia al richiedente un codice alfanumerico in formato \glo{JSON};
+				\item L'applicazione client, che vuole accedere ai dati del \gls{CRM}, deve effettuare una chiamata \gls{http} con metodo POST (ed uno specifico set di parametri) all'appropriato \glo{endpoint} di \textit{SalesForce};
+				\item \textit{SalesForce} risponde inviando al chiamante, una pagina web sulla quale l'utente dovrà inserire le proprie credenziali d'accesso al sito; %L'utente interagisce direttamente con l'\glo{endpoint} di autorizzazione, in questo modo l'applicazione che effettua la richiesta d'accesso non necessita di conoscere le credenziali d'autenticazione;
+				\item Una volta confermato che l'applicazione è autorizzata ad accedere al \gls{CRM}, \textit{SalesForce} invia al richiedente un codice alfanumerico in formato \glo{JSON};
 				\item L'applicazione deve quindi estrarre il codice ricevuto nel punto 3, inserirlo in una richiesta \gls{http} con metodo POST insieme ad un set specifico di parametri, ed inoltrate la richiesta all'\glo{endpoint} designato;
 				\item Nel caso in cui la richiesta sia stata effettuata con successo, il server risponde con un file \glo{JSON}, contenente i \glo{token} necessari ad interrogare il \gls{CRM};
 				\item L'applicazione client utilizza i \glo{token} d'accesso forniti per effettuare richieste al \gls{CRM}. 
@@ -201,12 +203,12 @@ Questa disciplina è fondamentale per controllare i costi, l'utilizzo delle riso
 			Entrambi i \gls{CRM} permettono l'interrogazione dei propri dati attraverso l'implementazione di protocolli \textit{\glo{REST-based}}. Questi offrono anche la possibilità di mettere in relazione dati differenti, in maniera simile al comportamento della clausola \glo{JOIN} per le \glo{query} \glo{SQL}, anche se con limitazioni.\\ 
 			La sfida che si è presentata in quest'ambito è stata quella di trovare il modo migliore di recuperare tutti i dati necessari limitando al massimo il numero di richieste \gls{http} inviate ai \gls{CRM}, in quanto ogni nuova richiesta effettuata aumenta il tempo di re-indirizzamento dei dati recuperati verso ADProject.
 			~\\
-			SalesForce e Microsoft Dynamics sfruttano due protocolli molto diversi tra di loro:
+			\textit{SalesForce} e \textit{Microsoft Dynamics} sfruttano due protocolli molto diversi tra di loro:
 			%TODO: migliorare
 			\paragraph{SOQL}
-			o \textit{\textbf{S}alesforce \textbf{O}bject \textbf{Q}uery \textbf{L}anguage} permette di recuperare i dati della propria organizzazione da SalesForce. SOQL è basato su richieste \gls{http} ad uno specifico \glo{endpoint}, al cui \glo{URL} viene accodata una \glo{query} simile a quelle formulate nel linguaggio \glo{SQL}. In caso di richiesta corretta, Il \gls{CRM} risponde con i dati richiesti in formato \glo{JSON}.
+			o \textit{\textbf{S}alesforce \textbf{O}bject \textbf{Q}uery \textbf{L}anguage} permette di recuperare i dati della propria organizzazione da \textit{SalesForce}. SOQL è basato su richieste \gls{http} ad uno specifico \glo{endpoint}, al cui \glo{URL} viene accodata una \glo{query} simile a quelle formulate nel linguaggio \glo{SQL}. In caso di richiesta corretta, Il \gls{CRM} risponde con i dati richiesti in formato \glo{JSON}.
 			\paragraph{OData}
-			E' un protocollo aperto (Open Data Protocol) creato da Microsoft, che definisce un insieme di best-practices per costruire e utilizzare \glo{API} RESTful.\\
+			E' un protocollo aperto (Open Data Protocol) creato da \textit{Microsoft}, che definisce un insieme di best-practices per costruire e utilizzare \glo{API} RESTful.\\
 			Dynamics permette l'interrogazione dei propri dati attraverso semplici richieste \gls{http} basate su questo protocollo, restituendo i dati richiesti in formato \glo{JSON}.
 			
 		\subsection{Simulazione query}
@@ -217,11 +219,14 @@ Questa disciplina è fondamentale per controllare i costi, l'utilizzo delle riso
 						
 			\begin{figure}[!hb]
 				\centering
-				\includegraphics[width=\linewidth]{images/postman}
+				
+				\rotatebox{90}{\includegraphics[width=.89\textheight,height=1.08\linewidth]{images/postman}}
+				
+				
 				\caption{Screenshot di una richiesta GET a SalesForce}
 				\label{fig:postman}
 			\end{figure}
-			Una volta simulate tutte le richieste è stato possibile iniziare la fase di progettazione avendo ben chiari i passaggi fondamentali richiesti a ADCrm.
+			Una volta simulate tutte le richieste è stato possibile iniziare la fase di progettazione avendo ben chiari i passaggi fondamentali richiesti ad ADCrm.
 		
 %**************************************************************
 % Tecnologie e Strumenti
@@ -232,7 +237,7 @@ In questa sezione vengono descritti brevemente i linguaggi di programmazione usa
 Non tutti i linguaggi che verranno presentati in seguito sono stati usati nell'ambito del progetto di stage (in quanto limitato alla realizzazione del servizio ADCrm), tuttavia la loro contestualizzazione all'interno dei vari moduli sviluppati dall'azienda aiuta a capire meglio il funzionamento degli stessi.
 
 \paragraph{.NET Framework}
-è un \glo{framework} software sviluppato da Microsoft. Include una vasta classe di librerie chiamata \textit{Framework Class Library} (FLC) che permette l'interoperabilità tra i linguaggi di programmazione del \glo{framework}. I programmi scritti per .NET vengono eseguiti in un ambiente software conosciuto come \textit{Common Language Runtime} (CLR), una \textit{\glo{virtual machine}}  che fornisce servizi come la gestione delle eccezioni e la gestione della memoria. FCL e CLR insieme costituiscono .NET.\\
+è un \glo{framework} software sviluppato da \textit{Microsoft}. Include una vasta classe di librerie chiamata \textit{Framework Class Library} (FLC) che permette l'interoperabilità tra i linguaggi di programmazione del \glo{framework}. I programmi scritti per .NET vengono eseguiti in un ambiente software conosciuto come \textit{Common Language Runtime} (CLR), una \textit{\glo{virtual machine}}  che fornisce servizi come la gestione delle eccezioni e la gestione della memoria. FCL e CLR insieme costituiscono .NET.\\
 Il software di project management \textbf{ADProject} e il modulo \textbf{ADCrm} sono sviluppati su questo \glo{framework}.
 %TODO da incrementare questa parte o specificarla meglio
 
@@ -270,20 +275,23 @@ Visual Studio supporta, oltre ai linguaggi e \glo{framework} sopracitati: C, C++
 %**************************************************************
 \section{Casi d'uso}\label{usecase}
 %TODO: da aggiungere alla tabella dei casi d'uso le precondizioni da ricontrollare le immagini se sbordano e da controllare se aggiungere testo all'inizio di questa sezione
-I casi d'uso sono creati secondo lo standard UML 2.4 e sono identificati dalla seguente notazione:
+I casi d'uso sono creati secondo lo standard \glo{UML} 2.4 e sono identificati dalla seguente notazione:
 \begin{center}
 	UC[Codice]: [Titolo]
 \end{center}
-dove il \textbf{codice} è un numero progressivo identificativo di ogni requisito, gerarchico nel  caso di sotto-casi d'uso tramite la notazione \textit{CodiceUCPadre.CodiceSottoUC}. Per ogni caso d'uso deve inoltre essere indicato:
+dove il \textbf{codice} è un numero progressivo identificativo di ogni caso d'uso, gerarchico nel  caso di sotto-casi d'uso tramite la notazione \textit{CodiceUCPadre.CodiceSottoUC}. \\Per ogni caso d'uso deve inoltre essere indicato:
 \begin{itemize}
 	\itemsep-0.5em
 	\item \textbf{Titolo:} breve ma non ambiguo
 	\item \textbf{Attori:} principali e secondari coinvolti
 	\item \textbf{Descrizione:} una descrizione sintetica del caso d'uso
-	%\item \textbf{Precondizione:} condizione necessaria affinché il caso d'uso possa avvenire
-	\item \textbf{Flusso principale degli eventi:} descrizione, eventualmente per punti, del main scenario del Caso d'uso
+	\item \textbf{Precondizione:} condizione necessaria affinché il caso d'uso possa avvenire
+	\item \textbf{Flusso principale degli eventi:} descrizione, per punti, dello scenario principale del Caso d'uso
 	\item \textbf{Postcondizione:} condizione del sistema dopo che il caso d'uso è avvenuto
 \end{itemize}
+
+Di seguito vengono riportati i casi d'uso principali utili allo sviluppo dell'applicazione:
+
 \begin{small}
 \input{useCase.tex}
 \end{small}
@@ -357,13 +365,13 @@ Si è deciso di sviluppare ADCrm seguendo quest'ottica, ottenendo in questo modo
 \subsection{RESTful}\label{rest}
 REST o \textit{\textbf{Re}presentational \textbf{S}tate \textbf{T}ransfer} è un architettura software che permette di rendere interoperabili sistemi di computer attraverso internet. 
 Un servizio web REST permette ai sistemi richiedenti, di accedere e manipolare una rappresentazione testuale delle sue risorse web attraverso un insieme predefinito di operazioni \glo{stateless}.
-Utilizzare i metodi definiti per il protocollo \gls{http} (GET, POST, PUT, DELETE) è il modo più comune accedere alle risorse web del sistema che le espone.
+Utilizzare i metodi definiti per il protocollo \gls{http} (GET, POST, PUT, DELETE) è il modo più comune per accedere alle risorse web del sistema che le espone.
 Questa architettura attraverso l'utilizzo del protocollo \glo{stateless} e di insiemi di operazioni standard, mira a garantire ottime performance, essere affidabile e scalabile senza dover necessitare di modificare tutto il sistema nel caso di cambiamenti a qualche sua componente.
 L'architettura REST viene utilizzata da \textbf{ADCrm\textbf{}} per recuperare ed esporre a sua volta le risorse presenti sul \gls{CRM}.
 Concretamente sarà presente quindi un microservizio per ogni \gls{CRM} che si vorrà collegare all'applicazione.
 
 \subsection{DTO \& DAO}
-Il \gls{DTO} (\textit{Data Transfer Object}) e \gls{DAO} (\textit{Data Access Object}) sono due design pattern architetturali spesso usati in congiunzione.\\
+Il \gls{DTO} e \gls{DAO} sono due design pattern architetturali spesso usati in congiunzione.\\
 La loro funzione principale è quella di disaccoppiare il \textit{data layer} (la parte in cui risiedono i dati) dalla parte di \textit{business logic} (ciò che rappresenta la logica applicativa) dell'applicazione, aumentando cosi la separazione tra le varie componenti e quindi la loro modularità e manutenibilità.\\
 Le classi di oggetti \gls{DTO} al loro interno avranno solamente campi dati accedibili attraverso metodi \textit{getter} e \textit{setter}, mentre gli oggetti \gls{DAO} implementeranno i metodi, utilizzati dalla \textit{business logic}, per accedere ai dati dell'applicazione utilizzando quindi i sopracitati \textit{Data Transfer Object}.
 
@@ -378,7 +386,7 @@ Il pattern fornisce un interfaccia per la creazione di un oggetto, ma lascia all
 	\label{fig:abstractfactorystructure}
 \end{figure}
 
-In questo modo l'applicazione ADCrm non solo non ha bisogno di sapere a priori se deve costruire oggetti per \textit{Salesforce} o altri \gls{CRM}, ma ha anche la possibilità di aver collegarsi a più applicazioni \gls{CRM} contemporaneamente.
+In questo modo l'applicazione ADCrm non solo non ha bisogno di sapere a priori se deve costruire oggetti per \textit{Salesforce}, \textit{Dynamics} o altri \gls{CRM}.
 
 
 \input{architecturalDesign.tex}
@@ -444,7 +452,7 @@ Inoltre l'azienda ha ipotizzato alcuni sviluppi futuri riguardo l'incremento del
 \newpage
 \section{Considerazioni personali}
 Durante l'insegnamento del corso di Ingegneria del Software, è stata più volte sottolineata l'importanza dello stage come conclusione del percorso formativo di ogni studente di Informatica, ma solo durante lo stesso si riesce ad apprezzare realmente quanto questo sia essenziale.\\
-Il primo contatto con Athesys s.r.l è avvenuto grazie a STAGE-IT ed è stata l'azienda che, oltre ad aver presentato progetti estremamente interessanti, mi ha messo a mio agio durante tutti gli incontri avvenuti. Avendo già avuto in precedenza un'esperienza lavorativa nell'ambito dell'informatica, ho imparato che l'ambiente ed il team di lavoro sono tanto importanti quanto il progetto che si andrà a svolgere, ed è stato il connubio di questi due elementi che, a seguito di incontri e colloqui, mi ha dato la certezza della scelta di Athesys s.r.l per lo stage.\\
+Il primo contatto con \textit{Athesys s.r.l} è avvenuto grazie a STAGE-IT ed è stata l'azienda che, oltre ad aver presentato progetti estremamente interessanti, mi ha messo a mio agio durante tutti gli incontri avvenuti. Avendo già avuto in precedenza un'esperienza lavorativa nell'ambito dell'informatica, ho imparato che l'ambiente ed il team di lavoro sono tanto importanti quanto il progetto che si andrà a svolgere, ed è stato il connubio di questi due elementi che, a seguito di incontri e colloqui, mi ha dato la certezza della scelta di \textit{Athesys s.r.l} per lo stage.\\
 All'inizio mi mancavano molte delle conoscenze necessarie per realizzare il progetto, ma questo l'ho vissuto come una sfida, superata grazie alle competenze acquisite in questi anni di studio. La realizzazione di ADCrm mi ha fatto capire che il percorso di laurea in informatica non mi ha insegnato solamente dei linguaggi di programmazione, bensì mi ha dato la forma mentis per apprenderli ed usarli tutti, per reagire a problemi inaspettati e trovare soluzioni per superarli.\\ 
 Ritengo quindi questa esperienza estremamente positiva, sia per gli obbiettivi raggiunti sia per le persone che ho conosciuto e che mi hanno affiancato durante lo stage.
 
