@@ -65,7 +65,7 @@ Inoltre si noti che è necessario da parte di chi effettua chiamate verso questo
 		\end{longtable}		
 	\end{small}
 \endgroup
-\section{Progettazione}
+\section{Progettazione di dettaglio}\label{progettazioneDiDettaglio}
 In questa sezione verranno descritti in maniera dettagliata tutti i \glo{package}, le classi principali dell'applicazione e i metodi più importanti delle stesse al fine mostrare al meglio il progetto di stage svolto.
 
 %\begin{figure}[H]
@@ -238,8 +238,8 @@ Questo \glo{package} contiene il \glo{package} Data(avente le classi \gls{DTO}) 
 \subsubsection{IIdentityProvider (interface)}
 
 \paragraph{Descrizione:}
-Interfaccia che dovrà essere implementata dalle classi concrete Athesys.ADCrm.Salesforce::IdentityProvider e\\ Athesys.ADCrm.Dynamics::IdentityProvider, essa definisce i metodi utilizzati per ottenere i \glo{token} di autenticazione e di refresh dai CRM, ed inoltre espone il metodo per effettuare inviare le \glo{query} di recupero dei dati.
-
+Interfaccia che dovrà essere implementata dalle classi concrete Athesys.ADCrm.Salesforce::IdentityProvider e\\ Athesys.ADCrm.Dynamics::IdentityProvider, essa definisce i metodi utilizzati per ottenere i \glo{token} di autenticazione e di refresh dai CRM, ed inoltre espone il metodo per effettuare inviare le \glo{query} di recupero dei dati.\\
+La creazione di quest'interfaccia e l'implementazione dei metodi della stessa, sono stati sviluppati da un programmatore senior dell'azienda, come descritto nel paragrafo \ref{noteImplementazione}, Note di implementazione.
 \paragraph{Metodi:}\hfill
 \begin{itemize}
 	\itemsep0em 	
@@ -459,8 +459,8 @@ Di seguito vengono riportati alcuni metodi significativi della classe per esempl
 	  public static async Task<OrganizationData> BuildOrganization(string organizationId)	
 	\end{lstlisting}
 	Metodo che costruisce un oggetto di tipo OrganizationData, appartenente ad un particolare \gls{CRM}, in base alla tipologia del parametro passato.
-	Tutti i campi dati dell'oggetto ritornato vengono impostati dal database dell'applicazione che contiene i parametri di connessione ai vari \gls{CRM}.
-	\\
+	Tutti i campi dati dell'oggetto ritornato vengono impostati dal database dell'applicazione che contiene i parametri di connessione ai vari \gls{CRM}.\\
+	Questo metodo è stato sviluppato da un programmatore senior dell'azienda, come descritto nel paragrafo \ref{noteImplementazione}, Note di implementazione.\\
 	\textbf{\small Argomenti:}
 	\begin{enumerate}[leftmargin=*]
 		\itemsep0em 
@@ -535,6 +535,7 @@ Il database è utilizzato per salvare i dati necessari a collegarsi per effettua
 	
 \end{itemize}
 
+Per realizzare questo database \glo{SQL} è necessario avere le credenziali aziendali d'accesso a \textit{Microsoft SQL Server}, un \textit{\glo{DBMS}} prodotto da \textit{Microsoft}. Questo sistema contiene svariati database aziendali con dati riservati, quindi la realizzazione della base di dati per l'applicazione \textbf{ADCrm} e il collegamento con lo stessa è stato realizzato da un programmatore senior dell'azienda, come descritto nel paragrafo \ref{noteImplementazione} Note di implementazione. 
 
 \subsection{Diagramma di sequenza}
 	\begin{figure}[H]

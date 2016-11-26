@@ -337,6 +337,10 @@ In questo capitolo viene dettagliatamente descritta l'applicazione, presentando:
 	\item Una descrizione più dettagliata delle classi che rappresentano il cuore dell'applicazione.
 \end{enumerate}
 
+\paragraph{Note sull'implementazione}\label{noteImplementazione}~\\
+Poiché durante lo sviluppo del progetto si è reso necessario accedere a dei dati aziendali sensibili (sopratutto per quanto riguarda la parte di configurazione e collegamento con Microsoft Dynamics), alcuni metodi, classi o interfacce sono state implementate da un programmatore senior dell'azienda. Per chiarezza, ogni elemento non implementato da me, descritto nella sezione \ref{progettazioneDiDettaglio} di progettazione di dettaglio, viene adeguatamente segnalato facendo riferimento a questo paragrafo.
+\par
+
 \section{Design pattern}\label{design_pattern}
 \subsection{Microservices}
 Lo stile architetturale a microservizi è un approccio per sviluppare una singola applicazione come un insieme di piccoli servizi autonomi che interagiscono tra di loro, ognuno dei quali gestisce i suoi processi e comunica attraverso meccanismi snelli, spesso \glo{API} \gls{http}.
